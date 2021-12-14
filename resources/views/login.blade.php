@@ -26,8 +26,8 @@
                             <input type="text" class="form-control" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" placeholder="Password" required>
-                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            <input id="lgps" type="password" class="form-control" placeholder="Password" required>
+                            <span toggle="#lgps" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>

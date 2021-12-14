@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>SignUp</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="css/signup.css">
 
 </head>
-<body class="img js-fullheight" style="background-image: url(assets/img/4.jpg);">
-<section class="ftco-section">
+<body class="img js-fullheight" style="background-image: url(assets/img/4.jpg);position: relative;
+">
+<section  class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
@@ -30,12 +31,12 @@
                             <input type="text" class="form-control" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" placeholder="Password" required>
-                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            <input id="sups" type="password" class="form-control" placeholder="Password" required>
+                            <span toggle="#sups" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
-                            <input id="passwordc-field" type="password" class="form-control" placeholder="Confirm Password" required>
-                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            <input id="sucps" type="password" class="form-control" placeholder="Confirm Password" required>
+                            <span toggle="#sucps" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
                         <form action="/action_page.php">
                             <label for="birthday">Birthday</label>
@@ -68,6 +69,7 @@
         </div>
     </div>
 </section>
+
 <script src="js/jquery.min.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -77,4 +79,5 @@
 </script>
 </body>
 </html>
+
 
