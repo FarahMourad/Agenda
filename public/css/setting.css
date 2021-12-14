@@ -18,8 +18,9 @@ body {
 }
 
 .profile-button:focus, .profile-button:active, .profile-button:hover {
-    background: #dcac95;
+    background: #bd9481;
     outline: none;
+    color: #fff3cd;
 }
 
 .back:hover {
@@ -37,4 +38,11 @@ body {
 }
 .avatar{
     font-size: 60px;
+}
+.back {
+    font-size: 20px;
+}
+.editText {
+    font-family: "Lucida Sans";
+    font-weight: bold;
 }

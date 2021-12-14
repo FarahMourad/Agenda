@@ -8139,7 +8139,6 @@ body {
     line-height: 1.8;
     font-weight: normal;
     color: gray;
-    position: relative;
     z-index: 0;
     padding: 0; }
 body:after {
@@ -8188,9 +8187,11 @@ h1, h2, h3, h4, h5,
     color: #fff; }
 
 .img {
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center; }
+    background-attachment: fixed;
+}
 
 .login-wrap {
     position: relative;

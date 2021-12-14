@@ -35,7 +35,7 @@
                     <div onclick="location.href='home';" class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
                         <h6>Back to home</h6>
                     </div>
-                    <h6 class="text-right">Edit Profile</h6>
+                    <h6 class="text-right editText">Edit Profile</h6>
                 </div>
                 <div class="row mt-2 trans">
                     <div class="col-md-6 trans"><input type="text" class="form-control" placeholder="first name"></div>
@@ -53,7 +53,7 @@
                     <div class="col-md-6 trans"><input type="password" class="form-control" placeholder="confirm password"></div>
 
                 </div>
-                <div class="mt-5 text-right trans"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="mt-5 text-right trans"><button onclick="location.href='home';" class="btn btn-primary profile-button" type="button">Save Profile</button></div>
             </form>
         </div>
     </div>

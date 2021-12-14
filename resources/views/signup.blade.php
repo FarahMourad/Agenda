@@ -55,9 +55,8 @@
                             <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
                         </div>
                         <div>
-                            <a href="login" style="color: #fff">Have an account?</a>
+                            <a href="signin" style="color: #fff">Have an account?</a>
                         </div>
-
                     </form>
                     <!--<p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
                     <div class="social d-flex text-center">
@@ -69,12 +68,13 @@
         </div>
     </div>
 </section>
-
 <script src="js/jquery.min.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+<script>
 
+</script>
 </body>
 </html>
 
