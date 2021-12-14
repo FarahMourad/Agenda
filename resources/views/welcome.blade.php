@@ -27,8 +27,8 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Sign in</a></li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">Services</a></li>
             </ul>
         </div>
     </div>
@@ -70,16 +70,16 @@
         <hr class="divider" />
         <div class="row gx-4 gx-lg-5">
             <div class="col-lg-3 col-md-6 text-center"></div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+            <div onclick="location.href='signup';" class="col-lg-3 col-md-6 text-center">
+                <div style="cursor: pointer" class="mt-5">
+                    <div class="mb-2"><i class="bi bi-person-plus fs-1 text-primary"></i></div>
                     <h3 class="h4 mb-2">Create an Account</h3>
                     <p class="text-muted mb-0">Still have no account..</p>
                     <p class="text-muted mb-0">It's a Fast and easy process</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
+            <div onclick="location.href='signin';" class="col-lg-3 col-md-6 text-center">
+                <div style="cursor: pointer" class="mt-5">
                     <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
                     <h3 class="h4 mb-2">Sign In</h3>
                     <p class="text-muted mb-0">Go and start managing your own business!</p>
@@ -93,29 +93,31 @@
     <div class="container-fluid p-0">
         <div class="row g-0">
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/1.jpg" title="Project Name">
-                    <img class="img-fluid" src="assets/img/1.jpg" alt="..." />
+                <a class="portfolio-box">
+                    <img class="img-fluid" src="assets/img/10.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-name">Tasks</div>
-                        <div class="project-category text-white-50">Description</div>
+                        <div class="project-category text-white-50">Agenda tasks can be shared and categorized you also can sort them according to their deadlines & Title, your task can be splitted into multiple steps, any tasks that is assigned to you can be found in the "Assigned to me" category,
+                            You can calculate your performance according to your completed tasks
+                        </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/7.jpg" title="Project Name">
+                <a class="portfolio-box">
                     <img class="img-fluid" src="assets/img/7.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-name">Notes</div>
-                        <div class="project-category text-white-50">Description</div>
+                        <div class="project-category text-white-50">Agenda notes can be shared and categorized you also can sort them according to their titles, any notes that is shared with you can be found in the "Shared with me" category</div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/5.jpg" title="Project Name">
+                <a class="portfolio-box">
                     <img class="img-fluid" src="assets/img/5.jpg" alt="..." />
                     <div class="portfolio-box-caption">
                         <div class="project-name">Secret Diary</div>
-                        <div class="project-category text-white-50">Description</div>
+                        <div class="project-category text-white-50">Agenda provides an unlimited diary where you can bookmark your special pages</div>
                     </div>
                 </a>
             </div>
@@ -136,10 +138,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script>
+
+</script>
 </body>
 </html>

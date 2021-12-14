@@ -1,0 +1,40 @@
+body {
+    background-image: url("../assets/img/11.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #fbceb5;
+}
+
+.profile-button {
+    background: #dcac95;
+    box-shadow: none;
+    border: none;
+}
+
+.profile-button:focus, .profile-button:active, .profile-button:hover {
+    background: #dcac95;
+    outline: none;
+}
+
+.back:hover {
+    color: #dcac95;
+    cursor: pointer;
+}
+.row{
+    margin-top: 180px;
+    border-radius: 0 30px 0 30px;
+    background-color: rgba(255, 255, 255, 0.32);
+}
+.trans{
+    background-color: transparent;
+    border: none !important;
+}
+.avatar{
+    font-size: 60px;
+}
