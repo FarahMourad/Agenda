@@ -55,7 +55,7 @@
                             <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
                         </div>
                         <div>
-                            <a href="login" style="color: #fff">Have an account?</a>
+                            <a href="signin" style="color: #fff">Have an account?</a>
                         </div>
 
                     </form>
