@@ -41,6 +41,7 @@
                         document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>  Logout</a>
                 </li>
+                <li>{{Auth::user()->user_id}}</li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
