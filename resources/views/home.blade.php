@@ -36,7 +36,14 @@
                 <li><a class="dropdown-item" href="setting"><i class="fas fa-user-cog"></i>  Settings</a></li>
                 <li><a class="dropdown-item" style="cursor: pointer"><i class="bi bi-cloud-sun-fill"></i>  Theme</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="/"><i class="fas fa-sign-out-alt"></i>  Logout</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>  Logout</a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </ul>
         </li>
     </ul>
