@@ -25,8 +25,8 @@
     <div class="row">
         <div class="col-md-4 border-right trans">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><i class="bi bi-person-circle avatar"></i>
-                <span class="font-weight-bold">FName LName</span>
-                <span class="text-black-50">userName</span>
+                <span class="font-weight-bold">{{Auth::user()->fName}} {{Auth::user()->lName}}</span>
+                <span class="text-black-50">{{Auth::user()->user_id}}</span>
             </div>
         </div>
         <div class="col-md-8 trans">
