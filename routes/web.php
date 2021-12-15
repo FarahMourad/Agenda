@@ -9,7 +9,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'prevent'],function() {
     Auth::routes();
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/setting', function () {
-        return view('setting');
-    });
+    Route::get('/setting', 'EditUserController@showSetting');
+    Route::post('/editData', 'EditUserController@edit')->name('edit');
+
 });

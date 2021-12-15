@@ -30,7 +30,11 @@
             </div>
         </div>
         <div class="col-md-8 trans">
-            <form class="p-3 py-5 trans">
+            @if($errors->any())
+                <script>alert('{{$errors->first()}}')</script>
+            @endif
+            <form method="POST" class="p-3 py-5 trans" action="{{route('edit')}}">
+                @csrf
                 <div class="d-flex justify-content-between align-items-center mb-3 trans">
                     <div onclick="location.href='home';" class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
                         <h6>Back to home</h6>
@@ -38,22 +42,22 @@
                     <h6 class="text-right editText">Edit Profile</h6>
                 </div>
                 <div class="row mt-2 trans">
-                    <div class="col-md-6 trans"><input type="text" class="form-control" placeholder="first name"></div>
-                    <div class="col-md-6 trans"><input type="text" class="form-control" placeholder="last name"></div>
+                    <div class="col-md-6 trans"><input name="fName" type="text" class="form-control" placeholder="first name"></div>
+                    <div class="col-md-6 trans"><input name="lName" type="text" class="form-control" placeholder="last name"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input type="password" class="form-control" placeholder="old password"></div>
-                    <div class="col-md-6 trans"><input type="date" class="form-control" placeholder="birthday"></div>
+                    <div class="col-md-6 trans"><input name="old_password" type="password" class="form-control" placeholder="old password"></div>
+                    <div class="col-md-6 trans"><input name="birthDate" type="date" class="form-control" placeholder="birthday"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input type="password" class="form-control" placeholder="new password"></div>
+                    <div class="col-md-6 trans"><input name="new_password" type="password" class="form-control" placeholder="new password"></div>
                     <div class="col-md-6 trans"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input type="password" class="form-control" placeholder="confirm password"></div>
+                    <div class="col-md-6 trans"><input name="confirm_password" type="password" class="form-control" placeholder="confirm password"></div>
 
                 </div>
-                <div class="mt-5 text-right trans"><button onclick="location.href='home';" class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="mt-5 text-right trans"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
             </form>
         </div>
     </div>
@@ -65,8 +69,8 @@
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
 </script>
 </body>
 </html>
