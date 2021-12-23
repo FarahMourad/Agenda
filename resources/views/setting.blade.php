@@ -30,6 +30,11 @@
             </div>
         </div>
         <div class="col-md-8 trans">
+                @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                @endif
 {{--            @if($errors->any())--}}
 {{--                alert('{{$errors->first()}}')--}}
 {{--            @endif--}}
@@ -91,8 +96,16 @@
                 url: "{{route('edit')}}",
                 type: "POST",
                 data: {_token:_token, fName: in1, lName: in2, old_password: in3, new_password: in5, confirm_password: in6, birthDate: in4},
-                success: function(res) {
-                    console.log(res);
+                success: function() {
+{{--                    @if($errors->any())--}}
+{{--                    @foreach ($errors->all() as $error)--}}
+{{--                    <div>{{ $error }}</div>--}}
+{{--                    @endforeach--}}
+{{--                        @endif--}}
+                    if ('{{$errors->any()}}') {
+                        console.log("check");
+                        alert('{{$errors->first()}}')
+                    }
                     //location.reload();
                 }
             });

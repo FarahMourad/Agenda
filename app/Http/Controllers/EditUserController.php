@@ -14,7 +14,7 @@ class EditUserController
         return view('setting');
     }
 
-    public function edit(Request $request): RedirectResponse
+    public function edit(Request $request)
     {
         $output = ["fail", "fail", "fail", "password"];
         if ($request->fName !== null){
@@ -33,11 +33,11 @@ class EditUserController
             $output[3] = $this->changePass($request);
         }
         if ($output === ["fail", "fail", "fail", "fail"])
-//            return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
-            return response()->json($output);
-        else
-//            return Redirect::back();
-            return response()->json("success");
+            return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
+            //return response()->json($output);
+//        else
+////            return Redirect::back();
+//            return response()->json("success");
     }
     public function changeFName(Request $request)
     {
