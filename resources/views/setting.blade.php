@@ -28,18 +28,14 @@
                 <span class="font-weight-bold">{{Auth::user()->fName}} {{Auth::user()->lName}}</span>
                 <span class="text-black-50">{{Auth::user()->user_id}}</span>
             </div>
+            @if($errors->any())
+                <div style="color: #9a0404; font-weight: bold; font-family: 'Lucida Fax'; padding-top: 30%; text-align: center">ERROR: {{ $errors->first() }}</div>
+            @endif
+            @if(\Session::has('msg'))
+                <div id="feedBack" style="color: #6b2e1f; font-weight: bold; font-family: 'Lucida Bright'; padding-top: 30%; text-align: center">ALERT: Your profile have been updated successfully</div>
+            @endif
         </div>
         <div class="col-md-8 trans">
-                @if($errors->any())
-                    <div>{{ $errors->first() }}</div>
-                @endif
-{{--            @if($errors->any())--}}
-{{--                alert('{{$errors->first()}}')--}}
-{{--            @endif--}}
-
-{{--            @error('password')--}}
-{{--            <small class="from-text text-danger">{{$message}}</small>--}}
-{{--            @enderror--}}
             <form method="POST" class="p-3 py-5 trans" action="{{route('edit')}}">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center mb-3 trans">
@@ -77,38 +73,9 @@
 <script src="js/scripts.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script>
-{{--    $('#save').click(function(e) {--}}
-{{--        e.preventDefault();--}}
-{{--        var _token = $("input[name='_token']").val();--}}
-{{--        let in1 = document.getElementById('input1').value;--}}
-{{--        let in2 = document.getElementById('input2').value;--}}
-{{--        let in3 = document.getElementById('input3').value;--}}
-{{--        let in4 = document.getElementById('input4').value;--}}
-{{--        let in5 = document.getElementById('input5').value;--}}
-{{--        let in6 = document.getElementById('input6').value;--}}
-
-{{--        if (in1 === "" && in2 === "" && in3 === "" && in4 === "" && in5 === "" && in6 === ""){--}}
-{{--            alert("Nothing to update!");--}}
-{{--        } else {--}}
-{{--            $.ajax({--}}
-{{--                url: "{{route('edit')}}",--}}
-{{--                type: "POST",--}}
-{{--                data: {_token:_token, fName: in1, lName: in2, old_password: in3, new_password: in5, confirm_password: in6, birthDate: in4},--}}
-{{--                success: function() {--}}
-{{--                    @if($errors->any())--}}
-{{--                    @foreach ($errors->all() as $error)--}}
-{{--                    <div>{{ $error }}</div>--}}
-{{--                    @endforeach--}}
-{{--                        @endif--}}
-{{--                    if ('{{$errors->any()}}') {--}}
-{{--                        console.log("check");--}}
-{{--                        alert('{{$errors->first()}}')--}}
-{{--                    }--}}
-{{--                    //location.reload();--}}
-{{--                }--}}
-{{--            });--}}
-{{--        }--}}
-{{--    });--}}
+    // $('#save').click(function() {
+    //     document.getElementById('feedBack').style.display = 'block';
+    // });
 </script>
 </body>
 </html>
