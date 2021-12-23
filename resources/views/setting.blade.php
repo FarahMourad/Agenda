@@ -42,7 +42,7 @@
 {{--            @error('password')--}}
 {{--            <small class="from-text text-danger">{{$message}}</small>--}}
 {{--            @enderror--}}
-            <form method="POST" class="p-3 py-5 trans">
+            <form method="POST" class="p-3 py-5 trans" action="{{route('edit')}}">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center mb-3 trans">
                     <div onclick="location.href='home';" class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
@@ -79,38 +79,38 @@
 <script src="js/scripts.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script>
-    $('#save').click(function(e) {
-        e.preventDefault();
-        var _token = $("input[name='_token']").val();
-        let in1 = document.getElementById('input1').value;
-        let in2 = document.getElementById('input2').value;
-        let in3 = document.getElementById('input3').value;
-        let in4 = document.getElementById('input4').value;
-        let in5 = document.getElementById('input5').value;
-        let in6 = document.getElementById('input6').value;
+{{--    $('#save').click(function(e) {--}}
+{{--        e.preventDefault();--}}
+{{--        var _token = $("input[name='_token']").val();--}}
+{{--        let in1 = document.getElementById('input1').value;--}}
+{{--        let in2 = document.getElementById('input2').value;--}}
+{{--        let in3 = document.getElementById('input3').value;--}}
+{{--        let in4 = document.getElementById('input4').value;--}}
+{{--        let in5 = document.getElementById('input5').value;--}}
+{{--        let in6 = document.getElementById('input6').value;--}}
 
-        if (in1 === "" && in2 === "" && in3 === "" && in4 === "" && in5 === "" && in6 === ""){
-            alert("Nothing to update!");
-        } else {
-            $.ajax({
-                url: "{{route('edit')}}",
-                type: "POST",
-                data: {_token:_token, fName: in1, lName: in2, old_password: in3, new_password: in5, confirm_password: in6, birthDate: in4},
-                success: function() {
+{{--        if (in1 === "" && in2 === "" && in3 === "" && in4 === "" && in5 === "" && in6 === ""){--}}
+{{--            alert("Nothing to update!");--}}
+{{--        } else {--}}
+{{--            $.ajax({--}}
+{{--                url: "{{route('edit')}}",--}}
+{{--                type: "POST",--}}
+{{--                data: {_token:_token, fName: in1, lName: in2, old_password: in3, new_password: in5, confirm_password: in6, birthDate: in4},--}}
+{{--                success: function() {--}}
 {{--                    @if($errors->any())--}}
 {{--                    @foreach ($errors->all() as $error)--}}
 {{--                    <div>{{ $error }}</div>--}}
 {{--                    @endforeach--}}
 {{--                        @endif--}}
-                    if ('{{$errors->any()}}') {
-                        console.log("check");
-                        alert('{{$errors->first()}}')
-                    }
-                    //location.reload();
-                }
-            });
-        }
-    });
+{{--                    if ('{{$errors->any()}}') {--}}
+{{--                        console.log("check");--}}
+{{--                        alert('{{$errors->first()}}')--}}
+{{--                    }--}}
+{{--                    //location.reload();--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+{{--    });--}}
 </script>
 </body>
 </html>
