@@ -36,6 +36,8 @@ class EditUserController
             return Redirect::back()->withErrors(['error' => 'Nothing to change']);
         else if ($output === ["fail", "fail", "fail", "fail"])
             return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
+        else
+            return Redirect::back();
     }
     public function changeFName(Request $request)
     {
