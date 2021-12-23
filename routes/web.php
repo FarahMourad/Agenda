@@ -8,8 +8,20 @@ Route::get('/', function () {
 });
 Route::group(['middleware' => 'prevent'],function() {
     Auth::routes();
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/setting', 'EditUserController@showSetting');
-    Route::post('/editData', 'EditUserController@edit')->name('edit');
-
+    Route::group(['middleware' => 'auth'],function() {
+        Route::get('/home', function (){
+            return view('layouts.home');
+        });
+        Route::get('/tasks', function (){
+            return view('tasks');
+        });
+        Route::get('/notes', function (){
+            return view('notes');
+        });
+        Route::get('/diary', function (){
+            return view('diary');
+        });
+        Route::get('/setting', 'EditUserController@showSetting');
+        Route::post('/editData', 'EditUserController@edit')->name('edit');
+    });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -31,14 +32,12 @@ class EditUserController
         if ($request->old_password !== null && $request->new_password !== null && $request->confirm_password !== null){
             $output[3] = $this->changePass($request);
         }
-        if ($output === ["fail", "fail", "fail", "password"])
-            return Redirect::back()->withErrors(['error' => 'Nothing to update']);
-        else if ($output === ["fail", "fail", "fail", "fail"])
-            return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
-        else if ($output === ["fail", "fail", "fail", "pass"])
-            return Redirect::back()->withErrors(['error' => 'Correct Pass']);
+        if ($output === ["fail", "fail", "fail", "fail"])
+//            return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
+            return response()->json($output);
         else
-            return Redirect::back();
+//            return Redirect::back();
+            return response()->json("success");
     }
     public function changeFName(Request $request)
     {

@@ -12,7 +12,7 @@
     <!-- Font-awesome Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link href="css/home.css" rel="stylesheet" />
+    <link id="stylesheet" href="css/home.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -34,7 +34,7 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="setting"><i class="fas fa-user-cog"></i>  Settings</a></li>
-                <li><a class="dropdown-item" style="cursor: pointer"><i class="bi bi-cloud-sun-fill"></i>  Theme</a></li>
+                <li><a onclick="swap()" class="dropdown-item" style="cursor: pointer"><i class="bi bi-cloud-sun-fill"></i>  Theme</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
@@ -54,29 +54,29 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Tasks
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="">All</a>
-                            <a class="nav-link" href="">Assigned to me</a>
+                            <a class="nav-link" href="/tasks">All</a>
+                            <a class="nav-link" href="/tasks">Assigned to me</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="far fa-sticky-note"></i></div>
                         Notes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="">All</a>
-                            <a class="nav-link" href="">Shared with me</a>
+                            <a class="nav-link" href="/notes">All</a>
+                            <a class="nav-link" href="/notes">Shared with me</a>
                         </nav>
                     </div>
-                    <a class="nav-link" href="home">
+                    <a class="nav-link" href="/diary">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
                     </a>
@@ -90,50 +90,7 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Tasks</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Tasks</li>
-                </ol>
-                <div class="row">
-{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                        <div class="card bg-primary text-white mb-4">--}}
-{{--                            <div class="card-body">Primary Card</div>--}}
-{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                        <div class="card bg-warning text-white mb-4">--}}
-{{--                            <div class="card-body">Warning Card</div>--}}
-{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                        <div class="card bg-success text-white mb-4">--}}
-{{--                            <div class="card-body">Success Card</div>--}}
-{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                        <div class="card bg-danger text-white mb-4">--}}
-{{--                            <div class="card-body">Danger Card</div>--}}
-{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                </div>
-            </div>
+            @yield('content')
         </main>
     </div>
 </div>
@@ -143,5 +100,17 @@
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script>
+    function swap() {
+        let sheet = document.getElementById('stylesheet').getAttribute('href');
+        console.log(sheet);
+        if (sheet === "css/homeDark.css"){
+            console.log("changed");
+            document.getElementById("stylesheet").setAttribute("href", "css/home.css");
+        }else {
+            document.getElementById("stylesheet").setAttribute("href", "css/homeDark.css");
+        }
+    }
+</script>
 </body>
 </html>

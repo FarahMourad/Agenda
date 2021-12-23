@@ -26,32 +26,23 @@
                         <div class="form-group">
                             <input name="user_id" type="text" class="form-control" placeholder="Username" required>
                         </div>
+                        @error('user_id')
+                        <small class="from-text text-danger">{{"wrong password or email"}}</small>
+                        @enderror
                         <div class="form-group">
                             <input name="password" id="lgps" type="password" class="form-control" placeholder="Password" required>
-                            <span toggle="#lgps" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            <span toggle="#lgps" style="cursor: pointer" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
+                        @error('password')
+                        <small class="from-text text-danger">{{"wrong password or email"}}</small>
+                        @enderror
                         <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
-                        </div>
-                        <div class="form-group d-md-flex">
-{{--                            <div class="w-50">--}}
-{{--                                <label class="checkbox-wrap checkbox-primary">Remember Me--}}
-{{--                                    <input name="remember" type="checkbox" checked>--}}
-{{--                                    <span class="checkmark"></span>--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
-
+                            <button type="submit" id="login" class="form-control btn btn-primary submit px-3">Sign In</button>
                         </div>
                         <div>
                             <a href="register" style="color: #fff">Don't have an account?</a>
                         </div>
-
                     </form>
-                    <!--<p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
-                    <div class="social d-flex text-center">
-                        <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
-                        <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
-                    </div>-->
                 </div>
             </div>
         </div>
@@ -62,6 +53,5 @@
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>

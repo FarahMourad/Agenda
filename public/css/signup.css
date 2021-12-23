@@ -8142,15 +8142,16 @@ body {
     z-index: 0;
     padding: 0; }
 body:after {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100%;
+    width: 100%;
     content: '';
     background: #000;
     opacity: .3;
-    z-index: -1; }
+    z-index: -1;
+}
 
 a {
     -webkit-transition: .3s all ease;

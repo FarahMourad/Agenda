@@ -30,10 +30,14 @@
             </div>
         </div>
         <div class="col-md-8 trans">
-            @if($errors->any())
-                <script>alert('{{$errors->first()}}')</script>
-            @endif
-            <form method="POST" class="p-3 py-5 trans" action="{{route('edit')}}">
+{{--            @if($errors->any())--}}
+{{--                alert('{{$errors->first()}}')--}}
+{{--            @endif--}}
+
+{{--            @error('password')--}}
+{{--            <small class="from-text text-danger">{{$message}}</small>--}}
+{{--            @enderror--}}
+            <form method="POST" class="p-3 py-5 trans">
                 @csrf
                 <div class="d-flex justify-content-between align-items-center mb-3 trans">
                     <div onclick="location.href='home';" class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
@@ -42,26 +46,26 @@
                     <h6 class="text-right editText">Edit Profile</h6>
                 </div>
                 <div class="row mt-2 trans">
-                    <div class="col-md-6 trans"><input name="fName" type="text" class="form-control" placeholder="first name"></div>
-                    <div class="col-md-6 trans"><input name="lName" type="text" class="form-control" placeholder="last name"></div>
+                    <div class="col-md-6 trans"><input id="input1" name="fName" type="text" class="form-control" placeholder="first name"></div>
+                    <div class="col-md-6 trans"><input id="input2" name="lName" type="text" class="form-control" placeholder="last name"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input name="old_password" type="password" class="form-control" placeholder="old password"></div>
-                    <div class="col-md-6 trans"><input name="birthDate" type="date" class="form-control" placeholder="birthday"></div>
+                    <div class="col-md-6 trans"><input id="input3" name="old_password" type="password" class="form-control" placeholder="old password"></div>
+                    <div class="col-md-6 trans"><input id="input4" name="birthDate" type="date" class="form-control" placeholder="birthday"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input name="new_password" type="password" class="form-control" placeholder="new password"></div>
+                    <div class="col-md-6 trans"><input id="input5" name="new_password" type="password" class="form-control" placeholder="new password"></div>
                     <div class="col-md-6 trans"></div>
                 </div>
                 <div class="row mt-3 trans">
-                    <div class="col-md-6 trans"><input name="confirm_password" type="password" class="form-control" placeholder="confirm password"></div>
-
+                    <div class="col-md-6 trans"><input id="input6" name="confirm_password" type="password" class="form-control" placeholder="confirm password"></div>
                 </div>
-                <div class="mt-5 text-right trans"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                <div class="mt-5 text-right trans"><button id="save" class="btn btn-primary profile-button" type="submit" >Save Profile</button></div>
             </form>
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- SimpleLightbox plugin JS-->
@@ -69,8 +73,31 @@
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+    $('#save').click(function(e) {
+        e.preventDefault();
+        var _token = $("input[name='_token']").val();
+        let in1 = document.getElementById('input1').value;
+        let in2 = document.getElementById('input2').value;
+        let in3 = document.getElementById('input3').value;
+        let in4 = document.getElementById('input4').value;
+        let in5 = document.getElementById('input5').value;
+        let in6 = document.getElementById('input6').value;
+
+        if (in1 === "" && in2 === "" && in3 === "" && in4 === "" && in5 === "" && in6 === ""){
+            alert("Nothing to update!");
+        } else {
+            $.ajax({
+                url: "{{route('edit')}}",
+                type: "POST",
+                data: {_token:_token, fName: in1, lName: in2, old_password: in3, new_password: in5, confirm_password: in6, birthDate: in4},
+                success: function(res) {
+                    console.log(res);
+                    //location.reload();
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>

@@ -82,9 +82,9 @@ body {
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
+  color: #fff;
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: #272a2e;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -3577,10 +3577,10 @@ textarea.form-control-lg {
   padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
-  color: #212529;
+  color: #dee2e6;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #343a40;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -3590,6 +3590,7 @@ textarea.form-control-lg {
   left: 0;
   margin-top: 0.125rem;
 }
+
 .dropdown-menu-start {
   --bs-position: start;
 }
@@ -3780,7 +3781,7 @@ textarea.form-control-lg {
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: #dee2e6;
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
