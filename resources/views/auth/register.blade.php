@@ -60,11 +60,11 @@
                         </div>
                         <div style="margin-top: 10px" class="form-group">
                             <label class="gender">Male
-                                <input type="radio" checked="checked" name="gender">
+                                <input type="radio" value="Male" checked="checked" name="gender">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="gender">Female
-                                <input type="radio" name="gender">
+                                <input type="radio" value="Female" name="gender">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
