@@ -31,9 +31,7 @@
         </div>
         <div class="col-md-8 trans">
                 @if($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
+                    <div>{{ $errors->first() }}</div>
                 @endif
 {{--            @if($errors->any())--}}
 {{--                alert('{{$errors->first()}}')--}}

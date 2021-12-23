@@ -32,12 +32,10 @@ class EditUserController
         if ($request->old_password !== null && $request->new_password !== null && $request->confirm_password !== null){
             $output[3] = $this->changePass($request);
         }
-        if ($output === ["fail", "fail", "fail", "fail"])
+        if ($output === ["fail", "fail", "fail", "password"])
+            return Redirect::back()->withErrors(['error' => 'Nothing to change']);
+        else if ($output === ["fail", "fail", "fail", "fail"])
             return Redirect::back()->withErrors(['error' => 'Wrong Pass']);
-            //return response()->json($output);
-//        else
-////            return Redirect::back();
-//            return response()->json("success");
     }
     public function changeFName(Request $request)
     {
