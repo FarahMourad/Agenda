@@ -73,8 +73,8 @@ class EditUserController
     {
         $request->validate([
             'old_password'=>'required',
-            'new_password' => 'required',
-            'confirm_password' => 'required|same:new_password'
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password|min:8'
         ]);
         $current_user = auth()->user();
         if (Hash::check($request->old_password, $current_user->password)){
