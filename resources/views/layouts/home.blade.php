@@ -18,7 +18,7 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="">AGENDA</a>
+    <a class="navbar-brand ps-3" href="/">AGENDA</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -34,7 +34,11 @@
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="setting"><i class="fas fa-user-cog"></i>  Settings</a></li>
-                <li><a onclick="swap()" class="dropdown-item" style="cursor: pointer"><i class="bi bi-cloud-sun-fill"></i>  Theme</a></li>
+                <li><a id="theme" class="dropdown-item" style="cursor: pointer"><i class="bi bi-cloud-sun-fill"></i>  Theme</a></li>
+{{--                <form id="theme-form" method="POST" class="d-none">--}}
+{{--                    @csrf--}}
+{{--                </form>--}}
+
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
@@ -61,8 +65,8 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/tasks">All</a>
-                            <a class="nav-link" href="/tasks">Assigned to me</a>
+                            <a class="nav-link" onclick="show('allTasks')">All</a>
+                            <a class="nav-link" onclick="show('assignedToMeTasks')">Assigned to me</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -72,11 +76,11 @@
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/notes">All</a>
-                            <a class="nav-link" href="/notes">Shared with me</a>
+                            <a class="nav-link" onclick="show('allNotes')">All</a>
+                            <a class="nav-link" onclick="show('sharedWithMeNotes')">Shared with me</a>
                         </nav>
                     </div>
-                    <a class="nav-link" href="/diary">
+                    <a class="nav-link" onclick="show('diaryDiv')">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
                     </a>
@@ -89,11 +93,80 @@
         </nav>
     </div>
     <div id="layoutSidenav_content">
-        <main>
-            @yield('content')
+        <main id="container">
+            <div id="allTasks" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Tasks</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">All</li>
+                </ol>
+{{--                <div class="row">--}}
+
+{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
+{{--                    --}}{{--                        <div class="card bg-primary text-white mb-4">--}}
+{{--                    --}}{{--                            <div class="card-body">Primary Card</div>--}}
+{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                    --}}{{--                            </div>--}}
+{{--                    --}}{{--                        </div>--}}
+{{--                    --}}{{--                    </div>--}}
+{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
+{{--                    --}}{{--                        <div class="card bg-warning text-white mb-4">--}}
+{{--                    --}}{{--                            <div class="card-body">Warning Card</div>--}}
+{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                    --}}{{--                            </div>--}}
+{{--                    --}}{{--                        </div>--}}
+{{--                    --}}{{--                    </div>--}}
+{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
+{{--                    --}}{{--                        <div class="card bg-success text-white mb-4">--}}
+{{--                    --}}{{--                            <div class="card-body">Success Card</div>--}}
+{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                    --}}{{--                            </div>--}}
+{{--                    --}}{{--                        </div>--}}
+{{--                    --}}{{--                    </div>--}}
+{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
+{{--                    --}}{{--                        <div class="card bg-danger text-white mb-4">--}}
+{{--                    --}}{{--                            <div class="card-body">Danger Card</div>--}}
+{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                    --}}{{--                            </div>--}}
+{{--                    --}}{{--                        </div>--}}
+{{--                    --}}{{--                    </div>--}}
+{{--                </div>--}}
+            </div>
+            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Tasks</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Assigned to me</li>
+                </ol>
+            </div>
+            <div id="allNotes" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Notes</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">All</li>
+                </ol>
+            </div>
+            <div id="sharedWithMeNotes" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Notes</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Shared with me</li>
+                </ol>
+            </div>
+            <div id="diaryDiv" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Diary</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Secret Diary</li>
+                </ol>
+            </div>
         </main>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/homeScript.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -101,15 +174,49 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script>
+    var theme = 1;
     function swap() {
         let sheet = document.getElementById('stylesheet').getAttribute('href');
-        console.log(sheet);
         if (sheet === "css/homeDark.css"){
-            console.log("changed");
+            theme = 1;
+            document.getElementById("stylesheet").setAttribute("href", "css/home.css");
+        }else {
+            theme = 0;
+            document.getElementById("stylesheet").setAttribute("href", "css/homeDark.css");
+        }
+    }
+
+    $('#theme').click(function(e) {
+        e.preventDefault();
+        var _token = $("input[name='_token']").val();
+        swap();
+        $.ajax({
+            type: "POST",
+            url: "{{route('edit-theme')}}",
+            data: {theme: theme, _token: _token},
+            success: function() {
+                console.log("success");
+            }
+        });
+    });
+
+
+    $(document).ready(function(){
+        theme = '{{\Illuminate\Support\Facades\Auth::user()->theme}}';
+        console.log(theme);
+        if (theme == 1){
+            console.log(theme);
             document.getElementById("stylesheet").setAttribute("href", "css/home.css");
         }else {
             document.getElementById("stylesheet").setAttribute("href", "css/homeDark.css");
         }
+    });
+    function show(id) {
+        var divList = document.getElementById('container').children
+        for (let i = 0; i < divList.length; i++) {
+            divList[i].style.display = 'none';
+        }
+        document.getElementById(id).style.display = 'block';
     }
 </script>
 </body>

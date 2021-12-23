@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +13,13 @@ class EditUserController
         return view('setting');
     }
 
-    public function edit(Request $request)
+    public function editTheme(Request $request){
+        $current_user = auth()->user();
+        $current_user->update([
+            'theme' => $request->theme
+        ]);
+    }
+    public function edit(Request $request): RedirectResponse
     {
         $output = ["fail", "fail", "fail", "password"];
         if ($request->fName !== null){

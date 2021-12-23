@@ -12,16 +12,9 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::get('/home', function (){
             return view('layouts.home');
         });
-        Route::get('/tasks', function (){
-            return view('tasks');
-        });
-        Route::get('/notes', function (){
-            return view('notes');
-        });
-        Route::get('/diary', function (){
-            return view('diary');
-        });
         Route::get('/setting', 'EditUserController@showSetting');
         Route::post('/editData', 'EditUserController@edit')->name('edit');
+        Route::post('/setTheme', 'EditUserController@editTheme')->name('edit-theme');
     });
+
 });
