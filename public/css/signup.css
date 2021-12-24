@@ -8149,7 +8149,7 @@ body:after {
     width: 100%;
     content: '';
     background: #000;
-    opacity: .3;
+    opacity: .55;
     z-index: -1;
 }
 
