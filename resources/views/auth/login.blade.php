@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
-<body class="img js-fullheight" style="background-image: url(assets/img/4.jpg);">
+<body class="img js-fullheight" style="background-image: url(assets/img/6.jpeg);">
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">

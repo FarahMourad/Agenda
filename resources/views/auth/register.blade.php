@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/signup.css">
 
 </head>
-<body class="img js-fullheight" style="background-image: url(assets/img/4.jpg);position: relative;
+<body class="img js-fullheight" style="background-image: url(assets/img/6.jpeg);position: relative;
 ">
 <section  class="ftco-section">
     <div class="container">
