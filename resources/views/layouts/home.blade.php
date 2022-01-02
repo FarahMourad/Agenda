@@ -162,6 +162,30 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Secret Diary</li>
                 </ol>
+                <div class="row">
+                    <div class="col-xl-3 col-md-6"></div>
+                    <div class="col-xl-3 col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="dBook">
+                            <div class="dCover"></div>
+                            <div class="dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="last-dPage">
+                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2>
+                            </div>
+                            <div class="back-dCover"></div>
+                        </div>
+                    </div>
+{{--                    <div class="col-xl-3 col-md-6"></div>--}}
+                </div>
             </div>
         </main>
     </div>
