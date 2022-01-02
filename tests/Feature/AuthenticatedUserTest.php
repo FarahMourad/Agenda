@@ -19,7 +19,7 @@ class AuthenticatedUserTest extends TestCase
 
         $response = $this->post('/register', $this->data());
 
-        $this->assertCount(4, User::all());
+        $this->assertCount(9, User::all());
     }
 
     /** @test */
