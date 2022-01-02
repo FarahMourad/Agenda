@@ -167,17 +167,15 @@
                     <div class="col-xl-3 col-md-6"></div>
                     <div class="col-md-6">
                         <div class="dBook">
-                            <div class="dCover"></div>
-                            <div class="dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
-                            <div class="dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
-                            <div class="dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
-                            <div class="dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
-                            <div class="dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2></div>
+                            <div class="dCover">
+                                <img src="../assets/img/12.jpg">
+                                <h2 style="font-family: 'Lucida Handwriting'; text-align: center">Secret Diary</h2>
+                            </div>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
                             <div class="last-dPage">
                                 <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2>
                             </div>

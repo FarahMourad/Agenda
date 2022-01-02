@@ -11719,7 +11719,7 @@ body {
     z-index: -2;
 }
 .dCover, .back-dCover{
-    height: 480px;
+    height: 500px;
     width: 400px;
     background-color: #835647;
     border-radius: 2px 20px 20px 2px;
@@ -11731,10 +11731,10 @@ body {
 
 .dPage, .last-dPage{
     padding: 10px;
-    height: 460px;
+    height: 480px;
     width: 390px;
     margin-top: 10px;
-    background-color: #ece5e0;
+    background-color: #fcf3f1;
     position: absolute;
     border-radius: 2px 10px 10px 2px;
     transform: rotateX(10deg);
@@ -11771,4 +11771,18 @@ body {
 }
 .dBook:hover .dPage:nth-child(6){
     transition-duration: 3.4s;
+}
+
+.dCover img{
+    width: 150px;
+    display: block;
+    border-radius: 50%;
+    margin: 50px auto;
+    position: relative;
+    z-index: 1;
+}
+.dCover h2{
+    font-family: "Lucida Handwriting";
+    text-align: center;
+    color: #ece5e0;
 }
