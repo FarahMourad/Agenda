@@ -135,7 +135,7 @@ class NoteController
             $new_category->category = $category;
             $new_category->save();
         } else {
-            return redirect()->back()->withErrors('msg', 'error: already exists');
+            return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
 }
