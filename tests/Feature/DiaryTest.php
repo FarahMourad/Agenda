@@ -274,6 +274,110 @@ class DiaryTest extends TestCase
         ]), $response->getContent(), '');
     }
 
+    /** @test */
+    public function go_to_specific_page_even()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 3,
+            'pageContent' => 'AyaKhamis BaselAyman PanceeWahid',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 2
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $this->assertSame(json_encode([
+            "left_content" => 'Sara Samer',
+            "right_content" => 'Aya Basel Pancee Farah',
+            "left_bookmarked" => 0,
+            "right_bookmarked" => 0,
+        ]), $response->getContent(), '');
+    }
+
+    public function searchForPage(Request $request)
+    {
+        $page_no = $request->page_no;
+        $user_id = auth()->user()->user_id;
+        $page = Diary_pages::where([
+            ['page_id', $page_no],
+            ['user_id', $user_id]
+        ])->first();
+        echo $page;
+        if ($page == null) {
+            return redirect()->back()->withErrors('msg', 'ERROR: empty diary');
+        } else {
+            if ($page_no % 2 == 0) {
+                $left_page = Diary_pages::where([
+                    ['page_id', $page_no - 1],
+                    ['user_id', $user_id]
+                ])->first();
+                echo $left_page;
+                return response()->json([
+                    'left_content' => $left_page->content,
+                    'right_content'  => $page->content,
+                    'left_bookmarked' => $left_page->bookmarked,
+                    'right_bookmarked' => $page->bookmarked
+                ]);
+            } else {
+                $right_page = Diary_pages::where([
+                    ['page_id', $page_no + 1],
+                    ['user_id', $user_id]
+                ])->first();
+                echo $right_page;
+                if ($right_page == null) {
+                    $right_page_content = null;
+                    $right_page_bookmarked = null;
+                } else {
+                    $right_page_content = $right_page->content;
+                    $right_page_bookmarked = $right_page->bookmarked;
+                }
+                return response()->json([
+                    'left_content' => $page->content,
+                    'right_content' => $right_page_content,
+                    'left_bookmarked' => $page->bookmarked,
+                    'right_bookmarked' => $right_page_bookmarked
+                ]);
+            }
+        }
+    }
+
     public function getLastPage(): JsonResponse
     {
         $current_user = auth()->user();
@@ -320,7 +424,8 @@ class DiaryTest extends TestCase
         }
     }
 
-    public function deleteDiary() {
+    public function deleteDiary(): \Illuminate\Http\Response
+    {
         $current_user = auth()->user();
         $pages = Diary_pages::where('user_id', $current_user->user_id);
         echo $pages->get();
@@ -329,7 +434,8 @@ class DiaryTest extends TestCase
         return response()->noContent();
     }
 
-    public function setContent(Request $request){
+    public function setContent(Request $request): \Illuminate\Http\Response
+    {
         if ($request->pageContent == null)
             return response()->noContent();
         else{

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
+
 class NotesTest extends TestCase
 {
 
