@@ -14,7 +14,7 @@ class DiaryController
         $current_user = auth()->user();
         $last_page = Diary_pages::where('user_id', $current_user->user_id)->latest('page_id')->first();
         $page_no = $last_page->page_id;
-        $page_no = $page_no * 2 - 1;
+//        $page_no = $page_no * 2 - 1;
         return response()->json([
             "content" => $last_page->content,
             "page_no" => $page_no,
@@ -46,7 +46,7 @@ class DiaryController
     public function searchForPage(Request $request): JsonResponse
     {
         $page_no = $request->page_no;
-        $page_no = ceil($page_no / 2);
+        //$page_no = ceil($page_no / 2);
         $current_user = auth()->user();
         $page = Diary_pages::where([
             ['page_id', $page_no],
@@ -96,7 +96,7 @@ class DiaryController
             return response()->noContent();
         else{
             $page_no = $request->page_no;
-            $page_no = ceil($page_no / 2);
+//            $page_no = ceil($page_no / 2);
             $current_user = auth()->user();
             $page = Diary_pages::where([
                 ['page_id', $page_no],
@@ -117,8 +117,16 @@ class DiaryController
 
     public function bookmarkPage(Request $request){
         $page_no = $request->page_no;
-        $page_no = ceil($page_no / 2);
+//        $page_no = ceil($page_no / 2);
         $current_user = auth()->user();
+        $page = Diary_pages::where([
+            ['bookmarked', true],
+            ['user_id', $current_user->user_id]
+        ])->first();
+        if($page != null){
+            $page->bookmarked = false;
+            $page->save();
+        }
         $page = Diary_pages::where([
             ['page_id', $page_no],
             ['user_id', $current_user->user_id]

@@ -21,7 +21,7 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::post('/editData', 'EditUserController@edit')->name('edit');
         Route::post('/setTheme', 'EditUserController@editTheme')->name('edit-theme');
 
-        ########################Diary########################
+        ######################## Diary ########################
         Route::get('/getDiary', 'DiaryController@getLastPage')->name('getDiary');
         Route::get('/getBook', 'DiaryController@retrieveBookmarked')->name('getBooked');
         Route::get('/searchPage', 'DiaryController@searchForPage')->name('searchPage');
