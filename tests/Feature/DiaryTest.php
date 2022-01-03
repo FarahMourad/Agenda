@@ -613,7 +613,6 @@ class DiaryTest extends TestCase
             ['page_id', $page_no],
             ['user_id', $user_id]
         ])->first();
-        echo $page;
         if ($page == null) {
             return redirect()->back()->withErrors('msg', 'ERROR: empty diary');
         } else {
@@ -622,7 +621,6 @@ class DiaryTest extends TestCase
                     ['page_id', $page_no - 1],
                     ['user_id', $user_id]
                 ])->first();
-                echo $left_page;
                 return response()->json([
                     'left_content' => $left_page->content,
                     'right_content'  => $page->content,
@@ -634,7 +632,6 @@ class DiaryTest extends TestCase
                     ['page_id', $page_no + 1],
                     ['user_id', $user_id]
                 ])->first();
-                echo $right_page;
                 if ($right_page == null) {
                     $right_page_content = null;
                     $right_page_bookmarked = null;
@@ -672,7 +669,6 @@ class DiaryTest extends TestCase
                     ['user_id', $current_user->user_id],
                     ['page_id', $page_no - 1]
                 ])->first();
-                echo $last_page;
                 $left_page = $page_no - 1;
                 $right_page = $page_no;
                 $left_bookmark = $left_content->bookmarked;
