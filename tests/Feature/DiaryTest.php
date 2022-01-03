@@ -54,7 +54,7 @@ class DiaryTest extends TestCase
         $request = Request::create('/setContent', 'POST', [
             'page_no' => 3,
             'pageContent' => null,
-            'bookmarked' => false,
+            'bookmarked' => false
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
@@ -79,7 +79,7 @@ class DiaryTest extends TestCase
         $request = Request::create('/setContent', 'POST', [
             'page_no' => 3,
             'pageContent' => 'Farah Mourad',
-            'bookmarked' => false,
+            'bookmarked' => false
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
@@ -91,13 +91,13 @@ class DiaryTest extends TestCase
             'page_id' => 3,
             'user_id' => $user->user_id,
             'content' => 'Farah Mourad',
-            'bookmarked' => false,
+            'bookmarked' => false
         ]);
 
         $request = Request::create('/setContent', 'POST', [
             'page_no' => 3,
             'pageContent' => 'Farah Mourad & Sara Mahmoud',
-            'bookmarked' => true,
+            'bookmarked' => true
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
@@ -109,7 +109,7 @@ class DiaryTest extends TestCase
             'page_id' => 3,
             'user_id' => $user->user_id,
             'content' => 'Farah Mourad & Sara Mahmoud',
-            'bookmarked' => true,
+            'bookmarked' => true
         ]);
     }
 
