@@ -93,17 +93,13 @@ class NoteController
             $new_category = new Note_category();
             $new_category->category = $category;
             $new_category->user_id = $user_id;
-//            echo $new_category;
             $new_category->save();
-            echo $new_category;
-            echo "test";
         }
         $note->title = $title;
         $note->content = $content;
         $note->category = $category;
         $note->modified_date = $modified_date;
         $note->pinned = !(($pinned == null) || ($pinned == false));
-        echo $note;
         $note->save();
         return response()->noContent();
     }

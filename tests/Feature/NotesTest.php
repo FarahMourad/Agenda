@@ -210,7 +210,6 @@ class NotesTest extends TestCase
         });
         $this->assertSame(json_encode([
             [
-                //"id" => 107,
                 "note_id" => 2,
                 "user_id" => $user->user_id,
                 "title" => "AI",
@@ -221,7 +220,6 @@ class NotesTest extends TestCase
                 "pinned" => 0
             ],
             [
-                //"id" => 106,
                 "note_id" => 1,
                 "user_id" => $user->user_id,
                 "title" => "Software",
@@ -277,7 +275,6 @@ class NotesTest extends TestCase
         });
         $this->assertSame(json_encode([
             [
-                //"id" => 116,
                 "note_id" => 1,
                 "user_id" => $user->user_id,
                 "title" => "Software",
@@ -288,7 +285,6 @@ class NotesTest extends TestCase
                 "pinned" => 0
             ],
             [
-                //"id" => 117,
                 "note_id" => 2,
                 "user_id" => $user->user_id,
                 "title" => "AI",
@@ -300,6 +296,8 @@ class NotesTest extends TestCase
             ]
         ]), $response->getContent(), '');
     }
+
+
     ##################fuctions to test##################
     public function getAllNotes(): JsonResponse
     {
@@ -316,17 +314,6 @@ class NotesTest extends TestCase
             'modified_date',
             'pinned']);
         return response()->json($note);
-    }
-
-    public function getCategoryNotes(Request $request): JsonResponse // category
-    {
-        $user_id = auth()->user()->user_id;
-        $category = $request->category;
-        $note = Note::where([
-            ['user_id', $user_id],
-            ['category', $category]
-        ])->get();
-        return response()->json('notes', $note);
     }
 
     public function addNote(Request $request): Response
@@ -381,69 +368,15 @@ class NotesTest extends TestCase
             $new_category = new Note_category();
             $new_category->category = $category;
             $new_category->user_id = $user_id;
-//            echo $new_category;
             $new_category->save();
-            echo $new_category;
-            echo "test";
         }
         $note->title = $title;
         $note->content = $content;
         $note->category = $category;
         $note->modified_date = $modified_date;
         $note->pinned = !(($pinned == null) || ($pinned == false));
-        echo $note;
         $note->save();
         return response()->noContent();
-    }
-
-    public function deleteNote(Request $request)
-    { // note_id
-        $user_id = auth()->user()->user_id;
-        $note_id = $request->note_id;
-        $note = Note::where([
-            ['user_id', $user_id],
-            ['note_id', $note_id]
-        ]);
-        $note->delete();
-    }
-
-    public function pinNote(Request $request)
-    { // note_id, pinned
-        $user_id = auth()->user()->user_id;
-        $note_id = $request->note_id;
-        $pinned = $request->pinned;
-        $note = Note::where([
-            ['user_id', $user_id],
-            ['note_id', $note_id]
-        ]);
-        $note->pinned = !(($pinned == null) || ($pinned == false));
-        $note->save();
-    }
-
-    public function shareNote(Request $request)
-    { //note_id, coll_username
-        $user_id = auth()->user()->user_id;
-        $note_id = $request->note_id;
-        $coll_username = $request->coll_username;
-        $collaborator = User::where([
-            ['user_id', $coll_username]
-        ]);
-        if ($collaborator != null) {
-            $note = Note::where([
-                ['user_id', $user_id],
-                ['note_id', $note_id]
-            ]);
-            $new_note = new Note();
-            $new_note = $note;
-            $new_note->user_id = $coll_username;
-            $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
-            $new_note->note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
-            $new_note->category = 'Shared with me';
-            $new_note->save();
-        }
-
-//        $note->pinned = !(($pinned == null || $pinned == false));
-        $note->save();
     }
 
     public function sortNotesByTitle(Request $request): JsonResponse // category
@@ -479,7 +412,20 @@ class NotesTest extends TestCase
         }
         return response()->json($retrieved_notes->sortBy("title"));
     }
-    
+
+
+
+    public function getCategoryNotes(Request $request): JsonResponse // category
+    {
+        $user_id = auth()->user()->user_id;
+        $category = $request->category;
+        $note = Note::where([
+            ['user_id', $user_id],
+            ['category', $category]
+        ])->orderBy('id', 'ASC')->get();
+        return response()->json($note);
+    }
+
     public function createNoteCategory(Request $request)
     { // category
         $user_id = auth()->user()->user_id;
@@ -497,6 +443,57 @@ class NotesTest extends TestCase
             return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
+
+    public function pinNote(Request $request)
+    { // note_id, pinned
+        $user_id = auth()->user()->user_id;
+        $note_id = $request->note_id;
+        $pinned = $request->pinned;
+        $note = Note::where([
+            ['user_id', $user_id],
+            ['note_id', $note_id]
+        ]);
+        $note->pinned = !(($pinned == null) || ($pinned == false));
+        $note->save();
+    }
+
+    public function deleteNote(Request $request)
+    { // note_id
+        $user_id = auth()->user()->user_id;
+        $note_id = $request->note_id;
+        $note = Note::where([
+            ['user_id', $user_id],
+            ['note_id', $note_id]
+        ]);
+        $note->delete();
+    }
+
+    public function shareNote(Request $request)
+    { //note_id, coll_username
+        $user_id = auth()->user()->user_id;
+        $note_id = $request->note_id;
+        $coll_username = $request->coll_username;
+        $collaborator = User::where([
+            ['user_id', $coll_username]
+        ]);
+        if ($collaborator != null) {
+            $note = Note::where([
+                ['user_id', $user_id],
+                ['note_id', $note_id]
+            ]);
+            $new_note = new Note();
+            $new_note = $note;
+            $new_note->user_id = $coll_username;
+            $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
+            $new_note->note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
+            $new_note->category = 'Shared with me';
+            $new_note->save();
+        }
+
+//        $note->pinned = !(($pinned == null || $pinned == false));
+        $note->save();
+    }
+
 
 //    public function sortNotesByDate(): JsonResponse
 //    {
