@@ -13,13 +13,21 @@ use function Symfony\Component\Translation\t;
 
 class NoteController
 {
-    public function getAllNotes(Request $request): JsonResponse
+    public function getAllNotes(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
         $note = Note::where([
             ['user_id', $user_id]
-        ])->get();
-        return response()->json('notes', $note);
+        ])->orderBy('id', 'ASC')->get([
+            'note_id',
+            'user_id',
+            'title',
+            'category',
+            'content',
+            'creation_date',
+            'modified_date',
+            'pinned']);
+        return response()->json($note);
     }
 
     public function getCategoryNotes(Request $request): JsonResponse // category
@@ -33,7 +41,7 @@ class NoteController
         return response()->json('notes', $note);
     }
 
-    public function addNote(Request $request)
+    public function addNote(Request $request): Response
     { // title, category, content, creation_date, modified_date, pinned
         $user_id = auth()->user()->user_id;
         $title = $request->title; //not null
@@ -44,7 +52,6 @@ class NoteController
         $pinned = $request->pinned;
         $last_note = Note::where('user_id', $user_id)->latest('note_id')->first();
         $note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
-
         if ($title != null && $creation_date != null && $modified_date != null) {
             $note = new Note();
             $note->user_id = $user_id;
@@ -54,9 +61,10 @@ class NoteController
             $note->content = $content;
             $note->creation_date = $creation_date;
             $note->modified_date = $modified_date;
-            $note->pinned = !($pinned == null);
+            $note->pinned = !(($pinned == null) || ($pinned == false));
             $note->save();
         }
+        return response()->noContent();
     }
 
     public function editNote(Request $request)
@@ -69,27 +77,35 @@ class NoteController
         $modified_date = $request->modified_date;
         $pinned = $request->pinned;
 
+        if ($title == null || $modified_date == null || $note_id == null) {
+            return redirect()->back()->withErrors('msg', 'ERROR: null content');
+        }
         $note = Note::where([
             ['user_id', $user_id],
             ['note_id', $note_id]
-        ]);
+        ])->first();
+        $table_empty = Note_category::count();
         $is_category_found = Note_category::where([
             ['user_id', $user_id],
             ['category', $category]
         ]);
-        if ($is_category_found == null) {
+        if ($is_category_found == null || $table_empty == 0) {
             $new_category = new Note_category();
-            $new_category->user_id = $user_id;
             $new_category->category = $category;
+            $new_category->user_id = $user_id;
+//            echo $new_category;
             $new_category->save();
+            echo $new_category;
+            echo "test";
         }
-
         $note->title = $title;
         $note->content = $content;
         $note->category = $category;
         $note->modified_date = $modified_date;
-        $note->pinned = !($pinned == false);
+        $note->pinned = !(($pinned == null) || ($pinned == false));
+        echo $note;
         $note->save();
+        return response()->noContent();
     }
 
     public function deleteNote(Request $request)
@@ -112,7 +128,7 @@ class NoteController
             ['user_id', $user_id],
             ['note_id', $note_id]
         ]);
-        $note->pinned = !($pinned == false);
+        $note->pinned = !(($pinned == null) || ($pinned == false));
         $note->save();
     }
 
@@ -146,17 +162,34 @@ class NoteController
     {
         $user_id = auth()->user()->user_id;
         $category = $request->category;
-        if ($category != 'all') {
-            $note = Note::where([
+
+        if ($category == 'all') {
+            $retrieved_notes = Note::where([
                 ['user_id', $user_id]
-            ])->orderBy('title', 'ASC')->get();
+            ])->get([
+                'note_id',
+                'user_id',
+                'title',
+                'category',
+                'content',
+                'creation_date',
+                'modified_date',
+                'pinned']);
         } else {
-            $note = Note::where([
+            $retrieved_notes = Note::where([
                 ['user_id', $user_id],
                 ['category', $category]
-            ])->orderBy('title', 'ASC')->get();
+            ])->get([
+                'note_id',
+                'user_id',
+                'title',
+                'category',
+                'content',
+                'creation_date',
+                'modified_date',
+                'pinned']);
         }
-        return response()->json('notes', $note);
+        return response()->json($retrieved_notes->sortBy("title"));
     }
 
     public function createNoteCategory(Request $request)
