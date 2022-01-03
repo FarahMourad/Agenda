@@ -5,6 +5,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -331,6 +332,279 @@ class DiaryTest extends TestCase
         ]), $response->getContent(), '');
     }
 
+    /** @test */
+    public function go_to_odd_bookmarked_page()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 3,
+            'pageContent' => 'AyaKhamis BaselAyman PanceeWahid',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getBook', 'GET', [
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->retrieveBookmarked();
+        });
+
+        $this->assertSame(json_encode([
+            "left_page" => 3,
+            "left_content" => "AyaKhamis BaselAyman PanceeWahid",
+            "right_page" => null,
+            "right_content" => null,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function go_to_even_bookmarked_page()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 3,
+            'pageContent' => 'AyaKhamis BaselAyman PanceeWahid',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getBook', 'GET', [
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->retrieveBookmarked();
+        });
+
+        $this->assertSame(json_encode([
+            "left_page" => 1,
+            "left_content" => "Sara Samer",
+            "right_page" => 2,
+            "right_content" => "Aya Basel Pancee Farah",
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function get_bookmarked_after_bookmark_multiple_page_while_setContent()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 3,
+            'pageContent' => 'AyaKhamis BaselAyman PanceeWahid',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getBook', 'GET', [
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->retrieveBookmarked();
+        });
+
+        $this->assertSame(json_encode([
+            "left_page" => 3,
+            "left_content" => "AyaKhamis BaselAyman PanceeWahid",
+            "right_page" => null,
+            "right_content" => null,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function bookmark_while_there_is_already_a_bookmark_setContent()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 1
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $this->assertSame(json_encode([
+            "left_content" => 'Sara Samer',
+            "right_content" => 'Aya Basel Pancee Farah',
+            "left_bookmarked" => 0,
+            "right_bookmarked" => 1,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function bookmark_while_there_is_already_a_bookmark_already_existed_page()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/bookmarkPage', 'POST', [
+            'page_no' => 1,
+            'bookmarked' => true
+
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->bookmarkPage($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 1
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $this->assertSame(json_encode([
+            "left_content" => 'Sara Samer',
+            "right_content" => 'Aya Basel Pancee Farah',
+            "left_bookmarked" => 1,
+            "right_bookmarked" => 0,
+        ]), $response->getContent(), '');
+    }
+    ##################fuctions to test##################
+
     public function searchForPage(Request $request)
     {
         $page_no = $request->page_no;
@@ -424,17 +698,15 @@ class DiaryTest extends TestCase
         }
     }
 
-    public function deleteDiary(): \Illuminate\Http\Response
+    public function deleteDiary(): Response
     {
         $current_user = auth()->user();
         $pages = Diary_pages::where('user_id', $current_user->user_id);
-        echo $pages->get();
-
         $pages->delete();
         return response()->noContent();
     }
 
-    public function setContent(Request $request): \Illuminate\Http\Response
+    public function setContent(Request $request): Response
     {
         if ($request->pageContent == null)
             return response()->noContent();
@@ -451,10 +723,85 @@ class DiaryTest extends TestCase
                 $page->user_id = $current_user->user_id;
             }
             $page->content = $request->pageContent;
-            $page->bookmarked = $request->bookmarked;
+            $page->save();
+            //use the bookmark function
+            if ($request->bookmarked == true || $request->bookmarked == 1)
+                $this->bookmarkPage($request);
+            else
+                $page->bookmarked = false;
             $page->save();
             return response()->noContent();
         }
+    }
+
+    public function bookmarkPage(Request $request): Response
+    {
+        $page_no = $request->page_no;
+        $current_user = auth()->user();
+        $page = Diary_pages::where([
+            ['bookmarked', true],
+            ['user_id', $current_user->user_id]
+        ])->first();
+        if($page != null){
+            $page->bookmarked = false;
+            $page->save();
+        }
+        $page = Diary_pages::where([
+            ['page_id', $page_no],
+            ['user_id', $current_user->user_id]
+        ])->first();
+        $page->bookmarked = $request->bookmarked;
+        $page->save();
+        return response()->noContent();
+    }
+
+    public function retrieveBookmarked(): JsonResponse
+    {
+        $current_user = auth()->user();
+        $pages = Diary_pages::where([
+            ['bookmarked', true],
+            ['user_id', $current_user->user_id]
+        ])->first();
+        if ($pages == null){
+            return response()->json([
+                "left_page" => null,
+                "left_content" => null,
+                "right_page" => null,
+                "right_content" => null,
+            ]);
+        }
+        $page_no = $pages->page_id;
+        $content =  $pages->content;
+        if ($page_no % 2 == 0){
+            $pages = Diary_pages::where([
+                ['page_id', $page_no - 1],
+                ['user_id', $current_user->user_id]
+            ])->first();
+            $left_page = $page_no - 1;
+            $left_content = $pages->content;
+            $right_page = $page_no;
+            $right_content = $content;
+        } else{
+            $pages = Diary_pages::where([
+                ['page_id', $page_no + 1],
+                ['user_id', $current_user->user_id]
+            ])->first();
+            $left_page = $page_no;
+            $left_content = $content;
+            if ($pages == null){
+                $right_page = null;
+                $right_content = null;
+            } else{
+                $right_page = $page_no + 1;
+                $right_content = $pages->content;
+            }
+        }
+        return response()->json([
+            "left_page" => $left_page,
+            "left_content" => $left_content,
+            "right_page" => $right_page,
+            "right_content" => $right_content,
+        ]);
     }
 
     /**
