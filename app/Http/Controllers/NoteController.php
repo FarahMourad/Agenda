@@ -13,6 +13,24 @@ use function Symfony\Component\Translation\t;
 
 class NoteController
 {
+    public function getAllNotes(Request $request) {
+        $user_id = auth()->user()->user_id;
+        $note = Note::where([
+            ['user_id', $user_id]
+        ]);
+        return response()->json('notes', $note);
+    }
+
+    public function getCategoryNotes(Request $request) {
+        $user_id = auth()->user()->user_id;
+        $category = $request->category;
+        $note = Note::where([
+            ['user_id', $user_id],
+            ['category', $category]
+        ]);
+        return response()->json('notes', $note);
+    }
+
     public function addNote(Request $request){
         $user_id = auth()->user()->user_id;
         $title = $request->title; //not null

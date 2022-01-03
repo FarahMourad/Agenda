@@ -30,7 +30,17 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::post('/bookmarkPage', 'DiaryController@bookmarkPage')->name('bookmarkPage');
         Route::post('/deleteDiary', 'DiaryController@deleteDiary')->name('deleteDiary');
 
+        ######################## Notes ########################
+        Route::get('/getAllNotes', 'NoteController@getAllNotes')->name('getAllNotes');
+        Route::get('/getCategoryNotes', 'NoteController@getCategoryNotes')->name('getCategoryNotes');
+        Route::get('/sortNotesByTitle', 'NoteController@sortNotesByTitle')->name('sortNotesByTitle');
 
+        Route::post('/createNoteCategory', 'NoteController@createNoteCategory')->name('createNoteCategory');
+        Route::post('/addNote', 'NoteController@addNote')->name('addNote');
+        Route::post('/editNote', 'NoteController@editNote')->name('editNote');
+        Route::post('/deleteNote', 'NoteController@deleteNote')->name('deleteNote');
+        Route::post('/pinNote', 'NoteController@pinNote')->name('pinNote');
+        Route::post('/shareNote', 'NoteController@shareNote')->name('shareNote');
     });
 
 });
