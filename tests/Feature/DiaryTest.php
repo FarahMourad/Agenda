@@ -17,7 +17,7 @@ class DiaryTest extends TestCase
     /** @test */
     public function only_logged_in_users_can_see_their_diary()
     {
-        $response = $this->get('/getDiary') -> assertRedirect('/login');
+        $this->get('/getDiary') -> assertRedirect('/login');
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class DiaryTest extends TestCase
             'HTTP_ACCEPT' => 'application/json',
         ]);
 
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -59,7 +59,7 @@ class DiaryTest extends TestCase
             'HTTP_ACCEPT' => 'application/json',
         ]);
 
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -83,7 +83,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -101,7 +101,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -126,7 +126,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -137,7 +137,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -165,7 +165,7 @@ class DiaryTest extends TestCase
             'HTTP_ACCEPT' => 'application/json',
         ]);
 
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->deleteDiary();
         })->assertStatus(204);
     }
@@ -183,7 +183,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -194,7 +194,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -230,7 +230,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -241,7 +241,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -252,7 +252,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -288,7 +288,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -299,7 +299,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -310,7 +310,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -319,7 +319,6 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-
         $response = $this->handleRequestUsing($request, function ($request) {
             return $this->searchForPage($request);
         });
@@ -330,6 +329,91 @@ class DiaryTest extends TestCase
             "left_bookmarked" => 0,
             "right_bookmarked" => 0,
         ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function go_to_specific_page_odd()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 2,
+            'pageContent' => 'Aya Basel Pancee Farah',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 3,
+            'pageContent' => 'AyaKhamis BaselAyman PanceeWahid',
+            'bookmarked' => true,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 1
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $this->assertSame(json_encode([
+            "left_content" => 'Sara Samer',
+            "right_content" => 'Aya Basel Pancee Farah',
+            "left_bookmarked" => 0,
+            "right_bookmarked" => 0,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function error_if_there_is_no_a_page_to_go_to()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 3
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $response->assertRedirect();
     }
 
     /** @test */
@@ -345,7 +429,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -356,7 +440,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -367,7 +451,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -401,7 +485,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -412,7 +496,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -423,7 +507,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -445,6 +529,86 @@ class DiaryTest extends TestCase
     }
 
     /** @test */
+    public function go_to_not_exist_bookmarked_page()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getBook', 'GET', [
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->retrieveBookmarked();
+        });
+
+        $this->assertSame(json_encode([
+            "left_page" => null,
+            "left_content" => null,
+            "right_page" => null,
+            "right_content" => null,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function bookmark_page()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/setContent', 'POST', [
+            'page_no' => 1,
+            'pageContent' => 'Sara Samer',
+            'bookmarked' => false,
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->setContent($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/bookmarkPage', 'POST', [
+            'page_no' => 1,
+            'bookmarked' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->bookmarkPage($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/searchPage', 'GET', [
+            'page_no' => 1
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->searchForPage($request);
+        });
+
+        $this->assertSame(json_encode([
+            "left_content" => 'Sara Samer',
+            "right_content" => null,
+            "left_bookmarked" => 1,
+            "right_bookmarked" => null,
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
     public function get_bookmarked_after_bookmark_multiple_page_while_setContent()
     {
         $user = UserFactory::new()->create();
@@ -457,7 +621,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -468,7 +632,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -479,7 +643,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -513,7 +677,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -524,7 +688,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -559,7 +723,7 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
@@ -570,19 +734,18 @@ class DiaryTest extends TestCase
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->setContent($request);
         })->assertStatus(204);
 
         $request = Request::create('/bookmarkPage', 'POST', [
             'page_no' => 1,
             'bookmarked' => true
-
         ], [], [], [
             'HTTP_ACCEPT' => 'application/json',
         ]);
 
-        $response = $this->handleRequestUsing($request, function ($request) {
+        $this->handleRequestUsing($request, function ($request) {
             return $this->bookmarkPage($request);
         })->assertStatus(204);
 
@@ -603,8 +766,8 @@ class DiaryTest extends TestCase
             "right_bookmarked" => 0,
         ]), $response->getContent(), '');
     }
-    ##################fuctions to test##################
 
+    ##################fuctions to test##################
     public function searchForPage(Request $request)
     {
         $page_no = $request->page_no;

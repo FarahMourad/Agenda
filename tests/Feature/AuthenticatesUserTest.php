@@ -88,7 +88,7 @@ class AuthenticatesUserTest extends TestCase
      * @param  callable  $callback
      * @return TestResponse
      */
-    protected function handleRequestUsing(Request $request, callable $callback)
+    protected function handleRequestUsing(Request $request, callable $callback): TestResponse
     {
         return new TestResponse(
             (new Pipeline($this->app))
