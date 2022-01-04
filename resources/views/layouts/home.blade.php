@@ -195,7 +195,7 @@
                     <svg style="display: inline-block" class="svg-inline--fa fa-sticky-note fa-w-14" aria-hidden="true" focusable="false" data-prefix="far" data-icon="sticky-note" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 348.106V80c0-26.51-21.49-48-48-48H48C21.49 32 0 53.49 0 80v351.988c0 26.51 21.49 48 48 48h268.118a48 48 0 0 0 33.941-14.059l83.882-83.882A48 48 0 0 0 448 348.106zm-128 80v-76.118h76.118L320 428.106zM400 80v223.988H296c-13.255 0-24 10.745-24 24v104H48V80h352z"></path></svg>
                     <p style="display: inline-block" class="breadcrumb-item active" > Add new note</p>
                 </div>
-                <div class="container" >
+                <div class="container">
                     <div class="row" id="notesContainer">
                     </div>
                 </div>
@@ -212,17 +212,17 @@
             <div id="diaryDiv" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Diary</h1>
                 <ol class="breadcrumb mb-4">
-                    <i class="fas fa-eraser" style="margin-right: 10px; color: #801818; cursor: pointer"></i><li class="breadcrumb-item diaryChoices">Erase Memories    </li>
-                    <i class="fas fa-star" style="margin-right: 10px; margin-left: 20px; color: #efa315; cursor: pointer"></i><li class="breadcrumb-item diaryChoices"> Go To Bookmarked    </li>
+                    <i onclick="deleteDiary()" class="fas fa-eraser" style="margin-right: 10px; color: #801818; cursor: pointer"></i><li onclick="deleteDiary()" class="breadcrumb-item diaryChoices">Erase Memories    </li>
+                    <i class="fas fa-star" style="margin-right: 10px; margin-left: 20px; color: #efa315; cursor: pointer" onclick="getBook()"></i><li onclick="getBook()" class="breadcrumb-item diaryChoices"> Go To Bookmarked    </li>
                     <i class="fas fa-save" onclick="return saveDiary()" id="save1" style="margin-right: 10px; margin-left: 20px; color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))"></i><li id="save2" style="cursor: default" onclick="return saveDiary()" class="breadcrumb-item diaryChoices"> Save Changes    </li>
-                    <li class="breadcrumb-item diaryChoices" style="margin-left: 20px">Go To: </li><input type="number" id="goto">
+                    <li id="go" class="breadcrumb-item diaryChoices" style="margin-left: 20px">Go To: </li><input type="number" id="goto">
                 </ol>
                 <div>
                     <div style="display: inline-block; float: left; height: 500px"><i class="fas fa-chevron-left arr" id="leftArrow"></i></div>
                     <div style="display: inline-block; float: left; margin-left: 550px; margin-right: 10px">
                         <div class="dBook">
                             <input type="checkbox" name="flip" id="flip" class="flipper" style="display: none">
-                            <label class="dCover" for="flip">
+                            <label id="loader" class="dCover" for="flip">
                                 <img src="../assets/img/12.jpg">
                                 <h2 style="font-family: 'Lucida Handwriting'; text-align: center">Secret Diary</h2>
                             </label>
@@ -232,21 +232,21 @@
                             <div class="dPage">
                                 <textarea name="" id="page-back" rows="17" maxlength="510" readonly></textarea>
                                 <footer style="width: 350px; justify-content: center; transform: scale(-1, 1); cursor: default">
-                                    <a>1</a>
+                                    <a id="leftNo">1</a>
                                     <i class="fas fa-star" id="star1" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
                                 </footer>
                             </div>
                             <div class="last-dPage">
                                 <textarea name="" id="page-front" rows="17" maxlength="510" readonly></textarea>
                                 <footer style="width: 350px; justify-content: center; cursor: default">
-                                    <a>2</a>
+                                    <a id="rightNo">2</a>
                                     <i class="fas fa-star" id="star2" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
                                 </footer>
                             </div>
                             <div class="back-dCover"></div>
                         </div>
                     </div>
-                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr" id="leftArrow"></i></div>
+                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr" id="rightArrow"></i></div>
                     <footer style="position: fixed;bottom: 0; width: 100%">
                         <a id="addPage" class="editDiary"><i class="fas fa-pencil-alt" style="margin-right: 10px"></i>Have More Adventures?</a>
                     </footer>
@@ -412,17 +412,43 @@
     var editing = 0;
     var diarySaved = 0;
     $('#addPage').on("click", function () {
-        editing = 1;
-        diarySaved = 0;
-        document.getElementById('page-back').readOnly = false;
-        document.getElementById('page-front').readOnly = false;
-        document.getElementById('star1').style.color = '#b9b1a1';
-        document.getElementById('star2').style.color = '#b9b1a1';
-        document.getElementById('star1').style.cursor = 'pointer';
-        document.getElementById('star2').style.cursor = 'pointer';
-        document.getElementById('save1').style.cursor = 'pointer';
-        document.getElementById('save2').style.cursor = 'pointer';
+        document.getElementById('page-back').value = "";
+        document.getElementById('page-front').value = "";
+        $.ajax({
+            type: "GET",
+            url: "/getDiary",
+            data: {},
+            success: function(res) {
+                if (res) {
+                    editing = 1;
+                    diarySaved = 0;
+                    document.getElementById('page-back').readOnly = false;
+                    document.getElementById('page-front').readOnly = false;
+                    document.getElementById('star1').style.cursor = 'pointer';
+                    document.getElementById('star2').style.cursor = 'pointer';
+                    document.getElementById('save1').style.cursor = 'pointer';
+                    document.getElementById('save2').style.cursor = 'pointer';
+
+                    document.getElementById('page-back').value = res.left_content;
+                    // console.log(document.getElementById('page-back').innerText);
+                    document.getElementById('page-front').value = res.right_content;
+                    document.getElementById('leftNo').innerText = res.left_page;
+                    document.getElementById('rightNo').innerText = res.right_page;
+                    if (res.left_bookmarked){
+                        document.getElementById('star1').style.color = '#efa315';
+                    }else {
+                        document.getElementById('star1').style.color = '#b9b1a1';
+                    }
+                    if (res.right_bookmarked){
+                        document.getElementById('star2').style.color = '#efa315';
+                    }else {
+                        document.getElementById('star2').style.color = '#b9b1a1';
+                    }
+                }
+            }
+        });
     })
+
     function saveDiary() {
         if (editing == 1 && diarySaved == 0) {
             editing = 0;
@@ -431,8 +457,163 @@
             document.getElementById('page-front').readOnly = true;
             document.getElementById('save1').style.cursor = 'default';
             document.getElementById('save2').style.cursor = 'default';
+            var _token = $("input[name='_token']").val();
+            var left = document.getElementById('page-back').value;
+            var right = document.getElementById('page-front').value;
+            if (left.length == 0 && right.length != 0){
+                left = right;
+                right = null;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/setContent",
+                data: {
+                    _token:_token,
+                    left_page: document.getElementById('leftNo').innerText,
+                    right_page: document.getElementById('rightNo').innerText,
+                    left_page_content: left,
+                    right_page_content: right,
+                },
+                success: function (res) {
+                }
+            });
         }
     }
+
+    function deleteDiary() {
+        var _token = $("input[name='_token']").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/deleteDiary",
+            data: {
+                _token:_token,
+            },
+            success: function (res) {
+                document.getElementById('page-front').value = "";
+                document.getElementById('page-back').value = "";
+                document.getElementById('leftNo').innerText = "1";
+                document.getElementById('rightNo').innerText = "2";
+                document.getElementById('star1').style.color = '#b9b1a1';
+                document.getElementById('star2').style.color = '#b9b1a1';
+            }
+        });
+    }
+
+    function getBook() {
+        $.ajax({
+            type: "GET",
+            url: "/getBook",
+            data: {},
+            success: function(res) {
+                if (res) {
+                    console.log(res);
+                    if (res.left_content == null && res.right_content == null && res.left_page == null && res.right_page == null){
+                        document.getElementById('light').innerHTML = "Didn't found any bookmarked page";
+                        document.getElementById('light').style.display = "block";
+                        document.getElementById('fade').style.display = "block";
+                    }else{
+                        document.getElementById('page-back').value = res.left_content;
+                        document.getElementById('page-front').value = res.right_content;
+                        document.getElementById('leftNo').innerText = res.left_page;
+                        document.getElementById('rightNo').innerText = res.left_page + 1;
+                        console.log(res.left_bookmarked)
+                        console.log(res.right_bookmarked)
+
+                        if (res.left_bookmarked){
+                            document.getElementById('star1').style.color = '#efa315';
+                        }else {
+                            document.getElementById('star1').style.color = '#b9b1a1';
+                        }
+                        if (res.right_bookmarked){
+                            document.getElementById('star2').style.color = '#efa315';
+                        }else {
+                            document.getElementById('star2').style.color = '#b9b1a1';
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+    $('#leftArrow').on("click", function(){
+        var pageNo = document.getElementById('leftNo').innerText;
+        console.log(pageNo);
+        if (pageNo <= 0) {
+            document.getElementById('light').innerHTML = "Page number is invalid";
+            document.getElementById('light').style.display = "block";
+            document.getElementById('fade').style.display = "block";
+        }else{
+            $.ajax({
+                type: "GET",
+                url: "/searchPage",
+                data: {
+                    page_no: pageNo,
+                },
+                success: function(res) {
+                    if (res) {
+                        if (res.left_content == null && res.right_content == null && res.left_page == null && res.right_page == null && res.left_bookmarked == null && res.right_bookmarked == null){
+                            document.getElementById('light').innerHTML = "Page number is invalid";
+                            document.getElementById('light').style.display = "block";
+                            document.getElementById('fade').style.display = "block";
+                        }else {
+                            document.getElementById('page-back').value = res.left_content;
+                            document.getElementById('page-front').value = res.right_content;
+                            document.getElementById('leftNo').innerText = res.left_page;
+                            document.getElementById('rightNo').innerText = res.right_page;
+                            if (res.left_bookmarked){
+                                document.getElementById('star1').style.color = '#efa315';
+                            }else {
+                                document.getElementById('star1').style.color = '#b9b1a1';
+                            }
+                            if (res.right_bookmarked){
+                                document.getElementById('star2').style.color = '#efa315';
+                            }else {
+                                document.getElementById('star2').style.color = '#b9b1a1';
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+    $('#rightArrow').on("click", function(){
+        var pageNo = document.getElementById('rightNo').value + 1;
+        console.log(pageNo);
+        $.ajax({
+            type: "GET",
+            url: "/searchPage",
+            data: {
+                page_no: pageNo,
+            },
+            success: function(res) {
+                if (res) {
+                    if (res.left_content == null && res.right_content == null && res.left_page == null && res.right_page == null && res.left_bookmarked == null && res.right_bookmarked == null){
+                        document.getElementById('light').innerHTML = "Page number is invalid";
+                        document.getElementById('light').style.display = "block";
+                        document.getElementById('fade').style.display = "block";
+                    }else {
+                        document.getElementById('page-back').value = res.left_content;
+                        document.getElementById('page-front').value = res.right_content;
+                        document.getElementById('leftNo').innerText = res.left_page;
+                        document.getElementById('rightNo').innerText = res.right_page;
+                        if (res.left_bookmarked){
+                            document.getElementById('star1').style.color = '#efa315';
+                        }else {
+                            document.getElementById('star1').style.color = '#b9b1a1';
+                        }
+                        if (res.right_bookmarked){
+                            document.getElementById('star2').style.color = '#efa315';
+                        }else {
+                            document.getElementById('star2').style.color = '#b9b1a1';
+                        }
+                    }
+                }
+            }
+        });
+    });
+
 </script>
 </body>
 </html>

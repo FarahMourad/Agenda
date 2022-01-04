@@ -16,9 +16,7 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::get('/test', function (){
             return view('test');
         });
-        Route::get('/diary', function (){
-            return view('diary');
-        });
+
 
         Route::get('/setting', 'EditUserController@showSetting');
         Route::post('/editData', 'EditUserController@edit')->name('edit');

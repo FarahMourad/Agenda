@@ -18,25 +18,34 @@ class DiaryController
             return response()->json([
                 "left_content" => null,
                 "right_content" => null,
-                "left_page" => null,
-                "right_page" => null,
+                "left_page" => 1,
+                "right_page" => 2,
                 "left_bookmarked" => null,
                 "right_bookmarked" => null
             ]);
         } else {
+
             $page_no = $last_page->page_id;
-            if($page_no % 2 == 0){
-                $left_content = Diary_pages::where([
-                    ['user_id', $current_user->user_id],
-                    ['page_id', $page_no - 1]
-                ])->first();
-                echo $last_page;
-                $left_page = $page_no - 1;
-                $right_page = $page_no;
-                $left_bookmark = $left_content->bookmarked;
-                $right_bookmark = $last_page->bookmarked;
-                $left_content = $left_content->content;
-                $right_content = $last_page->content;
+            if ($page_no % 2 == 0){
+                return response()->json([
+                    "left_content" => null,
+                    "right_content" => null,
+                    "left_page" => $page_no + 1,
+                    "right_page" => $page_no + 2,
+                    "left_bookmarked" => null,
+                    "right_bookmarked" => null
+                ]);
+//                $left_content = Diary_pages::where([
+//                    ['user_id', $current_user->user_id],
+//                    ['page_id', $page_no - 1]
+//                ])->first();
+//                echo $last_page;
+//                $left_page = $page_no - 1;
+//                $right_page = $page_no;
+//                $left_bookmark = $left_content->bookmarked;
+//                $right_bookmark = $last_page->bookmarked;
+//                $left_content = $left_content->content;
+//                $right_content = $last_page->content;
             } else {
                 $left_page = $page_no;
                 $right_page = $page_no + 1;
@@ -69,6 +78,8 @@ class DiaryController
                 "left_content" => null,
                 "right_page" => null,
                 "right_content" => null,
+                'left_bookmarked' => null,
+                'right_bookmarked' => null
             ]);
         }
         $page_no = $pages->page_id;
@@ -82,6 +93,8 @@ class DiaryController
             $left_content = $pages->content;
             $right_page = $page_no;
             $right_content = $content;
+            $right_bookmarked = true;
+            $left_bookmarked = false;
         } else{
             $pages = Diary_pages::where([
                 ['page_id', $page_no + 1],
@@ -96,12 +109,16 @@ class DiaryController
                 $right_page = $page_no + 1;
                 $right_content = $pages->content;
             }
+            $right_bookmarked = false;
+            $left_bookmarked = true;
         }
         return response()->json([
             "left_page" => $left_page,
             "left_content" => $left_content,
             "right_page" => $right_page,
             "right_content" => $right_content,
+            'left_bookmarked' => $left_bookmarked,
+            'right_bookmarked' => $right_bookmarked
         ]);
     }
 
@@ -114,7 +131,14 @@ class DiaryController
             ['user_id', $user_id]
         ])->first();
         if ($page == null) {
-            return redirect()->back()->withErrors('msg', 'ERROR: empty diary');
+            return response()->json([
+                'left_page' => null,
+                'right_page'  => null,
+                'left_content' => null,
+                'right_content'  => null,
+                'left_bookmarked' => null,
+                'right_bookmarked' => null
+            ]);
         } else {
             if ($page_no % 2 == 0) {
                 $left_page = Diary_pages::where([
@@ -122,6 +146,8 @@ class DiaryController
                     ['user_id', $user_id]
                 ])->first();
                 return response()->json([
+                    'left_page' => $page_no - 1,
+                    'right_page'  => $page_no,
                     'left_content' => $left_page->content,
                     'right_content'  => $page->content,
                     'left_bookmarked' => $left_page->bookmarked,
@@ -140,6 +166,8 @@ class DiaryController
                     $right_page_bookmarked = $right_page->bookmarked;
                 }
                 return response()->json([
+                    'left_page' => $page_no,
+                    'right_page'  => $page_no + 1,
                     'left_content' => $page->content,
                     'right_content' => $right_page_content,
                     'left_bookmarked' => $page->bookmarked,
@@ -151,50 +179,67 @@ class DiaryController
 
     public function setContent(Request $request): Response
     {
-        if ($request->pageContent == null)
-            return response()->noContent();
-        else{
-            $page_no = $request->page_no;
-            $current_user = auth()->user();
-            $page = Diary_pages::where([
-                ['page_id', $page_no],
-                ['user_id', $current_user->user_id]
-            ])->first();
-            if ($page === null){
-                $page = new Diary_pages();
-                $page->page_id = $page_no;
-                $page->user_id = $current_user->user_id;
+        $left_page_no = $request->left_page;
+        $right_page_no = $request->right_page;
+
+        $left_page_content = $request->left_page_content;
+        $right_page_content = $request->right_page_content;
+
+
+        if ($left_page_content != null || $right_page_content != null){
+            if ($left_page_content != null){
+                $current_user = auth()->user();
+                $page = Diary_pages::where([
+                    ['page_id', $left_page_no],
+                    ['user_id', $current_user->user_id]
+                ])->first();
+                if ($page === null){
+                    $page = new Diary_pages();
+                    $page->page_id = $left_page_no;
+                    $page->user_id = $current_user->user_id;
+                }
+                $page->content = $request->left_page_content;
+                $page->save();
             }
-            $page->content = $request->pageContent;
-            $page->save();
-            //use the bookmark function
-            if ($request->bookmarked == true || $request->bookmarked == 1)
-                $this->bookmarkPage($request);
-            else
-                $page->bookmarked = false;
-            $page->save();
-            return response()->noContent();
+            if ($right_page_content != null){
+                $current_user = auth()->user();
+                $page = Diary_pages::where([
+                    ['page_id', $right_page_no],
+                    ['user_id', $current_user->user_id]
+                ])->first();
+                if ($page === null){
+                    $page = new Diary_pages();
+                    $page->page_id = $right_page_no;
+                    $page->user_id = $current_user->user_id;
+                }
+                $page->content = $right_page_content;
+                $page->save();
+            }
         }
+        return response()->noContent();
+
     }
 
     public function bookmarkPage(Request $request)
     {
         $page_no = $request->page_no;
         $current_user = auth()->user();
-        $page = Diary_pages::where([
+        $old_page = Diary_pages::where([
             ['bookmarked', true],
             ['user_id', $current_user->user_id]
         ])->first();
-        if($page != null){
-            $page->bookmarked = false;
-            $page->save();
+        if($old_page != null){
+            $old_page->bookmarked = false;
+            $old_page->save();
         }
         $page = Diary_pages::where([
             ['page_id', $page_no],
             ['user_id', $current_user->user_id]
         ])->first();
-        $page->bookmarked = $request->bookmarked;
-        $page->save();
+        if ($page != null){
+            $page->bookmarked = true;
+            $page->save();
+        }
     }
 
     public function deleteDiary()
