@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Note_category;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -64,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data): User
     {
-        return User::create([
+        $user = User::create([
             'fName' => $data['fName'],
             'lName' => $data['lName'],
             'user_id' => $data['user_id'],
@@ -73,5 +74,10 @@ class RegisterController extends Controller
             'theme' => true,
             'password' => Hash::make($data['password']),
         ]);
+        $shared = new Note_category();
+        $shared->user_id = $user->user_id;
+        $shared->category = 'Shared with me';
+        $shared->save();
+        return $user;
     }
 }
