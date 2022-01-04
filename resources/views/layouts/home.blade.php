@@ -90,7 +90,7 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-{{--                {{Auth::user()->user_id}}--}}
+                {{Auth::user()->user_id}}
             </div>
         </nav>
     </div>
@@ -406,6 +406,32 @@
             divList[i].style.display = 'none';
         }
         document.getElementById(id).style.display = 'block';
+    }
+
+
+    var editing = 0;
+    var diarySaved = 0;
+    $('#addPage').on("click", function () {
+        editing = 1;
+        diarySaved = 0;
+        document.getElementById('page-back').disabled = false;
+        document.getElementById('page-front').disabled = false;
+        document.getElementById('star1').style.color = '#b9b1a1';
+        document.getElementById('star2').style.color = '#b9b1a1';
+        document.getElementById('star1').style.cursor = 'pointer';
+        document.getElementById('star2').style.cursor = 'pointer';
+        document.getElementById('save1').style.cursor = 'pointer';
+        document.getElementById('save2').style.cursor = 'pointer';
+    })
+    function saveDiary() {
+        if (editing == 1 && diarySaved == 0) {
+            editing = 0;
+            diarySaved = 1;
+            document.getElementById('page-back').disabled = true;
+            document.getElementById('page-front').disabled = true;
+            document.getElementById('save1').style.cursor = 'default';
+            document.getElementById('save2').style.cursor = 'default';
+        }
     }
 </script>
 </body>
