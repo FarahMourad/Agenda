@@ -218,7 +218,7 @@
                     <li id="go" class="breadcrumb-item diaryChoices" style="margin-left: 20px">Go To: </li><input type="number" id="goto">
                 </ol>
                 <div>
-                    <div style="display: inline-block; float: left; height: 500px"><i class="fas fa-chevron-left arr" id="leftArrow"></i></div>
+                    <div style="display: inline-block; float: left; height: 500px"  onclick="goLeft()"><i class="fas fa-chevron-left arr" id="leftArrow"></i></div>
                     <div style="display: inline-block; float: left; margin-left: 550px; margin-right: 10px">
                         <div class="dBook">
                             <input type="checkbox" name="flip" id="flip" class="flipper" style="display: none">
@@ -231,22 +231,22 @@
                             <div class="dPage"></div>
                             <div class="dPage">
                                 <textarea name="" id="page-back" rows="17" maxlength="510" readonly></textarea>
-                                <footer style="width: 350px; justify-content: center; transform: scale(-1, 1); cursor: default">
+                                <div style="width: 350px; justify-content: center; transform: scale(-1, 1); cursor: default">
                                     <a id="leftNo">1</a>
                                     <i class="fas fa-star" id="star1" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
-                                </footer>
+                                </div>
                             </div>
                             <div class="last-dPage">
                                 <textarea name="" id="page-front" rows="17" maxlength="510" readonly></textarea>
-                                <footer style="width: 350px; justify-content: center; cursor: default">
+                                <div style="width: 350px; justify-content: center; cursor: default">
                                     <a id="rightNo">2</a>
                                     <i class="fas fa-star" id="star2" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
-                                </footer>
+                                </div>
                             </div>
                             <div class="back-dCover"></div>
                         </div>
                     </div>
-                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr" id="rightArrow"></i></div>
+                    <div onclick="goRight()" style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr" id="rightArrow"></i></div>
                     <footer style="position: fixed;bottom: 0; width: 100%">
                         <a id="addPage" class="editDiary"><i class="fas fa-pencil-alt" style="margin-right: 10px"></i>Have More Adventures?</a>
                     </footer>
@@ -536,9 +536,10 @@
         });
     }
 
-
-    $('#leftArrow').on("click", function(){
+    function goLeft(){
+        console.log('left');
         var pageNo = document.getElementById('leftNo').innerText;
+        pageNo = parseInt(pageNo) - 1;
         console.log(pageNo);
         if (pageNo <= 0) {
             document.getElementById('light').innerHTML = "Page number is invalid";
@@ -577,9 +578,10 @@
                 }
             });
         }
-    });
-    $('#rightArrow').on("click", function(){
-        var pageNo = document.getElementById('rightNo').value + 1;
+    };
+    function goRight(){
+        var pageNo = document.getElementById('rightNo').innerText;
+        pageNo = parseInt(pageNo) + 1;
         console.log(pageNo);
         $.ajax({
             type: "GET",
@@ -612,7 +614,7 @@
                 }
             }
         });
-    });
+    };
 
 </script>
 </body>
