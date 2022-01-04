@@ -10,13 +10,21 @@ window.addEventListener('click', event => {
         document.getElementById('star2').style.color = '#efa315';
         document.getElementById('star1').style.color = '#b9b1a1';
     })
+
+    $('#fade').on("click", function () {
+        document.getElementById('light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    })
 });
 
 $('#goto').on("keypress",function(){
     var pageNo = document.getElementById('goto').value;
     console.log(pageNo);
-    if (pageNo <= 0)
-        alert("Page number is not valid");
+    if (pageNo <= 0) {
+        document.getElementById('light').innerHTML = "page Number is not valid";
+        document.getElementById('light').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
 });
 
 $('#addPage').on("click", function () {
@@ -26,6 +34,7 @@ $('#addPage').on("click", function () {
     document.getElementById('save1').style.cursor = 'pointer';
     document.getElementById('save2').style.cursor = 'pointer';
 })
+
 
 function saveDiary() {
 

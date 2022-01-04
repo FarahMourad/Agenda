@@ -53,6 +53,8 @@
         </li>
     </ul>
 </nav>
+<div id="light" class="white_content"></div>
+<div id="fade" class="black_overlay"></div>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">

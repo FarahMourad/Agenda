@@ -12222,3 +12222,35 @@ body {
 .editDiary:hover{
     color: #835647;
 }
+
+.black_overlay {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 1001;
+    -moz-opacity: 0.8;
+    opacity: .80;
+}
+.white_content {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 500px;
+    height: 100px;
+    padding: 16px;
+    border: none;
+    text-align: center;
+    align-content: center;
+    font-size: 18px;
+    font-family: "Lucida Sans";
+    border-radius: 10px;
+    background-color: white;
+    z-index: 1002;
+    overflow: auto;
+    color: black;
+}
