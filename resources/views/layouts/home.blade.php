@@ -230,14 +230,14 @@
                             <div class="dPage"></div>
                             <div class="dPage"></div>
                             <div class="dPage">
-                                <textarea name="" id="page-back" rows="17" maxlength="510" disabled></textarea>
+                                <textarea name="" id="page-back" rows="17" maxlength="510" readonly></textarea>
                                 <footer style="width: 350px; justify-content: center; transform: scale(-1, 1); cursor: default">
                                     <a>1</a>
                                     <i class="fas fa-star" id="star1" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
                                 </footer>
                             </div>
                             <div class="last-dPage">
-                                <textarea name="" id="page-front" rows="17" maxlength="510" disabled></textarea>
+                                <textarea name="" id="page-front" rows="17" maxlength="510" readonly></textarea>
                                 <footer style="width: 350px; justify-content: center; cursor: default">
                                     <a>2</a>
                                     <i class="fas fa-star" id="star2" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
@@ -414,8 +414,8 @@
     $('#addPage').on("click", function () {
         editing = 1;
         diarySaved = 0;
-        document.getElementById('page-back').disabled = false;
-        document.getElementById('page-front').disabled = false;
+        document.getElementById('page-back').readOnly = false;
+        document.getElementById('page-front').readOnly = false;
         document.getElementById('star1').style.color = '#b9b1a1';
         document.getElementById('star2').style.color = '#b9b1a1';
         document.getElementById('star1').style.cursor = 'pointer';
@@ -427,8 +427,8 @@
         if (editing == 1 && diarySaved == 0) {
             editing = 0;
             diarySaved = 1;
-            document.getElementById('page-back').disabled = true;
-            document.getElementById('page-front').disabled = true;
+            document.getElementById('page-back').readOnly = true;
+            document.getElementById('page-front').readOnly = true;
             document.getElementById('save1').style.cursor = 'default';
             document.getElementById('save2').style.cursor = 'default';
         }
