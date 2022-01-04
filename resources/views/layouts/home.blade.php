@@ -178,11 +178,18 @@
                             <div class="dPage"></div>
                             <div class="dPage"></div>
                             <div class="dPage">
-                                <textarea name="" id="page-back" cols="30" rows="10"></textarea>
+                                <textarea name="" id="page-back"></textarea>
+                                <footer style="width: 350px; justify-content: center; transform: scale(-1, 1)">
+                                    <a>1</a>
+                                    <i class="fas fa-star" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
+                                </footer>
                             </div>
                             <div class="last-dPage">
-                                <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2>
-                                bla bla bla
+                                <textarea name="" id="page-front"></textarea>
+                                <footer style="width: 350px; justify-content: center">
+                                    <a>2</a>
+                                    <i class="fas fa-star" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
+                                </footer>
                             </div>
                             <div class="back-dCover"></div>
                         </div>

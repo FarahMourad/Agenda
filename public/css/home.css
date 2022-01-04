@@ -11775,13 +11775,28 @@ body {
 .dBook input[type = "radio"]:checked ~ .dPage:nth-child(6){
     transition-duration: 3.4s;
 }
+.dBook input[type = "radio"]:checked ~ .last-dPage{
+    z-index: 0;
+}
 #page-back{
     height: 400px;
     width: 350px;
-    background: transparent linear-gradient(to bottom, transparent 30px, #dcc4ac 5px);
+    background: transparent;
     transform: scale(-1, 1);
     resize: none;
     outline: none;
+    overflow: hidden;
+    border: none;
+    font-family: "Lucida Handwriting";
+    padding: 10px;
+}
+#page-front{
+    height: 400px;
+    width: 350px;
+    background: transparent;
+    resize: none;
+    outline: none;
+    overflow: hidden;
     border: none;
     font-family: "Lucida Handwriting";
     padding: 10px;
