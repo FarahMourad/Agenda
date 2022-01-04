@@ -160,29 +160,37 @@
             <div id="diaryDiv" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Diary</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Secret Diary</li>
+                    <i class="fas fa-eraser" style="margin-right: 10px; color: #801818; cursor: pointer"></i><li class="breadcrumb-item diaryChoices">Erase Memories    </li>
+                    <i class="fas fa-star" style="margin-right: 10px; margin-left: 20px; color: #efa315; cursor: pointer"></i><li class="breadcrumb-item diaryChoices"> Go To Bookmarked    </li>
+                    <i class="fas fa-save" style="margin-right: 10px; margin-left: 20px; color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)); cursor: pointer"></i><li class="breadcrumb-item diaryChoices"> Save Changes    </li>
+                    <li class="breadcrumb-item diaryChoices" style="margin-left: 20px">Go To: </li><input type="number" id="goto">
                 </ol>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6"></div>
-                    <div class="col-xl-3 col-md-6"></div>
-                    <div class="col-md-6">
+                <div>
+                    <div style="display: inline-block; float: left; height: 500px"><i class="fas fa-chevron-left arr"></i></div>
+                    <div style="display: inline-block; float: left; margin-left: 550px; margin-right: 10px">
                         <div class="dBook">
-                            <div class="dCover">
+                            <input type="radio" name="flip" id="flip" style="display: none">
+                            <label class="dCover" for="flip">
                                 <img src="../assets/img/12.jpg">
                                 <h2 style="font-family: 'Lucida Handwriting'; text-align: center">Secret Diary</h2>
+                            </label>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
+                            <div class="dPage"></div>
+                            <div class="dPage">
+                                <textarea name="" id="page-back" cols="30" rows="10"></textarea>
                             </div>
-                            <div class="dPage"></div>
-                            <div class="dPage"></div>
-                            <div class="dPage"></div>
-                            <div class="dPage"></div>
-                            <div class="dPage"></div>
                             <div class="last-dPage">
                                 <h2 style="font-family: 'Lucida Handwriting'">Secret Diary</h2>
+                                bla bla bla
                             </div>
                             <div class="back-dCover"></div>
                         </div>
                     </div>
-{{--                    <div class="col-xl-3 col-md-6"></div>--}}
+                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr"></i></div>
+                    <footer style="position: fixed;bottom: 0; width: 100%">
+                        <a class="editDiary"><i class="fas fa-pencil-alt" style="margin-right: 10px"></i>Have More Adventures?</a>
+                    </footer>
                 </div>
             </div>
         </main>
@@ -221,7 +229,6 @@
             }
         });
     });
-
 
     $(document).ready(function(){
         theme = '{{\Illuminate\Support\Facades\Auth::user()->theme}}';

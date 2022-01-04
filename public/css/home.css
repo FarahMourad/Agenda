@@ -4803,7 +4803,7 @@ textarea.form-control-lg {
   float: left;
   padding-right: 0.5rem;
   color: #6c757d;
-  content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */;
+  content: var(--bs-breadcrumb-divider, "   ") /* rtl: var(--bs-breadcrumb-divider, "/") */;
 }
 .breadcrumb-item.active {
   color: #6c757d;
@@ -7387,7 +7387,7 @@ textarea.form-control-lg {
 }
 
 .mb-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 0.8rem !important;
 }
 
 .mb-5 {
@@ -11699,19 +11699,21 @@ body {
   border-radius: 0.25rem !important;
 }
 
+
 .dBook{
     align-items: center;
     cursor: pointer;
 }
 
-.dBook:hover .dCover{
+.dBook input[type = "radio"]:checked ~ .dCover{
     transform: rotateX(10deg) rotateY(-180deg);
 }
-.dBook:hover .dPage{
+.dBook input[type = "radio"]:checked ~ .dPage{
     transform: rotateX(10deg) rotateY(-180deg);
     z-index: 2;
 }
 .dCover{
+    cursor: pointer;
     z-index: 1;
     transition: all 3s;
 }
@@ -11724,7 +11726,7 @@ body {
     background-color: #835647;
     border-radius: 2px 20px 20px 2px;
     position: absolute;
-    box-shadow: 1px 1px 10px #b6b2b2;
+    box-shadow: 1px 1px 10px #d5d2d2;
     transform: rotateX(10deg);
     transform-origin: center left;
 }
@@ -11734,7 +11736,8 @@ body {
     height: 480px;
     width: 390px;
     margin-top: 10px;
-    background-color: #fcf3f1;
+    background-color: #FDFAFAFF;
+    background-image: linear-gradient(90deg, rgb(248, 245, 243) 0%, rgb(253, 250, 250) 15%);
     position: absolute;
     border-radius: 2px 10px 10px 2px;
     transform: rotateX(10deg);
@@ -11757,20 +11760,31 @@ body {
     transition-duration: 0.4s;
 }
 
-.dBook:hover .dPage:nth-child(2){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(2){
     transition-duration: 5s;
 }
-.dBook:hover .dPage:nth-child(3){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(3){
     transition-duration: 4.6s;
 }
-.dBook:hover .dPage:nth-child(4){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(4){
     transition-duration: 4.2s;
 }
-.dBook:hover .dPage:nth-child(5){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(5){
     transition-duration: 3.8s;
 }
-.dBook:hover .dPage:nth-child(6){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(6){
     transition-duration: 3.4s;
+}
+#page-back{
+    height: 400px;
+    width: 350px;
+    background: transparent linear-gradient(to bottom, transparent 30px, #dcc4ac 5px);
+    transform: scale(-1, 1);
+    resize: none;
+    outline: none;
+    border: none;
+    font-family: "Lucida Handwriting";
+    padding: 10px;
 }
 
 .dCover img{
@@ -11785,4 +11799,45 @@ body {
     font-family: "Lucida Handwriting";
     text-align: center;
     color: #ece5e0;
+}
+.arr{
+    position: absolute;
+    top: 50%;
+    font-size: 35px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.arr:hover{
+    color: #535557;
+}
+#goto{
+    background-color: rgba(106, 109, 114, 0.06);
+    width: 50px;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.diaryChoices{
+    cursor: pointer;
+    color: #505056;
+}
+.diaryChoices:hover {
+    color: #000000;
+}
+.editDiary{
+    font-family: 'Lucida Handwriting';
+    text-decoration: underline;
+    color: #8a6e61;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+    margin-right: 400px;
+    margin-bottom: 10px;
+}
+.editDiary:hover{
+    color: #835647;
 }

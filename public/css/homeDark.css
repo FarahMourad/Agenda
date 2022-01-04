@@ -4804,7 +4804,7 @@ textarea.form-control-lg {
   float: left;
   padding-right: 0.5rem;
   color: #6c757d;
-  content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */;
+  content: var(--bs-breadcrumb-divider, "   ") /* rtl: var(--bs-breadcrumb-divider, "/") */;
 }
 .breadcrumb-item.active {
   color: #6c757d;
@@ -7388,7 +7388,7 @@ textarea.form-control-lg {
 }
 
 .mb-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 0.8rem !important;
 }
 
 .mb-5 {
@@ -11704,19 +11704,66 @@ body {
 
 
 
+/*.dBook{*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.dBook:hover .dCover{*/
+/*    transform: rotateX(10deg) rotateY(-180deg);*/
+/*}*/
+/*.dBook:hover .dPage{*/
+/*    transform: rotateX(10deg) rotateY(-180deg);*/
+/*    z-index: 2;*/
+/*}*/
+/*.dCover{*/
+/*    z-index: 1;*/
+/*    transition: all 3s;*/
+/*}*/
+/*.back-dCover{*/
+/*    z-index: -2;*/
+/*}*/
+/*.dCover, .back-dCover{*/
+/*    height: 500px;*/
+/*    width: 400px;*/
+/*    background-color: #bd9481;*/
+/*    border-radius: 2px 20px 20px 2px;*/
+/*    position: absolute;*/
+/*    box-shadow: 1px 1px 10px #8a6e61;*/
+/*    transform: rotateX(10deg);*/
+/*    transform-origin: center left;*/
+/*}*/
+
+/*.dPage, .last-dPage{*/
+/*    padding: 10px;*/
+/*    height: 480px;*/
+/*    width: 390px;*/
+/*    margin-top: 10px;*/
+/*    background-color: #f8f5f3;*/
+/*    color: #111213;*/
+/*    position: absolute;*/
+/*    border-radius: 2px 10px 10px 2px;*/
+/*    transform: rotateX(10deg);*/
+/*    transform-origin: center left;*/
+/*    z-index: -1;*/
+/*}*/
+
+
+
 .dBook{
     align-items: center;
     cursor: pointer;
 }
 
-.dBook:hover .dCover{
+.dBook input[type = "radio"]:checked ~ .dCover{
     transform: rotateX(10deg) rotateY(-180deg);
 }
-.dBook:hover .dPage{
+.dBook input[type = "radio"]:checked ~ .dPage{
     transform: rotateX(10deg) rotateY(-180deg);
     z-index: 2;
 }
 .dCover{
+    cursor: pointer;
     z-index: 1;
     transition: all 3s;
 }
@@ -11741,6 +11788,7 @@ body {
     margin-top: 10px;
     background-color: #f8f5f3;
     color: #111213;
+    background-image: linear-gradient(90deg, rgb(241, 230, 225) 0%, rgb(248, 245, 243) 15%);
     position: absolute;
     border-radius: 2px 10px 10px 2px;
     transform: rotateX(10deg);
@@ -11763,29 +11811,72 @@ body {
     transition-duration: 0.4s;
 }
 
-.dBook:hover .dPage:nth-child(2){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(2){
     transition-duration: 5s;
 }
-.dBook:hover .dPage:nth-child(3){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(3){
     transition-duration: 4.6s;
 }
-.dBook:hover .dPage:nth-child(4){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(4){
     transition-duration: 4.2s;
 }
-.dBook:hover .dPage:nth-child(5){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(5){
     transition-duration: 3.8s;
 }
-.dBook:hover .dPage:nth-child(6){
+.dBook input[type = "radio"]:checked ~ .dPage:nth-child(6){
     transition-duration: 3.4s;
 }
+
 .dCover img{
     width: 150px;
     display: block;
     border-radius: 50%;
-    margin: 20px auto;
+    margin: 50px auto;
     position: relative;
+    z-index: 1;
 }
 .dCover h2{
     font-family: "Lucida Handwriting";
     text-align: center;
+    color: #ece5e0;
+}
+
+
+
+
+.arr{
+    position: absolute;
+    top: 50%;
+    font-size: 35px;
+    cursor: pointer;
+}
+#goto{
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 50px;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.diaryChoices{
+    cursor: pointer;
+}
+.diaryChoices:hover {
+    color: #d2cece;
+}
+.editDiary{
+    font-family: 'Lucida Handwriting';
+    text-decoration: underline;
+    color: #bd9481;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+    margin-right: 400px;
+    margin-bottom: 10px;
+}
+.editDiary:hover{
+    color: #d5c0bb;
 }
