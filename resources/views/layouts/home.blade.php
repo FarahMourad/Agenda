@@ -496,6 +496,9 @@
                 document.getElementById('rightNo').innerText = "2";
                 document.getElementById('star1').style.color = '#b9b1a1';
                 document.getElementById('star2').style.color = '#b9b1a1';
+                document.getElementById('light').innerHTML = "Your diary has been deleted successfully";
+                document.getElementById('light').style.display = "block";
+                document.getElementById('fade').style.display = "block";
             }
         });
     }
