@@ -46,12 +46,12 @@
                     <h6 class="text-right editText">Edit Profile</h6>
                 </div>
                 <div class="row mt-2 trans">
-                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input1" name="fName" type="text" class="form-control" placeholder="first name"></div>
-                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input2" name="lName" type="text" class="form-control" placeholder="last name"></div>
+                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input1" name="fName" type="text" class="form-control" placeholder={{Auth::user()->fName}}></div>
+                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input2" name="lName" type="text" class="form-control" placeholder={{Auth::user()->lName}}></div>
                 </div>
                 <div class="row mt-3 trans">
                     <div class="col-md-6 trans"><input onclick="resetColor()" id="input3" name="old_password" type="password" class="form-control" placeholder="old password"></div>
-                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input4" name="birthDate" type="date" class="form-control" placeholder="birthday"></div>
+                    <div class="col-md-6 trans"><input onclick="resetColor()" id="input4" name="birthDate" type="date" class="form-control" placeholder="birthday" value={{Auth::user()->birthDate}}></div>
                 </div>
                 <div class="row mt-3 trans">
                     <div class="col-md-6 trans"><input onclick="resetColor()" id="input5" name="new_password" type="password" class="form-control" placeholder="new password"></div>
