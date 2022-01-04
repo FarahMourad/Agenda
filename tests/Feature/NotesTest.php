@@ -724,6 +724,15 @@ class NotesTest extends TestCase
         }
     }
 
+    public function getCategories(Request $request): JsonResponse
+    {
+        $user_id = auth()->user()->user_id;
+        $categories = Note_category::where([
+            ['user_id', $user_id]
+        ])->get();
+        return response()->json($categories);
+    }
+
     public function pinNote(Request $request)
     { // note_id, pinned
         $user_id = auth()->user()->user_id;

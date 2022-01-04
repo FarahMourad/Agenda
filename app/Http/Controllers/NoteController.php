@@ -205,4 +205,13 @@ class NoteController
             return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
+
+    public function getCategories(Request $request): JsonResponse
+    {
+        $user_id = auth()->user()->user_id;
+        $categories = Note_category::where([
+            ['user_id', $user_id]
+        ])->get();
+        return response()->json($categories);
+    }
 }
