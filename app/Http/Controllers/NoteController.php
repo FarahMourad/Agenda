@@ -206,7 +206,7 @@ class NoteController
         }
     }
 
-    public function getCategories(Request $request): JsonResponse
+    public function getCategories(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
         $categories = Note_category::where([

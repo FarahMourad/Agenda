@@ -37,6 +37,7 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::get('/getAllNotes', 'NoteController@getAllNotes')->name('getAllNotes');
         Route::get('/getCategoryNotes', 'NoteController@getCategoryNotes')->name('getCategoryNotes');
         Route::get('/getNotes', 'NoteController@getNotes')->name('getNotes');
+        Route::get('/getCategories', 'NoteController@getCategories')->name('getCategories');
 
         Route::POST('/sortNotesByTitle', 'NoteController@sortNotesByTitle')->name('sortNotesByTitle');
         Route::post('/createNoteCategory', 'NoteController@createNoteCategory')->name('createNoteCategory');
