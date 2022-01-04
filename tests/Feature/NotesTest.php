@@ -565,6 +565,310 @@ class NotesTest extends TestCase
         ]), $response->getContent(), '');
     }
 
+    /** @test */
+    public function get_category_notes()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software2',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project2',
+            'creation_date' => '2022-01-05',
+            'modified_date' => '2022-01-05',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getCategoryNotes', 'GET', [
+            'category' => 'SWE'
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->getCategoryNotes($request);
+        });
+        $this->assertSame(json_encode([
+            [
+                "note_id" => 2,
+                "user_id" => $user->user_id,
+                "title" => "Software2",
+                "category" => "SWE",
+                "content" => "Software Engineering Project2",
+                "creation_date" => "2022-01-05",
+                "modified_date" => "2022-01-05",
+                "pinned" => 0
+            ],
+            [
+                "note_id" => 1,
+                "user_id" => $user->user_id,
+                "title" => "Software",
+                "category" => "SWE",
+                "content" => "Software Engineering Project",
+                "creation_date" => "2022-01-03",
+                "modified_date" => "2022-01-03",
+                "pinned" => 0
+            ]
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function get_category_notes_with_pinned_first()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software2',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project2',
+            'creation_date' => '2022-01-05',
+            'modified_date' => '2022-01-05',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software3',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project3',
+            'creation_date' => '2021-01-01',
+            'modified_date' => '2021-01-01',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getCategoryNotes', 'GET', [
+            'category' => 'SWE'
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->getCategoryNotes($request);
+        });
+        $this->assertSame(json_encode([
+            [
+                "note_id" => 1,
+                "user_id" => $user->user_id,
+                "title" => "Software",
+                "category" => "SWE",
+                "content" => "Software Engineering Project",
+                "creation_date" => "2022-01-03",
+                "modified_date" => "2022-01-03",
+                "pinned" => 1
+            ],
+            [
+                "note_id" => 2,
+                "user_id" => $user->user_id,
+                "title" => "Software2",
+                "category" => "SWE",
+                "content" => "Software Engineering Project2",
+                "creation_date" => "2022-01-05",
+                "modified_date" => "2022-01-05",
+                "pinned" => 0
+            ],
+            [
+                "note_id" => 3,
+                "user_id" => $user->user_id,
+                "title" => "Software3",
+                "category" => "SWE",
+                "content" => "Software Engineering Project3",
+                "creation_date" => "2021-01-01",
+                "modified_date" => "2021-01-01",
+                "pinned" => 0
+            ]
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function pin_note()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/pinNote', 'POST', [
+            'note_id' => 1,
+            'pinned' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->pinNote($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('note', [
+            'note_id' => 1,
+            'user_id' => $user->user_id,
+            'title' => 'Software',
+            'category' => 'SWE',
+            'content' => 'Software Engineering Project',
+            'pinned' => true
+        ]);
+    }
+
+    /** @test */
+    public function create_category()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/createNoteCategory', 'POST', [
+            'category' => 'SWE',
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->createNoteCategory($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('note_category', [
+            'category' => 'SWE',
+            'user_id' => $user->user_id
+        ]);
+    }
+
+    /** @test */
+    public function share_note()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $user2 = UserFactory::new()->create();
+
+        $request = Request::create('/addNote', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'note_content' => 'Software Engineering Project',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addNote($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/shareNote', 'POST', [
+            'note_id' => 1,
+            'coll_username' => $user2->user_id
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->shareNote($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('note', [
+            'note_id' => 1,
+            'user_id' => $user->user_id,
+            'title' => 'Software',
+            'category' => 'SWE',
+            'content' => 'Software Engineering Project',
+        ]);
+
+        $this->assertDatabaseHas('note', [
+            'note_id' => 1,
+            'user_id' => $user2->user_id,
+            'title' => 'Software',
+            'category' => 'Shared with me',
+            'content' => 'Software Engineering Project',
+        ]);
+    }
+
+    /** @test */
+    public function get_categories_of_specific_user()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/createNoteCategory', 'POST', [
+            'category' => 'SWE',
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->createNoteCategory($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/createNoteCategory', 'POST', [
+            'category' => 'ML',
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->createNoteCategory($request);
+        })->assertStatus(204);
+
+        $response = $this->getCategories();
+
+        $this->assertSame(json_encode([
+            [
+                "category" => "SWE",
+                "user_id" => $user->user_id
+            ],
+            [
+                "category" => "ML",
+                "user_id" => $user->user_id
+            ]
+        ]), $response->getContent(), '');
+    }
+
 
     ##################fuctions to test##################
     public function getAllNotes(): JsonResponse
@@ -693,8 +997,6 @@ class NotesTest extends TestCase
         return response()->noContent();
     }
 
-
-
     public function getCategoryNotes(Request $request): JsonResponse // category
     {
         $user_id = auth()->user()->user_id;
@@ -702,7 +1004,15 @@ class NotesTest extends TestCase
         $note = Note::where([
             ['user_id', $user_id],
             ['category', $category]
-        ])->orderBy('pinned', 'DESC')->orderBy('modified_date', 'DESC')->get();
+        ])->orderBy('pinned', 'DESC')->orderBy('modified_date', 'DESC')->get([
+            'note_id',
+            'user_id',
+            'title',
+            'category',
+            'content',
+            'creation_date',
+            'modified_date',
+            'pinned']);
         return response()->json($note);
     }
 
@@ -713,18 +1023,29 @@ class NotesTest extends TestCase
         $is_category_found = Note_category::where([
             ['user_id', $user_id],
             ['category', $category]
-        ]);
+        ])->first();
+
         if ($is_category_found == null) {
             $new_category = new Note_category();
             $new_category->user_id = $user_id;
             $new_category->category = $category;
             $new_category->save();
+            return response()->noContent();
         } else {
             return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
 
-    public function pinNote(Request $request)
+    public function getCategories(): JsonResponse
+    {
+        $user_id = auth()->user()->user_id;
+        $categories = Note_category::where([
+            ['user_id', $user_id]
+        ])->get();
+        return response()->json($categories);
+    }
+
+    public function pinNote(Request $request): Response
     { // note_id, pinned
         $user_id = auth()->user()->user_id;
         $note_id = $request->note_id;
@@ -735,6 +1056,7 @@ class NotesTest extends TestCase
         ])->first();
         $note->pinned = !(($pinned == null) || ($pinned == false));
         $note->save();
+        return response()->noContent();
     }
 
     public function shareNote(Request $request)
@@ -752,12 +1074,19 @@ class NotesTest extends TestCase
             ])->first();
             $new_note = new Note();
             //may generate error
-            $new_note = $note;
             $new_note->user_id = $coll_username;
+            $new_note->title = $note->title;
+            $new_note->content = $note->content;
             $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
             $new_note->note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
             $new_note->category = 'Shared with me';
+            //to be deleted
+            $new_note->creation_date = $note->creation_date;
+            $new_note->modified_date = $note->modified_date;
+            $new_note->pinned = false;
+            echo $new_note;
             $new_note->save();
+            return response()->noContent();
         }
 //        $note->pinned = !(($pinned == null || $pinned == false));
 //        $note->save();
