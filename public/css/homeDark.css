@@ -10,6 +10,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
 :root {
   --bs-blue: rgb(190, 150, 130);
   --bs-indigo: #6610f2;
@@ -75,14 +76,67 @@
     scroll-behavior: smooth;
   }
 }
+.shareNotesB {
+    color: white;
+}
+article {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    float: left;
+    border: 2px solid #25353b;
+    box-sizing: border-box;
+}
+
+article div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 25px;
+    transition: .5s ease;
+}
+
+article input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input[type=radio]:checked ~ div {
+    background-color: #b0b0b0;
+    color: #333333;
+}
+
+
+.noteContent{
+    border-right: none;
+    border-left: none;
+    border-top:none;
+    width: 100%;
+    background-color: inherit;
+    color: white;
+}
+.noteContent::placeholder{
+
+}
+.noteContent:focus{
+
+}
 .card-margin {
     margin-bottom: 1.875rem;
 }
 
 .card {
     border: 0;
-    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(14, 5, 5, 0.44);
     -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
     -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
 }
@@ -92,7 +146,7 @@
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #ffffff;
+    background-color: #000000;
     background-clip: border-box;
     border: 1px solid #e6e4e9;
     border-radius: 8px;
@@ -123,7 +177,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #edf1fc;
+    background-color: #000000;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -148,7 +202,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #fcfcfd;
+    background-color: #000000;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -173,7 +227,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #e8faf8;
+    background-color: #030000;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
@@ -3316,7 +3370,7 @@ textarea.form-control-lg {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #d7d7d7;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
@@ -3338,7 +3392,7 @@ textarea.form-control-lg {
   }
 }
 .btn:hover {
-  color: #212529;
+  color: #9d9d9f;
 }
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
@@ -4834,7 +4888,7 @@ textarea.form-control-lg {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: inherit;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
