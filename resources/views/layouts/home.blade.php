@@ -78,7 +78,7 @@
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" onclick="show('allNotes');noteView();">All</a>
+                            <a class="nav-link" id="allNotesButton" ">All</a>
                             <a class="nav-link" onclick="show('sharedWithMeNotes')">Shared with me</a>
                         </nav>
                     </div>
@@ -717,5 +717,6 @@
     };
 
 </script>
+<script src="js/note.js"></script>
 </body>
 </html>
