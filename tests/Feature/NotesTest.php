@@ -681,6 +681,18 @@ class NotesTest extends TestCase
         return response()->json($retrieved_notes);
     }
 
+    public function deleteNote(Request $request): Response
+    { // note_id
+        $user_id = auth()->user()->user_id;
+        $note_id = $request->note_id;
+        $note = Note::where([
+            ['user_id', $user_id],
+            ['note_id', $note_id]
+        ]);
+        $note->delete();
+        return response()->noContent();
+    }
+
 
 
     public function getCategoryNotes(Request $request): JsonResponse // category
@@ -720,21 +732,9 @@ class NotesTest extends TestCase
         $note = Note::where([
             ['user_id', $user_id],
             ['note_id', $note_id]
-        ]);
+        ])->first();
         $note->pinned = !(($pinned == null) || ($pinned == false));
         $note->save();
-    }
-
-    public function deleteNote(Request $request): Response
-    { // note_id
-        $user_id = auth()->user()->user_id;
-        $note_id = $request->note_id;
-        $note = Note::where([
-            ['user_id', $user_id],
-            ['note_id', $note_id]
-        ]);
-        $note->delete();
-        return response()->noContent();
     }
 
     public function shareNote(Request $request)
@@ -749,8 +749,9 @@ class NotesTest extends TestCase
             $note = Note::where([
                 ['user_id', $user_id],
                 ['note_id', $note_id]
-            ]);
+            ])->first();
             $new_note = new Note();
+            //may generate error
             $new_note = $note;
             $new_note->user_id = $coll_username;
             $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
@@ -758,9 +759,8 @@ class NotesTest extends TestCase
             $new_note->category = 'Shared with me';
             $new_note->save();
         }
-
 //        $note->pinned = !(($pinned == null || $pinned == false));
-        $note->save();
+//        $note->save();
     }
 
     /**
