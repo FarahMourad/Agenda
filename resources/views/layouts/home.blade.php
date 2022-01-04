@@ -173,7 +173,6 @@
                         <button type="submit" onsubmit="" class="btn btn-sm btn-flash-border-success" style="float: right; ">SAVE NOTE</button>
                     </div>
                     </form>
-
                 </div>
             </div>
             <div id="allNotes" style="display: none" class="container-fluid px-4">
@@ -213,14 +212,14 @@
                 <ol class="breadcrumb mb-4">
                     <i class="fas fa-eraser" style="margin-right: 10px; color: #801818; cursor: pointer"></i><li class="breadcrumb-item diaryChoices">Erase Memories    </li>
                     <i class="fas fa-star" style="margin-right: 10px; margin-left: 20px; color: #efa315; cursor: pointer"></i><li class="breadcrumb-item diaryChoices"> Go To Bookmarked    </li>
-                    <i class="fas fa-save" style="margin-right: 10px; margin-left: 20px; color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)); cursor: pointer"></i><li class="breadcrumb-item diaryChoices"> Save Changes    </li>
+                    <i class="fas fa-save" onclick="return saveDiary()" id="save1" style="margin-right: 10px; margin-left: 20px; color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity))"></i><li id="save2" style="cursor: default" onclick="return saveDiary()" class="breadcrumb-item diaryChoices"> Save Changes    </li>
                     <li class="breadcrumb-item diaryChoices" style="margin-left: 20px">Go To: </li><input type="number" id="goto">
                 </ol>
                 <div>
-                    <div style="display: inline-block; float: left; height: 500px"><i class="fas fa-chevron-left arr"></i></div>
+                    <div style="display: inline-block; float: left; height: 500px"><i class="fas fa-chevron-left arr" id="leftArrow"></i></div>
                     <div style="display: inline-block; float: left; margin-left: 550px; margin-right: 10px">
                         <div class="dBook">
-                            <input type="radio" name="flip" id="flip" style="display: none">
+                            <input type="checkbox" name="flip" id="flip" class="flipper" style="display: none">
                             <label class="dCover" for="flip">
                                 <img src="../assets/img/12.jpg">
                                 <h2 style="font-family: 'Lucida Handwriting'; text-align: center">Secret Diary</h2>
@@ -229,25 +228,25 @@
                             <div class="dPage"></div>
                             <div class="dPage"></div>
                             <div class="dPage">
-                                <textarea name="" id="page-back"></textarea>
-                                <footer style="width: 350px; justify-content: center; transform: scale(-1, 1)">
+                                <textarea name="" id="page-back" rows="17" maxlength="510" disabled></textarea>
+                                <footer style="width: 350px; justify-content: center; transform: scale(-1, 1); cursor: default">
                                     <a>1</a>
-                                    <i class="fas fa-star" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
+                                    <i class="fas fa-star" id="star1" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
                                 </footer>
                             </div>
                             <div class="last-dPage">
-                                <textarea name="" id="page-front"></textarea>
-                                <footer style="width: 350px; justify-content: center">
+                                <textarea name="" id="page-front" rows="17" maxlength="510" disabled></textarea>
+                                <footer style="width: 350px; justify-content: center; cursor: default">
                                     <a>2</a>
-                                    <i class="fas fa-star" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
+                                    <i class="fas fa-star" id="star2" style="float: right; margin-right: 20px; color: #b9b1a1; cursor: pointer"></i>
                                 </footer>
                             </div>
                             <div class="back-dCover"></div>
                         </div>
                     </div>
-                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr"></i></div>
+                    <div style="display: inline-block; float: right; height: 500px; margin-right: 20px"><i class="fas fa-chevron-right arr" id="leftArrow"></i></div>
                     <footer style="position: fixed;bottom: 0; width: 100%">
-                        <a class="editDiary"><i class="fas fa-pencil-alt" style="margin-right: 10px"></i>Have More Adventures?</a>
+                        <a id="addPage" class="editDiary"><i class="fas fa-pencil-alt" style="margin-right: 10px"></i>Have More Adventures?</a>
                     </footer>
                 </div>
             </div>
@@ -257,6 +256,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/homeScript.js"></script>
+<script src="js/diary.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>

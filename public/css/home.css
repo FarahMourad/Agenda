@@ -12073,10 +12073,10 @@ body {
     cursor: pointer;
 }
 
-.dBook input[type = "radio"]:checked ~ .dCover{
+.dBook input[type = "checkbox"]:checked ~ .dCover{
     transform: rotateX(10deg) rotateY(-180deg);
 }
-.dBook input[type = "radio"]:checked ~ .dPage{
+.dBook input[type = "checkbox"]:checked ~ .dPage{
     transform: rotateX(10deg) rotateY(-180deg);
     z-index: 2;
 }
@@ -12127,23 +12127,22 @@ body {
 .dPage:nth-child(6){
     transition-duration: 0.4s;
 }
-
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(2){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(2){
     transition-duration: 5s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(3){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(3){
     transition-duration: 4.6s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(4){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(4){
     transition-duration: 4.2s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(5){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(5){
     transition-duration: 3.8s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(6){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(6){
     transition-duration: 3.4s;
 }
-.dBook input[type = "radio"]:checked ~ .last-dPage{
+.dBook input[type = "checkbox"]:checked ~ .last-dPage{
     z-index: 0;
 }
 #page-back{
@@ -12169,7 +12168,6 @@ body {
     font-family: "Lucida Handwriting";
     padding: 10px;
 }
-
 .dCover img{
     width: 150px;
     display: block;

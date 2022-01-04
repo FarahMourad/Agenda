@@ -12006,64 +12006,15 @@ body {
 }
 
 
-
-
-
-/*.dBook{*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.dBook:hover .dCover{*/
-/*    transform: rotateX(10deg) rotateY(-180deg);*/
-/*}*/
-/*.dBook:hover .dPage{*/
-/*    transform: rotateX(10deg) rotateY(-180deg);*/
-/*    z-index: 2;*/
-/*}*/
-/*.dCover{*/
-/*    z-index: 1;*/
-/*    transition: all 3s;*/
-/*}*/
-/*.back-dCover{*/
-/*    z-index: -2;*/
-/*}*/
-/*.dCover, .back-dCover{*/
-/*    height: 500px;*/
-/*    width: 400px;*/
-/*    background-color: #bd9481;*/
-/*    border-radius: 2px 20px 20px 2px;*/
-/*    position: absolute;*/
-/*    box-shadow: 1px 1px 10px #8a6e61;*/
-/*    transform: rotateX(10deg);*/
-/*    transform-origin: center left;*/
-/*}*/
-
-/*.dPage, .last-dPage{*/
-/*    padding: 10px;*/
-/*    height: 480px;*/
-/*    width: 390px;*/
-/*    margin-top: 10px;*/
-/*    background-color: #f8f5f3;*/
-/*    color: #111213;*/
-/*    position: absolute;*/
-/*    border-radius: 2px 10px 10px 2px;*/
-/*    transform: rotateX(10deg);*/
-/*    transform-origin: center left;*/
-/*    z-index: -1;*/
-/*}*/
-
-
-
 .dBook{
     align-items: center;
     cursor: pointer;
 }
 
-.dBook input[type = "radio"]:checked ~ .dCover{
+.dBook input[type = "checkbox"]:checked ~ .dCover{
     transform: rotateX(10deg) rotateY(-180deg);
 }
-.dBook input[type = "radio"]:checked ~ .dPage{
+.dBook input[type = "checkbox"]:checked ~ .dPage{
     transform: rotateX(10deg) rotateY(-180deg);
     z-index: 2;
 }
@@ -12116,22 +12067,22 @@ body {
     transition-duration: 0.4s;
 }
 
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(2){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(2){
     transition-duration: 5s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(3){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(3){
     transition-duration: 4.6s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(4){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(4){
     transition-duration: 4.2s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(5){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(5){
     transition-duration: 3.8s;
 }
-.dBook input[type = "radio"]:checked ~ .dPage:nth-child(6){
+.dBook input[type = "checkbox"]:checked ~ .dPage:nth-child(6){
     transition-duration: 3.4s;
 }
-.dBook input[type = "radio"]:checked ~ .last-dPage{
+.dBook input[type = "checkbox"]:checked ~ .last-dPage{
     z-index: 0;
 }
 #page-back{
@@ -12171,20 +12122,19 @@ body {
     text-align: center;
     color: #ece5e0;
 }
-
-
-
-
 .arr{
     position: absolute;
     top: 50%;
     font-size: 35px;
     cursor: pointer;
 }
+.arr:hover{
+    color: #95999c;
+}
 #goto{
     background-color: rgba(255, 255, 255, 0.08);
     width: 50px;
-    color: black;
+    color: white;
     outline: none;
     border: none;
     border-radius: 10px;
@@ -12194,9 +12144,10 @@ body {
 }
 .diaryChoices{
     cursor: pointer;
+    color: #d2cece;
 }
 .diaryChoices:hover {
-    color: #d2cece;
+    color: white;
 }
 .editDiary{
     font-family: 'Lucida Handwriting';
