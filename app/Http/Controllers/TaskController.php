@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Step;
 use App\Models\Task;
 use App\Models\Task_category;
 use App\Models\User;
@@ -10,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class TaskController
 {
-    public function getTasks(Request $request): JsonResponse
+    public function getTasks(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
         $tasks = Task::where([
@@ -38,7 +39,6 @@ class TaskController
         ])->get();
         return response()->json($categories);
     }
-
 
     public function sortByTitle(Request $request): JsonResponse // category
     {
@@ -75,7 +75,6 @@ class TaskController
         }
         return response()->json($retrieved_tasks);
     }
-
 
     public function createCategory(Request $request) // category
     {
@@ -135,7 +134,7 @@ class TaskController
         $is_category_found = Task_category::where([
             ['user_id', $user_id],
             ['category', $category]
-        ]);
+        ])->first();
         if ($is_category_found == null || $table_empty == 0) {
             $new_category = new Task_category();
             $new_category->category = $category;
@@ -219,15 +218,14 @@ class TaskController
 
     }
 
-
-    public function setAsPinned(Request $request) // task_id, is_pinned
+    public function setAsPinned(Request $request) // task_id, pinned
     {
         $user_id = auth()->user()->user_id;
         $task = Task::where([
             ['task_id', $request->task_id],
             ['user_id', $user_id],
         ])->first();
-        $task->is_pinned = $request->is_pinned;
+        $task->pinned = $request->pinned;
         $task->save();
     }
 
@@ -268,16 +266,115 @@ class TaskController
         $user_id = auth()->user()->user_id;
         $total_tasks = Task::where([
             ['user_id', $user_id]
-        ])::count();
+        ])->count();
         $completed_tasks = Task::where([
             ['user_id', $user_id],
             ['completed', true]
-        ])::count();
+        ])->count();
         $performance = ($completed_tasks / $total_tasks) * 100;
         return response()->json($performance);
     }
 
+    public function getSteps(Request $request): JsonResponse // task_id
+    {
+        $user_id = auth()->user()->user_id;
+        $steps = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id]
+        ])->orderBy('pinned', 'DESC')->orderBy('created_at', 'ASC')->get();
+        return response()->json($steps);
+    }
 
+    public function addStep(Request $request) // task_id, step_id, title, step_content, deadline
+    {
+        $user_id = auth()->user()->user_id;
+        $step = new Step();
+        $step->user_id = $user_id;
+        $step->task_id = $request->task_id;
+        $step->step_id = $request->step_id;
+        $step->content = $request->step_content;
+        $step->deadline = $request->deadline;
+        $step->completed = false;
+        $step->save();
+    }
+
+    public function editStepTitle(Request $request)  // task_id, step_id, title
+    {
+        $user_id = auth()->user()->user_id;
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->title = $request->title;
+        $step->save();
+    }
+
+    public function editStepDeadline(Request $request)  // task_id, step_id, deadline
+    {
+        $user_id = auth()->user()->user_id;
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->deadline = $request->deadline;
+        $step->save();
+    }
+
+    public function editStepContent(Request $request)  // task_id, step_id, step_content
+    {
+        $user_id = auth()->user()->user_id;
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->content = $request->step_content;
+        $step->save();
+    }
+
+    public function markStepCompleted(Request $request)  // task_id, step_id, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->completed = $request->completed;
+        $step->save();
+    }
+
+    public function markAllStepsAsCompleted(Request $request)  // task_id, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $steps = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+        ])->get();
+        foreach ($steps as $i) {
+            $i->completed = $request->completed;
+            $i->save();
+        }
+    }
+
+    public function editStep()
+    {
+
+    }
+
+    public function deleteStep(Request $request) // task_id, step_id
+    {
+        $user_id = auth()->user()->user_id;
+
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->delete();
+    }
 
 
 

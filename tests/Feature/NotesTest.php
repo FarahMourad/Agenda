@@ -1084,7 +1084,6 @@ class NotesTest extends TestCase
             $new_note->creation_date = $note->creation_date;
             $new_note->modified_date = $note->modified_date;
             $new_note->pinned = false;
-            echo $new_note;
             $new_note->save();
             return response()->noContent();
         }
