@@ -189,40 +189,6 @@ class NoteController
 //        $note->save();
     }
 
-//    public function sortNotesByTitle(Request $request): JsonResponse // category
-//    {
-//        $user_id = auth()->user()->user_id;
-//        $category = $request->category;
-//
-//        if ($category == 'all') {
-//            $retrieved_notes = Note::where([
-//                ['user_id', $user_id]
-//            ])->get([
-//                'note_id',
-//                'user_id',
-//                'title',
-//                'category',
-//                'content',
-//                'creation_date',
-//                'modified_date',
-//                'pinned']);
-//        } else {
-//            $retrieved_notes = Note::where([
-//                ['user_id', $user_id],
-//                ['category', $category]
-//            ])->get([
-//                'note_id',
-//                'user_id',
-//                'title',
-//                'category',
-//                'content',
-//                'creation_date',
-//                'modified_date',
-//                'pinned']);
-//        }
-//        return response()->json($retrieved_notes->sortBy("title"));
-//    }
-
     public function sortNotesByTitle(Request $request): JsonResponse // category
     {
         $user_id = auth()->user()->user_id;
