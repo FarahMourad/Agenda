@@ -110,12 +110,12 @@
                 </ol>
                 <div class="row">
 
-                    <div class="col-xl-3 col-md-6" style="cursor: pointer">
+                    <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
                             <div class="card-body"><span>Task Title</span> <span style="float: right"><i class="bi bi-pin-angle-fill"></i></span></div>
                             <div class="small" style="color: rgba(243,239,233,0.63); padding: 0 15px 15px"><span>Category</span><span style="float: right">Deadline</span></div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" style="text-decoration: none">View Details</a>
+                                <a class="small text-white stretched-link" style="text-decoration: none; cursor: pointer">View Details</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -129,6 +129,12 @@
                     <li class="breadcrumb-item active">Assigned to me</li>
                 </ol>
             </div>
+            <div id="selectedTask" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Tasks</h1>
+                
+            </div>
+
+
             <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
                 <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:0px;width: 500px;height: 500px;  overflow-y: scroll; " class="card card-margin">
