@@ -85,6 +85,7 @@
                     <a class="nav-link" onclick="show('diaryDiv')">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
+                        
                     </a>
                 </div>
             </div>
