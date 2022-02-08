@@ -85,7 +85,7 @@
                     <a class="nav-link" onclick="show('diaryDiv')">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
-                        
+
                     </a>
                 </div>
             </div>
@@ -102,45 +102,69 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">All</li>
                 </ol>
-{{--                <div class="row">--}}
+                <div class="row">
 
-{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                    --}}{{--                        <div class="card bg-primary text-white mb-4">--}}
-{{--                    --}}{{--                            <div class="card-body">Primary Card</div>--}}
-{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                    --}}{{--                            </div>--}}
-{{--                    --}}{{--                        </div>--}}
-{{--                    --}}{{--                    </div>--}}
-{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                    --}}{{--                        <div class="card bg-warning text-white mb-4">--}}
-{{--                    --}}{{--                            <div class="card-body">Warning Card</div>--}}
-{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                    --}}{{--                            </div>--}}
-{{--                    --}}{{--                        </div>--}}
-{{--                    --}}{{--                    </div>--}}
-{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                    --}}{{--                        <div class="card bg-success text-white mb-4">--}}
-{{--                    --}}{{--                            <div class="card-body">Success Card</div>--}}
-{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                    --}}{{--                            </div>--}}
-{{--                    --}}{{--                        </div>--}}
-{{--                    --}}{{--                    </div>--}}
-{{--                    --}}{{--                    <div class="col-xl-3 col-md-6">--}}
-{{--                    --}}{{--                        <div class="card bg-danger text-white mb-4">--}}
-{{--                    --}}{{--                            <div class="card-body">Danger Card</div>--}}
-{{--                    --}}{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                    --}}{{--                                <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                    --}}{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                    --}}{{--                            </div>--}}
-{{--                    --}}{{--                        </div>--}}
-{{--                    --}}{{--                    </div>--}}
-{{--                </div>--}}
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="card bg-primary text-white mb-4">
+                                                <div class="card-body">Primary Card</div>
+                                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="card bg-warning text-white mb-4">
+                                                <div class="card-body">Warning Card</div>
+                                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="card bg-success text-white mb-4">
+                                                <div class="card-body">Success Card</div>
+                                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="card bg-danger text-white mb-4">
+                                                <div class="card-body">Danger Card</div>
+                                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                </div>
+                <div class="col-md-4 col-sm-6 content-card">
+                    <div class="card-big-shadow">
+                        <div class="card card-just-text" data-background="color" data-color="blue" data-radius="none">
+                            <div class="content">
+                                <h6 class="category">Best cards</h6>
+                                <h4 class="title"><a href="#">Blue Card</a></h4>
+                                <p class="description">What all of these have in common is that they're pulling information out of the app or the service and making it relevant to the moment. </p>
+                            </div>
+                        </div> <!-- end card -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 content-card">
+                    <div class="card-big-shadow">
+                        <div class="card card-just-text" data-background="color" data-color="blue" data-radius="none">
+                            <div class="content">
+                                <h6 class="category">Best cards</h6>
+                                <h4 class="title"><a href="#">Blue Card</a></h4>
+                                <p class="description">What all of these have in common is that they're pulling information out of the app or the service and making it relevant to the moment. </p>
+                            </div>
+                        </div> <!-- end card -->
+                    </div>
+                </div>
+
+
             </div>
             <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Tasks</h1>
@@ -234,6 +258,7 @@
                 <br>
                 <div class="container" >
                     <div class="row" id="notesContainer">
+
                     </div>
                 </div>
                 <div>
@@ -356,47 +381,62 @@
         form.insertBefore(article,null);
 
     }
+    var num=0;
     function noteView(note){
         var notesContainer = document.getElementById("notesContainer");
         var col = document.createElement("div");
-        col.className="col-lg-4";
+        col.className="col-md-4 col-sm-6 content-card";
         col.id = note.note_id + "";
-        var card = document.createElement("div");
-        card.className="card card-margin";
-        var cardHeader = document.createElement("div");
-        cardHeader.className="card-header no-border";
-        var cardBody = document.createElement("div");
-        cardBody.className="card-body pt-0";
-        var body = document.createElement("div");
-        body.className="widget-49";
-        var view = document.createElement("div");
-        view.className="widget-49-meeting-action";
-        var cardTitleHeader = document.createElement("h5");
-        cardTitleHeader.className="card-title";
-        cardTitleHeader.innerHTML=note.title;
-        cardTitleHeader.style="float:left;width:95%;height:28px;text-overflow: ellipsis; overflow:hidden";
-        // cardHeader.style="width:100%;";
+        var div2 = document.createElement("div");
+        div2.className="card-big-shadow";
+        var div3 = document.createElement("div");
+        div3.className="card card-just-text";
+        div3.setAttribute("data-background","color");
+        if(num%6==0)
+            div3.setAttribute("data-color","blue");
+        else if(num%6==1)
+            div3.setAttribute("data-color","green");
+        else if(num%6==2)
+            div3.setAttribute("data-color","yellow");
+        else if(num%6==3)
+            div3.setAttribute("data-color","brown");
+        else if(num%6==4)
+            div3.setAttribute("data-color","purple");
+        else if(num%6==5)
+            div3.setAttribute("data-color","orange");
+        num++;
+        div3.setAttribute("data-radius","none");
+        var div4 = document.createElement("div");
+        div4.className="content";
+        var div5 = document.createElement("div");
+        div5.style="font-size: 25px;height:35px;text-overflow: ellipsis; overflow:hidden";
+        div5.innerHTML=note.title;
+        var div6 = document.createElement("div");
+        var description= document.createElement("p");
+        description.className="description";
+        description.style="text-overflow: ellipsis; overflow-y:hidden;height: 195px;width:100%;";
+        description.innerHTML=note.content;
 
+
+        //pin
         var pinned = note.pinned;
-
-        var pinDiv= document.createElement("div");
         var pin= document.createElement("svg");
-        pinDiv.style= "float:right;cursor:pointer";
-        pin.style= "float:top";
+        pin.style= "float:right; width:16px;cursor:pointer";
         pin.xmlns="http://www.w3.org/2000/svg";
         pin.width='16';
         pin.height='16';
+        pin.float='right';
         pin.fill="currentColor";
         pin.viewBox="0 0 16 16";
         if (pinned==true)
             pin.className="bi bi-pin-fill";
         else
             pin.className="bi bi-pin";
-
         var path = document.createElement("path");
         path.d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354zm1.58 1.408-.002-.001.002.001zm-.002-.001.002.001A.5.5 0 0 1 6 2v5a.5.5 0 0 1-.276.447h-.002l-.012.007-.054.03a4.922 4.922 0 0 0-.827.58c-.318.278-.585.596-.725.936h7.792c-.14-.34-.407-.658-.725-.936a4.915 4.915 0 0 0-.881-.61l-.012-.006h-.002A.5.5 0 0 1 10 7V2a.5.5 0 0 1 .295-.458 1.775 1.775 0 0 0 .351-.271c.08-.08.155-.17.214-.271H5.14c.06.1.133.191.214.271a1.78 1.78 0 0 0 .37.282z";
         pin.insertBefore(path,null);
-        pinDiv.onclick=function (e){
+
+        pin.onclick=function (e){
             if (pinned === 1){ //pin style
                 pinned = false;
                 pin.className="bi bi-pin";
@@ -421,15 +461,12 @@
             });
         }
 
-        var noteContent = document.createElement("p");
 
-        noteContent.className="widget-49-pro-title";
-        noteContent.style="text-overflow: ellipsis; overflow-y:hidden;height: 290px;width:100%;";
-        noteContent.innerHTML= note.content;
-
+        //view note
         var viewNote = document.createElement("div");
         viewNote.innerHTML="VIEW NOTE";
         viewNote.className="btn btn-sm btn-flash-border-success";
+        viewNote.style="float:right;margin-right:10px;margin-bottom:10px";
         viewNote.onclick=function (){
 
             document.getElementById("noteTitle").value= note.title;
@@ -437,16 +474,20 @@
             show('editNotes');
             document.getElementById("note_id").value = col.id;
         }
+
+
+        //delete note
         const self= this;
         var deleteButton =document.createElement("svg");
-        deleteButton.style= "float:left;cursor:pointer";
+        deleteButton.style= "float:left;cursor:pointer;margin-left:10px";
         deleteButton.onclick=function (){
             var result = confirm("Are you sure you want to delete this note?");
             if (result) {
                 document.getElementById("deletedNote").value = col.id;
-                document.forms["deleteNote"].action= "{{route('deleteNote')}}"
+                document.forms["deleteNote"].action= "{{route('deleteNote')}}";
                 document.forms["deleteNote"].submit();
                 notesContainer.removeChild(col);
+
             }
 
         }
@@ -459,18 +500,166 @@
         var deletePath = document.createElement("path");
         deletePath.d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
         deleteButton.insertBefore(deletePath,null);
+
+
+        var view = document.createElement("div");
         view.insertBefore(deleteButton,null);
         view.insertBefore(viewNote,null);
-        body.insertBefore(noteContent,null);
-        body.insertBefore(view,null);
-        cardBody.insertBefore(body,null);
-        cardHeader.insertBefore(cardTitleHeader,null);
-        pinDiv.insertBefore(pin,null);
-        cardHeader.insertBefore(pinDiv,null);
-        card.insertBefore(cardHeader,null);
-        card.insertBefore(cardBody,null);
-        col.insertBefore(card,null);
+
+
+
+
+        var br=document.createElement("br");
+        div6.insertBefore(br,null);
+        div6.insertBefore(description,null);
+        div4.insertBefore(div5,null);
+
+        div4.insertBefore(div6,null);
+        div3.insertBefore(pin,null);
+        div3.insertBefore(div4,null);
+        div3.insertBefore(view,null);
+        div2.insertBefore(div3,null);
+        col.insertBefore(div2,null);
+
         notesContainer.insertBefore(col,null);
+
+
+
+
+
+
+
+
+
+
+        ///////ollddd/////////////
+
+
+
+
+
+
+
+
+    // var notesContainer = document.getElementById("notesContainer");
+    //     var col = document.createElement("div");
+    //     col.className="col-md-4 col-sm-6 content-card";
+    //     col.id = note.note_id + "";
+    //     var card = document.createElement("div");
+    //     card.className="card-big-shadow";
+    //     var cardColor= document.createElement("div");
+    //     cardColor.className="card card-just-text";
+    //     cardColor.setAttribute("data-background","color");
+    //     cardColor.setAttribute("data-color","blue");
+    //     cardColor.setAttribute("data-radius","none");
+    //     var cardHeader = document.createElement("div");
+    //     cardHeader.className="card-header no-border";
+    //     var cardBody = document.createElement("div");
+    //     cardBody.className="card-body pt-0";
+    //     var body = document.createElement("div");
+    //     body.className="widget-49";
+    //     var view = document.createElement("div");
+    //     view.className="widget-49-meeting-action";
+    //     var cardTitleHeader = document.createElement("h5");
+    //     cardTitleHeader.className="card-title";
+    //     cardTitleHeader.innerHTML=note.title;
+    //     cardTitleHeader.style="float:left;width:95%;height:28px;text-overflow: ellipsis; overflow:hidden";
+        // cardHeader.style="width:100%;";
+
+        {{--var pinned = note.pinned;--}}
+
+        {{--var pinDiv= document.createElement("div");--}}
+        {{--var pin= document.createElement("svg");--}}
+        {{--pinDiv.style= "float:right;cursor:pointer";--}}
+        {{--pin.style= "float:top";--}}
+        {{--pin.xmlns="http://www.w3.org/2000/svg";--}}
+        {{--pin.width='16';--}}
+        {{--pin.height='16';--}}
+        {{--pin.fill="currentColor";--}}
+        {{--pin.viewBox="0 0 16 16";--}}
+        {{--if (pinned==true)--}}
+        {{--    pin.className="bi bi-pin-fill";--}}
+        {{--else--}}
+        {{--    pin.className="bi bi-pin";--}}
+
+        {{--var path = document.createElement("path");--}}
+        {{--path.d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354zm1.58 1.408-.002-.001.002.001zm-.002-.001.002.001A.5.5 0 0 1 6 2v5a.5.5 0 0 1-.276.447h-.002l-.012.007-.054.03a4.922 4.922 0 0 0-.827.58c-.318.278-.585.596-.725.936h7.792c-.14-.34-.407-.658-.725-.936a4.915 4.915 0 0 0-.881-.61l-.012-.006h-.002A.5.5 0 0 1 10 7V2a.5.5 0 0 1 .295-.458 1.775 1.775 0 0 0 .351-.271c.08-.08.155-.17.214-.271H5.14c.06.1.133.191.214.271a1.78 1.78 0 0 0 .37.282z";--}}
+        {{--pin.insertBefore(path,null);--}}
+        {{--pinDiv.onclick=function (e){--}}
+        {{--    if (pinned === 1){ //pin style--}}
+        {{--        pinned = false;--}}
+        {{--        pin.className="bi bi-pin";--}}
+        {{--    }--}}
+        {{--    else {--}}
+        {{--        pinned = true;--}}
+        {{--        pin.className="bi bi-pin-fill";--}}
+        {{--    }--}}
+        {{--    e.preventDefault();--}}
+        {{--    var _token = $("input[name='_token']").val();--}}
+        {{--    console.log(pinned);--}}
+        {{--    $.ajax({--}}
+        {{--        type: "POST",--}}
+        {{--        url: "{{route('pinNote')}}",--}}
+        {{--        data: {--}}
+        {{--            note_id: note.note_id,--}}
+        {{--            _token: _token,--}}
+        {{--        },--}}
+        {{--        success: function() {--}}
+        {{--            console.log("success");--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--}--}}
+
+        {{--var noteContent = document.createElement("p");--}}
+
+        {{--noteContent.className="widget-49-pro-title";--}}
+        {{--noteContent.style="text-overflow: ellipsis; overflow-y:hidden;height: 290px;width:100%;";--}}
+        {{--noteContent.innerHTML= note.content;--}}
+
+        {{--var viewNote = document.createElement("div");--}}
+        {{--viewNote.innerHTML="VIEW NOTE";--}}
+        {{--viewNote.className="btn btn-sm btn-flash-border-success";--}}
+        {{--viewNote.onclick=function (){--}}
+
+        {{--    document.getElementById("noteTitle").value= note.title;--}}
+        {{--    document.getElementById("noteContent").innerText= note.content;--}}
+        {{--    show('editNotes');--}}
+        {{--    document.getElementById("note_id").value = col.id;--}}
+        {{--}--}}
+        {{--const self= this;--}}
+        {{--var deleteButton =document.createElement("svg");--}}
+        {{--deleteButton.style= "float:left;cursor:pointer";--}}
+        {{--deleteButton.onclick=function (){--}}
+        {{--    var result = confirm("Are you sure you want to delete this note?");--}}
+        {{--    if (result) {--}}
+        {{--        document.getElementById("deletedNote").value = col.id;--}}
+        {{--        document.forms["deleteNote"].action= "{{route('deleteNote')}}"--}}
+        {{--        document.forms["deleteNote"].submit();--}}
+        {{--        notesContainer.removeChild(col);--}}
+        {{--    }--}}
+
+        {{--}--}}
+        {{--deleteButton.xmlns="http://www.w3.org/2000/svg";--}}
+        {{--deleteButton.width='16';--}}
+        {{--deleteButton.height='16';--}}
+        {{--deleteButton.className="bi bi-trash-fill";--}}
+        {{--deleteButton.fill="currentColor";--}}
+        {{--deleteButton.viewBox="0 0 16 16";--}}
+        {{--var deletePath = document.createElement("path");--}}
+        {{--deletePath.d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"--}}
+        {{--deleteButton.insertBefore(deletePath,null);--}}
+        {{--view.insertBefore(deleteButton,null);--}}
+        {{--view.insertBefore(viewNote,null);--}}
+        {{--body.insertBefore(noteContent,null);--}}
+        {{--body.insertBefore(view,null);--}}
+        {{--cardBody.insertBefore(body,null);--}}
+        {{--cardHeader.insertBefore(cardTitleHeader,null);--}}
+        {{--pinDiv.insertBefore(pin,null);--}}
+        {{--cardHeader.insertBefore(pinDiv,null);--}}
+        {{--card.insertBefore(cardHeader,null);--}}
+        {{--card.insertBefore(cardBody,null);--}}
+        {{--col.insertBefore(card,null);--}}
+        {{--notesContainer.insertBefore(col,null);--}}
 
     }
 
@@ -504,6 +693,7 @@
             divList[i].style.display = 'none';
         }
         document.getElementById(id).style.display = 'block';
+        num=0;
     }
 
 
