@@ -149,8 +149,9 @@
                     <li class="breadcrumb-item active">Assigned to me</li>
                 </ol>
             </div>
-            <div id="shareNotes" style="display: none" class="container-fluid px-4">
+            <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
+                <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:0px;width: 500px;height: 500px;  overflow-y: scroll; " class="card card-margin">
                 <form id="sharingNotes" method="POST">
                     <label for="userShared">Collaborator</label>
                     <input type="text" style="display: none" id="shared_note">
@@ -160,6 +161,7 @@
                     <div id="notesToBeShared">
                     </div>
                 </form>
+                </div>
             </div>
             <div id="addNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
@@ -262,7 +264,7 @@
                     </div>
                 </div>
                 <div>
-                    <input type="button" class="shareNotesB" value="Share Notes" style="background: inherit;border: none; float: right;" onclick="show('shareNotes')" >
+                    <input type="button" class="shareNotesB" value="Share Notes" style="background: inherit;border: none; float: right;" onclick="document.getElementById('shareNotes').style.display='block';" >
                 </div>
             </div>
             <div id="sharedWithMeNotes" style="display: none" class="container-fluid px-4">
