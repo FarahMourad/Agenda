@@ -53,7 +53,7 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::get('/sortTasksByTitle', 'TaskController@sortByTitle')->name('sortTasksByTitle');
         Route::get('/sortByDeadline', 'TaskController@sortByDeadline')->name('sortByDeadline');
 
-        Route::post('/createTaskCategory', 'TaskController@createTaskCategory')->name('createTaskCategory');
+        Route::post('/createTaskCategory', 'TaskController@createCategory')->name('createTaskCategory');
         Route::post('/addTask', 'TaskController@addTask')->name('addTask');
         Route::post('/editTask', 'TaskController@editTask')->name('editTask');
         Route::post('/shareAsCopy', 'TaskController@shareAsCopy')->name('shareAsCopy');

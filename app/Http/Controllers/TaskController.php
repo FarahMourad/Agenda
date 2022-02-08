@@ -6,11 +6,7 @@ use App\Models\Task;
 use App\Models\Task_category;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use \Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Redirect;
-use Mockery\Matcher\Not;
-use function Symfony\Component\Translation\t;
+use Illuminate\Http\JsonResponse;
 
 class TaskController
 {
@@ -34,86 +30,15 @@ class TaskController
         return response()->json('tasks', $tasks);
     }
 
-    public function addTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
+    public function getCategories(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
-        $task = new Task();
-        $task->task_id = $request->task_id;
-        $task->user_id = $user_id;
-        $task->title = $request->title;
-        $task->category = $request->category;
-        $task->description = $request->description;
-        $task->deadline = $request->deadline;
-        $task->pinned = $request->pinned;
-        $task->completed = $request->completed;
-        $task->save();
-    }
-
-    public function editTitle(Request $request) // task_id, title
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->title = $request->title;
-        $task->save();
-    }
-
-    public function editDeadline(Request $request) // task_id, deadline
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->deadline = $request->deadline;
-        $task->save();
-    }
-
-    public function editDescription(Request $request) // task_id, description
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->description = $request->description;
-        $task->save();
-    }
-
-    public function setAsPinned(Request $request) // task_id, is_pinned
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->is_pinned = $request->is_pinned;
-        $task->save();
-    }
-
-    public function editCategory(Request $request) // task_id, category
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
+        $categories = Task_category::where([
             ['user_id', $user_id]
-        ])->first();
-        $task->category = $request->category;
-        $task->save();
+        ])->get();
+        return response()->json($categories);
     }
 
-    public function markAsCompleted(Request $request) // task_id, is_completed
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id]
-        ])->first();
-        $task->completed = $request->completed;
-        $task->save();
-    }
 
     public function sortByTitle(Request $request): JsonResponse // category
     {
@@ -151,18 +76,36 @@ class TaskController
         return response()->json($retrieved_tasks);
     }
 
-    public function calculatePerformance(Request $request)
+    public function createCategory(Request $request) // category
     {
         $user_id = auth()->user()->user_id;
-        $total_tasks = Task::where([
-            ['user_id', $user_id]
-        ])::count();
-        $completed_tasks = Task::where([
+        $category = $request->category;
+        $is_category_found = Task_category::where([
             ['user_id', $user_id],
-            ['completed', true]
-        ])::count();
-        $performance = ($completed_tasks / $total_tasks) * 100;
-        return response()->json($performance);
+            ['category', $category]
+        ])->first();
+
+        if ($is_category_found == null) {
+            $new_category = new Task_category();
+            $new_category->user_id = $user_id;
+            $new_category->category = $category;
+            $new_category->save();
+        }
+    }
+
+    public function addTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $task = new Task();
+        $task->task_id = $request->task_id;
+        $task->user_id = $user_id;
+        $task->title = $request->title;
+        $task->category = $request->category;
+        $task->description = $request->description;
+        $task->deadline = $request->deadline;
+        $task->pinned = $request->pinned;
+        $task->completed = $request->completed;
+        $task->save();
     }
 
     public function editTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
@@ -204,6 +147,39 @@ class TaskController
         $task->save();
     }
 
+    public function editTitle(Request $request) // task_id, title
+    {
+        $user_id = auth()->user()->user_id;
+        $task = Task::where([
+            ['task_id', $request->task_id],
+            ['user_id', $user_id],
+        ])->first();
+        $task->title = $request->title;
+        $task->save();
+    }
+
+    public function editDeadline(Request $request) // task_id, deadline
+    {
+        $user_id = auth()->user()->user_id;
+        $task = Task::where([
+            ['task_id', $request->task_id],
+            ['user_id', $user_id],
+        ])->first();
+        $task->deadline = $request->deadline;
+        $task->save();
+    }
+
+    public function editDescription(Request $request) // task_id, description
+    {
+        $user_id = auth()->user()->user_id;
+        $task = Task::where([
+            ['task_id', $request->task_id],
+            ['user_id', $user_id],
+        ])->first();
+        $task->description = $request->description;
+        $task->save();
+    }
+
     public function shareAsCopy(Request $request) //task_id, collaborator_username
     {
         $user_id = auth()->user()->user_id;
@@ -238,30 +214,26 @@ class TaskController
 
     }
 
-    public function createCategory(Request $request) // category
+    public function setAsPinned(Request $request) // task_id, is_pinned
     {
         $user_id = auth()->user()->user_id;
-        $category = $request->category;
-        $is_category_found = Task_category::where([
+        $task = Task::where([
+            ['task_id', $request->task_id],
             ['user_id', $user_id],
-            ['category', $category]
         ])->first();
-
-        if ($is_category_found == null) {
-            $new_category = new Task_category();
-            $new_category->user_id = $user_id;
-            $new_category->category = $category;
-            $new_category->save();
-        }
+        $task->is_pinned = $request->is_pinned;
+        $task->save();
     }
 
-    public function getCategories(): JsonResponse
+    public function markAsCompleted(Request $request) // task_id, is_completed
     {
         $user_id = auth()->user()->user_id;
-        $categories = Task_category::where([
+        $task = Task::where([
+            ['task_id', $request->task_id],
             ['user_id', $user_id]
-        ])->get();
-        return response()->json($categories);
+        ])->first();
+        $task->completed = $request->completed;
+        $task->save();
     }
 
     public function deleteTask(Request $request)
@@ -273,5 +245,34 @@ class TaskController
         ]);
         $task->delete();
     }
+
+    public function editCategory(Request $request) // task_id, category
+    {
+        $user_id = auth()->user()->user_id;
+        $task = Task::where([
+            ['task_id', $request->task_id],
+            ['user_id', $user_id]
+        ])->first();
+        $task->category = $request->category;
+        $task->save();
+    }
+
+    public function calculatePerformance(Request $request)
+    {
+        $user_id = auth()->user()->user_id;
+        $total_tasks = Task::where([
+            ['user_id', $user_id]
+        ])::count();
+        $completed_tasks = Task::where([
+            ['user_id', $user_id],
+            ['completed', true]
+        ])::count();
+        $performance = ($completed_tasks / $total_tasks) * 100;
+        return response()->json($performance);
+    }
+
+
+
+
 
 }
