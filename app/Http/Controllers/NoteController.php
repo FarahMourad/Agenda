@@ -252,6 +252,7 @@ class NoteController
         }
         return response()->json($retrieved_notes);
     }
+
     public function createNoteCategory(Request $request)
     { // category
         $user_id = auth()->user()->user_id;

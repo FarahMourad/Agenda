@@ -38,7 +38,7 @@ class StepController
         $step = Step::where([
             ['task_id', $request->task_id],
             ['step_id', $request->step_id]
-        ]);
+        ])->first();
         $step->title = $request->title;
         $step->save();
     }
@@ -49,7 +49,7 @@ class StepController
         $step = Step::where([
             ['task_id', $request->task_id],
             ['step_id', $request->step_id]
-        ]);
+        ])->first();
         $step->deadline = $request->deadline;
         $step->save();
     }
@@ -60,20 +60,37 @@ class StepController
         $step = Step::where([
             ['task_id', $request->task_id],
             ['step_id', $request->step_id]
-        ]);
+        ])->first();
         $step->content = $request->step_content;
         $step->save();
     }
 
-    public function markAsCompleted(Request $request)  // task_id, step_id
+    public function markAsCompleted(Request $request)  // task_id, step_id, completed
     {
         // $user_id = auth()->user()->user_id;
         $step = Step::where([
             ['task_id', $request->task_id],
             ['step_id', $request->step_id]
-        ]);
+        ])->first();
         $step->completed = $request->completed;
         $step->save();
+    }
+
+    public function markAllStepsAsCompleted(Request $request)  // task_id, completed
+    {
+        // $user_id = auth()->user()->user_id;
+        $steps = Step::where([
+            ['task_id', $request->task_id],
+        ])->get();
+        foreach ($steps as $i) {
+            $i->completed = $request->completed;
+            $i->save();
+        }
+    }
+
+    public function editStep()
+    {
+
     }
 
     public function deleteStep(Request $request) // task_id, step_id
