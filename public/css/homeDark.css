@@ -8254,7 +8254,7 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #bd9481 !important;
 }
 
 .bg-secondary {
@@ -12338,4 +12338,15 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; }
+    background: #555;
+}
+
+.taskBar{
+    cursor: pointer;
+    padding-right: 10px;
+    color: #838686;
+}
+.taskIcons{
+    color: white;
+    margin-left: 3px;
+}

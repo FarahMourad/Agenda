@@ -60,29 +60,27 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Tasks
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" onclick="show('allTasks')">All</a>
-                            <a class="nav-link" onclick="show('assignedToMeTasks')">Assigned to me</a>
+                            <a class="nav-link" style="cursor: pointer" onclick="show('allTasks')">All</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <a class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="far fa-sticky-note"></i></div>
                         Notes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" id="allNotesButton" ">All</a>
-                            <a class="nav-link" onclick="show('sharedWithMeNotes')">Shared with me</a>
+                            <a class="nav-link" style="cursor: pointer" id="allNotesButton">All</a>
                         </nav>
                     </div>
-                    <a class="nav-link" onclick="show('diaryDiv')">
+                    <a class="nav-link" style="cursor: pointer" onclick="show('diaryDiv')">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
 
@@ -102,52 +100,27 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">All</li>
                 </ol>
-{{--                <div class="row">--}}
-
-{{--                                        <div class="col-xl-3 col-md-6">--}}
-{{--                                            <div class="card bg-primary text-white mb-4">--}}
-{{--                                                <div class="card-body">Primary Card</div>--}}
-{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xl-3 col-md-6">--}}
-{{--                                            <div class="card bg-warning text-white mb-4">--}}
-{{--                                                <div class="card-body">Warning Card</div>--}}
-{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xl-3 col-md-6">--}}
-{{--                                            <div class="card bg-success text-white mb-4">--}}
-{{--                                                <div class="card-body">Success Card</div>--}}
-{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xl-3 col-md-6">--}}
-{{--                                            <div class="card bg-danger text-white mb-4">--}}
-{{--                                                <div class="card-body">Danger Card</div>--}}
-{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
-{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
-{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                </div>--}}
-
-            </div>
-            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
-                <h1 class="mt-4">Tasks</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Assigned to me</li>
+                <ol class="breadcrumb mb-4" style="">
+                    <li class="breadcrumb-item taskBar">Sort by Title <i class="bi bi-sort-down taskIcons"></i></li>
+                    <li class="breadcrumb-item taskBar">Sort by Deadline <i class="bi bi-sort-down taskIcons"></i></li>
+                    <li class="breadcrumb-item taskBar">Add Task <i class="bi bi-plus-square taskIcons"></i></li>
+                    <li class="breadcrumb-item taskBar">Create Category <i class="bi bi-plus-square taskIcons"></i></li>
+                    <li class="breadcrumb-item taskBar">Performance <i class="bi bi-bar-chart-line-fill taskIcons"></i></li>
                 </ol>
+                <div class="row">
+
+                    <div class="col-xl-3 col-md-6" style="cursor: pointer">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body"><span>Task Title</span> <span style="float: right"><i class="bi bi-pin-angle-fill"></i></span></div>
+                            <div class="small" style="color: rgba(243,239,233,0.63); padding: 0 15px 15px"><span>Category</span><span style="float: right">Deadline</span></div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" style="text-decoration: none">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
             <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
