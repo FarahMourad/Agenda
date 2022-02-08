@@ -102,68 +102,45 @@
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">All</li>
                 </ol>
-                <div class="row">
+{{--                <div class="row">--}}
 
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card bg-primary text-white mb-4">
-                                                <div class="card-body">Primary Card</div>
-                                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card bg-warning text-white mb-4">
-                                                <div class="card-body">Warning Card</div>
-                                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card bg-success text-white mb-4">
-                                                <div class="card-body">Success Card</div>
-                                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card bg-danger text-white mb-4">
-                                                <div class="card-body">Danger Card</div>
-                                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                </div>
-                <div class="col-md-4 col-sm-6 content-card">
-                    <div class="card-big-shadow">
-                        <div class="card card-just-text" data-background="color" data-color="blue" data-radius="none">
-                            <div class="content">
-                                <h6 class="category">Best cards</h6>
-                                <h4 class="title"><a href="#">Blue Card</a></h4>
-                                <p class="description">What all of these have in common is that they're pulling information out of the app or the service and making it relevant to the moment. </p>
-                            </div>
-                        </div> <!-- end card -->
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 content-card">
-                    <div class="card-big-shadow">
-                        <div class="card card-just-text" data-background="color" data-color="blue" data-radius="none">
-                            <div class="content">
-                                <h6 class="category">Best cards</h6>
-                                <h4 class="title"><a href="#">Blue Card</a></h4>
-                                <p class="description">What all of these have in common is that they're pulling information out of the app or the service and making it relevant to the moment. </p>
-                            </div>
-                        </div> <!-- end card -->
-                    </div>
-                </div>
-
+{{--                                        <div class="col-xl-3 col-md-6">--}}
+{{--                                            <div class="card bg-primary text-white mb-4">--}}
+{{--                                                <div class="card-body">Primary Card</div>--}}
+{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-xl-3 col-md-6">--}}
+{{--                                            <div class="card bg-warning text-white mb-4">--}}
+{{--                                                <div class="card-body">Warning Card</div>--}}
+{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-xl-3 col-md-6">--}}
+{{--                                            <div class="card bg-success text-white mb-4">--}}
+{{--                                                <div class="card-body">Success Card</div>--}}
+{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-xl-3 col-md-6">--}}
+{{--                                            <div class="card bg-danger text-white mb-4">--}}
+{{--                                                <div class="card-body">Danger Card</div>--}}
+{{--                                                <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                                                    <a class="small text-white stretched-link" href="#">View Details</a>--}}
+{{--                                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                </div>--}}
 
             </div>
             <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
@@ -184,20 +161,32 @@
                     </div>
                 </form>
             </div>
-            <div id="addNotes" style="display: none" class="container-fluid px-4">
+            <div id="addNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
+{{--                <div style="height:100%;opacity:0.5;background-color:#000000;" ></div>--}}
                 {{--                <div style="cursor: pointer; width: 70px" onclick="cancel()">--}}
                 {{--                    <p><u>< Cancel</u></p>--}}
                 {{--                </div>--}}
-                <div class="card card-margin">
-                    <form action="{{route('addNote')}}" method="POST">
+                <div id="newNotte" style="padding:15px;z-index: 1001;margin-left:350px;margin-top:50px;width: 500px;" class="card card-margin">
+                    <form id="noteForm" action="{{route('addNote')}}" method="POST">
                         @csrf
-                        <input name="title" class="noteContent" id="addedNoteTitle" style="height: 50px;" placeholder="Note Title" maxlength="100" required>
-                        <textarea name="note_content" class="noteContent" id="addedNoteContent" style="height: 400px; border-bottom: none" placeholder="Note Content" required></textarea>
+                        <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
+                                onclick="var result = confirm('Are you sure you want to discard changes?');
+                        if (result) {
+                          document.getElementById('noteForm').reset();
+                          document.getElementById('addNotes').style.display='none';
+                        }
+                         ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        </button>
+                        <input name="title" class="noteContent" id="addedNoteTitle" style="height: 50px;" placeholder="Title" maxlength="100" required>
+                        <textarea name="note_content" class="noteContent" id="addedNoteContent" style="height: 400px; border-bottom: none" placeholder="Content" required></textarea>
                         <div>
-                            <label style="margin-left: 20px" for="cat">Category</label>
-                            <select name="category" style="width: 150px" name="cat" id="cat">
-                                <option selected value>Uncategorized</option>
+                            <label class="btn btn-sm btn-flash-border-success" style="cursor:none;margin-left: 20px" for="cat">Category</label>
+                            <select class="btn btn-default dropdown-toggle" name="category" style="width: 150px; background-color: #4a9a71" name="cat" id="cat">
+                                <option style="background-color: #c4d8da" selected value>Uncategorized</option>
                             </select>
                         </div>
                         <div>
@@ -207,21 +196,29 @@
 
                 </div>
             </div>
-            <div id="editNotes" style="display: none" class="container-fluid px-4">
+            <div id="editNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
-                {{--                <div style="cursor: pointer; width: 70px" onclick="cancel()">--}}
-                {{--                    <p><u>< Cancel</u></p>--}}
-                {{--                </div>--}}
-                <div class="card card-margin">
+
+                <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:50px;width: 500px;" class="card card-margin">
                     <form action="{{route('editNote')}}" method="POST">
                         @csrf
+                        <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
+                                onclick="var result = confirm('Are you sure you want to discard changes?');
+                        if (result) {
+                          document.getElementById('editNotes').style.display='none';
+                        }
+                         ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
                         <input name="title" class="noteContent" id="noteTitle" style="height: 50px;" placeholder="Note Title" maxlength="100" required>
                         <input id="note_id" type="text" name="note_id" style="display: none">
                         <textarea name="note_content" class="noteContent" id="noteContent" style="height: 400px; border-bottom: none" placeholder="Note Content" required></textarea>
                         <div>
-                            <label style="margin-left: 20px" for="cat">Category</label>
-                            <select name="category" style="width: 150px" name="cat" id="cat">
-                                <option disabled>Uncategorized</option>
+                            <label class="btn btn-sm btn-flash-border-success" style="cursor:none;margin-left: 20px" for="cat">Category</label>
+                            <select class="btn btn-default dropdown-toggle" name="category" style="width: 150px; background-color: #4a9a71" name="cat" id="editCat">
+                                <option style="background-color: #c4d8da" selected value>Uncategorized</option>
                             </select>
                         </div>
                         <div>
@@ -242,11 +239,14 @@
                     <form>
                         <label for="categoryCreation">Create Category:</label>
                         <input type="text" name="category" id="categoryCreation" placeholder="Category Title" required>
-                        <input onclick="categoryView('duck')" type="submit" value="Create">
+                        <input class="btn btn-sm btn-flash-border-success"
+                               style=""
+                               onclick="categoryView('duck')" type="submit" value="CREATE">
                     </form>
                 </div>
                 <br>
-                <div style="cursor: pointer ;width:120px;  margin-right: 100px" onclick="show('addNotes')" >
+{{--                <div style="cursor: pointer ;width:120px;  margin-right: 100px" onclick="show('addNotes')" >--}}
+                    <div style="cursor: pointer ;width:120px;  margin-right: 100px" onclick="document.getElementById('addNotes').style.display='block';" >
                     <svg style="display: inline-block" class="svg-inline--fa fa-sticky-note fa-w-14" aria-hidden="true" focusable="false" data-prefix="far" data-icon="sticky-note" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 348.106V80c0-26.51-21.49-48-48-48H48C21.49 32 0 53.49 0 80v351.988c0 26.51 21.49 48 48 48h268.118a48 48 0 0 0 33.941-14.059l83.882-83.882A48 48 0 0 0 448 348.106zm-128 80v-76.118h76.118L320 428.106zM400 80v223.988H296c-13.255 0-24 10.745-24 24v104H48V80h352z"></path></svg>
                     <p style="display: inline-block" class="breadcrumb-item active" > Add new note</p>
                 </div>
@@ -321,6 +321,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/homeScript.js"></script>
 <script src="js/diary.js"></script>
+<script src="js/newNote.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
@@ -386,6 +387,7 @@
         var notesContainer = document.getElementById("notesContainer");
         var col = document.createElement("div");
         col.className="col-md-4 col-sm-6 content-card";
+        col.style="width:300px";
         col.id = note.note_id + "";
         var div2 = document.createElement("div");
         div2.className="card-big-shadow";
@@ -465,13 +467,12 @@
         //view note
         var viewNote = document.createElement("div");
         viewNote.innerHTML="VIEW NOTE";
-        viewNote.className="btn btn-sm btn-flash-border-success";
-        viewNote.style="float:right;margin-right:10px;margin-bottom:10px";
+        viewNote.style="padding: 0.25rem 0.5rem; font-size: 0.875rem;float:right;margin-right:10px;margin-bottom:10px; cursor:pointer";
         viewNote.onclick=function (){
 
             document.getElementById("noteTitle").value= note.title;
             document.getElementById("noteContent").innerText= note.content;
-            show('editNotes');
+            document.getElementById('editNotes').style.display='block';
             document.getElementById("note_id").value = col.id;
         }
 
