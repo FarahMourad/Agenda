@@ -68,6 +68,7 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" style="cursor: pointer" onclick="show('allTasks')">All</a>
+                            <a class="nav-link" style="cursor: pointer" onclick="show('assignedToMeTasks')">Assigned to me</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -78,12 +79,12 @@
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" style="cursor: pointer" id="allNotesButton">All</a>
+                            <a class="nav-link" style="cursor: pointer" onclick="show('sharedWithMeNotes')">Shared with me</a>
                         </nav>
                     </div>
                     <a class="nav-link" style="cursor: pointer" onclick="show('diaryDiv')">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Diary
-
                     </a>
                 </div>
             </div>
@@ -121,6 +122,12 @@
                     </div>
 
                 </div>
+            </div>
+            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Tasks</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Assigned to me</li>
+                </ol>
             </div>
             <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
