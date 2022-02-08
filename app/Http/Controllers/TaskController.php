@@ -76,6 +76,7 @@ class TaskController
         return response()->json($retrieved_tasks);
     }
 
+
     public function createCategory(Request $request) // category
     {
         $user_id = auth()->user()->user_id;
@@ -213,6 +214,7 @@ class TaskController
     {
 
     }
+
 
     public function setAsPinned(Request $request) // task_id, is_pinned
     {
