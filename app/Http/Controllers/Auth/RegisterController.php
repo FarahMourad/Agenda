@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Note_category;
+use App\Models\Task_category;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,6 +76,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $shared = new Note_category();
+        $shared->user_id = $user->user_id;
+        $shared->category = 'Shared with me';
+        $shared->save();
+        $shared = new Task_category();
         $shared->user_id = $user->user_id;
         $shared->category = 'Shared with me';
         $shared->save();
