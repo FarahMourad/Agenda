@@ -14,7 +14,7 @@ use function Symfony\Component\Translation\t;
 
 class TaskController
 {
-    public function getTasks(Request $request)
+    public function getTasks(Request $request): JsonResponse
     {
         $user_id = auth()->user()->user_id;
         $tasks = Task::where([
@@ -133,7 +133,6 @@ class TaskController
         return response()->json($retrieved_tasks);
     }
 
-
     public function sortByDeadline(Request $request): JsonResponse // category
     {
         $user_id = auth()->user()->user_id;
@@ -154,7 +153,16 @@ class TaskController
 
     public function calculatePerformance(Request $request)
     {
-
+        $user_id = auth()->user()->user_id;
+        $total_tasks = Task::where([
+            ['user_id', $user_id]
+        ])::count();
+        $completed_tasks = Task::where([
+            ['user_id', $user_id],
+            ['completed', true]
+        ])::count();
+        $performance = ($completed_tasks / $total_tasks) * 100;
+        return response()->json($performance);
     }
 
     public function editTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
