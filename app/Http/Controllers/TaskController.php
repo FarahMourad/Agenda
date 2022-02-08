@@ -98,7 +98,6 @@ class TaskController
     {
         $user_id = auth()->user()->user_id;
         $task = new Task();
-        $task->task_id = $request->task_id;
         $task->user_id = $user_id;
         $task->title = $request->title;
         $task->category = $request->category;
@@ -106,6 +105,9 @@ class TaskController
         $task->deadline = $request->deadline;
         $task->pinned = $request->pinned;
         $task->completed = $request->completed;
+        $last_task = Task::where('user_id', $user_id)->latest('task_id')->first();
+        $task_id = ($last_task != null) ? ($last_task->task_id + 1) : 1;
+        $task->task_id =$task_id;
         $task->save();
     }
 
