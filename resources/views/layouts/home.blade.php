@@ -289,6 +289,10 @@
                     <div class="row" id="notesContainer">
 
                     </div>
+                    <form method="POST" style="display: none" id="deleteNote" name="deleteNote">
+                        @csrf
+                        <input type="number" name="note_id" id="deletedNote">
+                    </form>
                 </div>
                 <div>
                     <input type="button" class="shareNotesB" value="Share Notes" style="background: inherit;border: none; float: right;" onclick="document.getElementById('shareNotes').style.display='block';" >
@@ -404,7 +408,7 @@
         noteShared.id=note.note_id;
         noteShared.type="radio";
         noteShared.name="category";
-        // noteShared.required;
+        // noteShared.required;c
         article.className="feature1";
         article.insertBefore(noteShared,null);
         article.insertBefore(div,null);
@@ -517,7 +521,6 @@
                 document.forms["deleteNote"].action= "{{route('deleteNote')}}";
                 document.forms["deleteNote"].submit();
                 notesContainer.removeChild(col);
-
             }
 
         }
