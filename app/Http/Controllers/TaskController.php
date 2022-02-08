@@ -238,6 +238,7 @@ class TaskController
         ])->first();
         $task->completed = $request->completed;
         $task->save();
+        $this->markAllStepsAsCompleted($request);
     }
 
     public function deleteTask(Request $request)
@@ -261,7 +262,7 @@ class TaskController
         $task->save();
     }
 
-    public function calculatePerformance(Request $request)
+    public function calculatePerformance(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
         $total_tasks = Task::where([
@@ -272,7 +273,7 @@ class TaskController
             ['completed', true]
         ])->count();
         $performance = ($completed_tasks / $total_tasks) * 100;
-        return response()->json($performance);
+        return response()->json(ceil($performance));
     }
 
     public function getSteps(Request $request): JsonResponse // task_id
@@ -359,9 +360,31 @@ class TaskController
         }
     }
 
-    public function editStep()
+    public function editStep(Request $request)
     {
+        $user_id = auth()->user()->user_id;
+        $task_id = $request->task_id;
+        $step_id = $request->step_id;
+        $title = $request->title;
+        $step_content = $request->step_content;
+        $deadline = $request->deadline;
+        $completed = $request->completed;
 
+        if ($title == null || $task_id == null) {
+            return redirect()->back()->withErrors('msg', 'ERROR: null content');
+        }
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $task_id],
+            ['step_id', $step_id]
+        ])->first();
+        if ($step != null) {
+            $step->title = $title;
+            $step->content = $step_content;
+            $step->deadline = $deadline;
+            $step->completed = !(($completed == null) || ($completed == false));
+            $step->save();
+        }
     }
 
     public function deleteStep(Request $request) // task_id, step_id
@@ -375,7 +398,5 @@ class TaskController
         ])->first();
         $step->delete();
     }
-
-
 
 }

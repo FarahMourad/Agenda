@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Step;
 use App\Models\Task;
 use App\Models\Task_category;
 use App\Models\User;
@@ -1021,6 +1022,50 @@ class TasksTest extends TestCase
     }
 
     /** @test */
+    public function complete_task()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Software Engineering Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/markAsCompleted', 'POST', [
+            'task_id' => 1,
+            'completed' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->markAsCompleted($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('task', [
+            'task_id' => 1,
+            'user_id' => $user->user_id,
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Software Engineering Project',
+            'deadline' => '2022-02-09',
+            'pinned' => false,
+            'completed' => true
+        ]);
+    }
+
+    /** @test */
     public function create_category()
     {
         $user = UserFactory::new()->create();
@@ -1130,6 +1175,375 @@ class TasksTest extends TestCase
                 "user_id" => $user->user_id
             ]
         ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function calculate_performance()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Database',
+            'category' => 'DBS',
+            'description' => 'Database Project',
+            'deadline' => '2022-02-13',
+            'creation_date' => '2001-01-01',
+            'modified_date' => '2001-01-01',
+            'pinned' => true,
+            'completed' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'aSoftware Engineering Project',
+            'deadline' => '2022-02-11',
+            'creation_date' => '2022-01-05',
+            'modified_date' => '2022-01-05',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'AI',
+            'category' => 'ML',
+            'description' => 'gAI Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $response = $this->handleRequestUsing($request, function () {
+            return $this->calculatePerformance();
+        });
+
+        $this->assertSame(json_encode(34), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function add_step_to_specific_task()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Work on the SWE Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the SWE Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('task_step', [
+            'user_id' => $user->user_id,
+            'task_id' => 1,
+            'step_id' => 1,
+            'content' => 'Work on the SWE Project',
+            'completed' => false
+        ]);
+    }
+
+    /** @test */
+    public function get_all_steps_from_specific_task()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'aSoftware Engineering Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the SWE Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the AI Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/getSteps', 'GET', [
+            'task_id' => 1
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+        $response = $this->handleRequestUsing($request, function ($request) {
+            return $this->getSteps($request);
+        });
+
+        $this->assertSame(json_encode([
+            [
+                "task_id" => 1,
+                "step_id" => 1,
+                "user_id" => $user->user_id,
+                "content" => "Work on the SWE Project",
+                "completed" => 0
+            ],
+            [
+                "task_id" => 1,
+                "step_id" => 2,
+                "user_id" => $user->user_id,
+                "content" => "Work on the AI Project",
+                "completed" => 0
+            ]
+        ]), $response->getContent(), '');
+    }
+
+    /** @test */
+    public function edit_step_already_exist_in_specific_task()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Work on SWE Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the SWE Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/editStep', 'POST', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'step_content' => 'Work on AI Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->editStep($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseMissing('task_step', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'user_id' => $user->user_id,
+            'content' => 'Work on SWE Project',
+            'completed' => false
+        ]);
+
+        $this->assertDatabaseHas('task_step', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'user_id' => $user->user_id,
+            'content' => 'Work on AI Project',
+            'completed' => false
+        ]);
+    }
+
+    /** @test */
+    public function complete_step_in_specific_task()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Software Engineering Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the SWE Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/markStepCompleted', 'POST', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'completed' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->markStepCompleted($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('task_step', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'user_id' => $user->user_id,
+            'content' => 'Work on the SWE Project',
+            'completed' => true
+        ]);
+    }
+
+    /** @test */
+    public function complete_task_and_show_that_all_steps_are_completed()
+    {
+        $user = UserFactory::new()->create();
+        $this->actingAs($user);
+
+        $request = Request::create('/addTask', 'POST', [
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Software Engineering Project',
+            'deadline' => '2022-02-09',
+            'creation_date' => '2022-01-03',
+            'modified_date' => '2022-01-03',
+            'pinned' => false,
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addTask($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the SWE Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/addStep', 'POST', [
+            'task_id' => 1,
+            'step_content' => 'Work on the AI Project',
+            'completed' => false
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->addStep($request);
+        })->assertStatus(204);
+
+        $request = Request::create('/markAsCompleted', 'POST', [
+            'task_id' => 1,
+            'completed' => true
+        ], [], [], [
+            'HTTP_ACCEPT' => 'application/json'
+        ]);
+        $this->handleRequestUsing($request, function ($request) {
+            return $this->markAsCompleted($request);
+        })->assertStatus(204);
+
+        $this->assertDatabaseHas('task', [
+            'task_id' => 1,
+            'user_id' => $user->user_id,
+            'title' => 'Software',
+            'category' => 'SWE',
+            'description' => 'Software Engineering Project',
+            'deadline' => '2022-02-09',
+            'pinned' => false,
+            'completed' => true
+        ]);
+        $this->assertDatabaseHas('task_step', [
+            'task_id' => 1,
+            'step_id' => 1,
+            'user_id' => $user->user_id,
+            'content' => 'Work on the SWE Project',
+            'completed' => true
+        ]);
+        $this->assertDatabaseHas('task_step', [
+            'task_id' => 1,
+            'step_id' => 2,
+            'user_id' => $user->user_id,
+            'content' => 'Work on the AI Project',
+            'completed' => true
+        ]);
     }
 
 
@@ -1304,6 +1718,19 @@ class TasksTest extends TestCase
         return response()->noContent();
     }
 
+    public function markAsCompleted(Request $request): Response // task_id, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $task = Task::where([
+            ['task_id', $request->task_id],
+            ['user_id', $user_id]
+        ])->first();
+        $task->completed = $request->completed;
+        $task->save();
+        $this->markAllStepsAsCompleted($request);
+        return response()->noContent();
+    }
+
     public function sortByTitle(Request $request): JsonResponse // category
     {
         $user_id = auth()->user()->user_id;
@@ -1437,6 +1864,110 @@ class TasksTest extends TestCase
             ['user_id', $user_id]
         ])->get();
         return response()->json($categories);
+    }
+
+    public function calculatePerformance(): JsonResponse
+    {
+        $user_id = auth()->user()->user_id;
+        $total_tasks = Task::where([
+            ['user_id', $user_id]
+        ])->count();
+        $completed_tasks = Task::where([
+            ['user_id', $user_id],
+            ['completed', true]
+        ])->count();
+        $performance = ($completed_tasks / $total_tasks) * 100;
+        return response()->json(ceil ($performance));
+    }
+
+
+    public function getSteps(Request $request): JsonResponse // task_id
+    {
+        $user_id = auth()->user()->user_id;
+        $steps = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id]
+        ])->get([
+            'task_id',
+            'step_id',
+            'user_id',
+            'content',
+            'completed'
+        ]);
+        return response()->json($steps);
+    }
+
+    public function addStep(Request $request): Response // task_id, step_content, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $step = new Step();
+        $step->user_id = $user_id;
+        $step->task_id = $request->task_id;
+        $step->content = $request->step_content;
+        $step->completed = false;
+        $last_step = Step::where('user_id', $user_id)->latest('step_id')->first();
+        $step_id = ($last_step != null) ? ($last_step->step_id + 1) : 1;
+        $step->step_id =$step_id;
+        $step->save();
+        return response()->noContent();
+    }
+
+    public function markStepCompleted(Request $request): Response  // task_id, step_id, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+            ['step_id', $request->step_id]
+        ])->first();
+        $step->completed = $request->completed;
+        $step->save();
+        return response()->noContent();
+
+    }
+
+    public function editStep(Request $request) //task_id, step_id, step_content, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $task_id = $request->task_id;
+        $step_id = $request->step_id;
+        $step_content = $request->step_content;
+        $completed = $request->completed;
+
+        if ($step_content == null || $task_id == null || $step_id == null) {
+            return redirect()->back()->withErrors('msg', 'ERROR: null content');
+        }
+        $step = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $task_id],
+            ['step_id', $step_id]
+        ])->first();
+        if ($step != null) {
+            $step->content = $step_content;
+            $step->completed = !(($completed == null) || ($completed == false));
+            $step->save();
+        }
+        return response()->noContent();
+    }
+
+    public function markAllStepsAsCompleted(Request $request): Response  // task_id, completed
+    {
+        $user_id = auth()->user()->user_id;
+        $steps = Step::where([
+            ['user_id', $user_id],
+            ['task_id', $request->task_id],
+        ])->get();
+        foreach ($steps as $i) {
+            $i = Step::where([
+                ['user_id', $user_id],
+                ['task_id', $request->task_id],
+                ['step_id', $i->step_id]
+            ])->first();
+            $i->completed = $request->completed;
+            echo $i;
+            $i->save();
+        }
+        return response()->noContent();
     }
 
 

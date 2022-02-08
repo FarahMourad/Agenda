@@ -48,6 +48,7 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::get('/getAllTasks', 'TaskController@getTasks')->name('getAllTasks');
         Route::get('/getCategoryTasks', 'TaskController@getCategoryTasks')->name('getCategoryTasks');
         Route::get('/getTaskCategories', 'TaskController@getCategories')->name('getTaskCategories');
+        Route::get('/calculatePerformance', 'TaskController@calculatePerformance')->name('calculatePerformance');
 
         Route::get('/sortTasksByTitle', 'TaskController@sortByTitle')->name('sortTasksByTitle');
         Route::get('/sortByDeadline', 'TaskController@sortByDeadline')->name('sortByDeadline');
@@ -56,12 +57,19 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::post('/addTask', 'TaskController@addTask')->name('addTask');
         Route::post('/editTask', 'TaskController@editTask')->name('editTask');
         Route::post('/shareAsCopy', 'TaskController@shareAsCopy')->name('shareAsCopy');
-        Route::post('/shareAsCollaborator', 'TaskController@shareAsCollaborator')->name('shareAsCollaborator');
+//        Route::post('/shareAsCollaborator', 'TaskController@shareAsCollaborator')->name('shareAsCollaborator');
 
         Route::post('/pinTask', 'TaskController@setAsPinned')->name('pinTask');
         Route::post('/markAsCompleted', 'TaskController@markAsCompleted')->name('markAsCompleted');
         Route::post('/deleteTask', 'TaskController@deleteTask')->name('deleteTask');
         Route::post('/editTaskCategory', 'TaskController@editCategory')->name('editTaskCategory');
+
+        Route::get('/getSteps', 'TaskController@getSteps')->name('getSteps');
+        Route::post('/addStep', 'TaskController@addStep')->name('addStep');
+        Route::post('/editStep', 'TaskController@editStep')->name('editStep');
+        Route::post('/markStepCompleted', 'TaskController@markStepCompleted')->name('calculatePerformance');
+        Route::post('/markAllStepsAsCompleted', 'TaskController@markAllStepsAsCompleted')->name('markAllStepsAsCompleted');
+        Route::post('/deleteStep', 'TaskController@deleteStep')->name('deleteStep');
 
     });
 
