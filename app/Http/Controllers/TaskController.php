@@ -94,21 +94,23 @@ class TaskController
         }
     }
 
-    public function addTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
+    public function addTask(Request $request) // title, category, description, deadline, pinned, completed
     {
         $user_id = auth()->user()->user_id;
-        $task = new Task();
-        $task->user_id = $user_id;
-        $task->title = $request->title;
-        $task->category = $request->category;
-        $task->description = $request->description;
-        $task->deadline = $request->deadline;
-        $task->pinned = $request->pinned;
-        $task->completed = $request->completed;
-        $last_task = Task::where('user_id', $user_id)->latest('task_id')->first();
-        $task_id = ($last_task != null) ? ($last_task->task_id + 1) : 1;
-        $task->task_id =$task_id;
-        $task->save();
+        if($request->title != null){
+            $task = new Task();
+            $task->user_id = $user_id;
+            $task->title = $request->title;
+            $task->category = $request->category;
+            $task->description = $request->description;
+            $task->deadline = $request->deadline;
+            $task->pinned = $request->pinned;
+            $task->completed = $request->completed;
+            $last_task = Task::where('user_id', $user_id)->latest('task_id')->first();
+            $task_id = ($last_task != null) ? ($last_task->task_id + 1) : 1;
+            $task->task_id =$task_id;
+            $task->save();
+        }
     }
 
     public function editTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
