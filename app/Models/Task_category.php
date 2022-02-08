@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Note_collaborator extends Model{
-    protected $table = 'note_collaborator';
+class Task_category extends Model{
+    protected $table = 'task_category';
     public $timestamps = false;
     protected $fillable = [
-        'note_id',
-        'collaborator_id'
+        'category',
+        'user_id'
     ];
 }
