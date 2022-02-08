@@ -12367,3 +12367,49 @@ body {
     color: black;
     margin-left: 3px;
 }
+.task_window{
+    margin: auto;
+    font-family: "Arial";
+
+    width: 470px;
+    height: 560px;
+    background: url("../assets/img/13.jpg") no-repeat;
+    background-size: cover;
+
+    border-radius: 3px;
+    color: #252424;
+}
+.task_window_after{
+    position: absolute;
+    margin: auto;
+    font-family: "Arial";
+    font-size: 20px;
+    width: 470px;
+    height: 560px;
+    padding: 15px;
+    border-radius: 3px;
+    color: #333131;
+    background-color: rgba(210, 180, 165, 0.38);
+}
+.selectedTaskIcons{
+    margin-left: 8px;
+    font-size: 17px;
+    color: #4d4d4d;
+    cursor: pointer;
+}
+.selectedTaskIcons:hover{
+    color: #252525;
+}
+.saveTaskButton{
+    background-color: #151515;
+    color: white;
+    width: 65px;
+    height: 40px;
+    border-radius: 30%;
+    border: unset;
+    outline: unset;
+    float: right;
+}
+.saveTaskButton:hover{
+    background-color: #252525;
+}

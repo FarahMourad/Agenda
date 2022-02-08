@@ -123,15 +123,56 @@
 
                 </div>
             </div>
-            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
+            <div id="assignedToMe" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Tasks</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Assigned to me</li>
                 </ol>
             </div>
-            <div id="selectedTask" style="display: none" class="container-fluid px-4">
+            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Tasks</h1>
-                
+                <div class="task_window">
+                    <div class="task_window_after">
+                        <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
+                            <span>Task Title</span><span style="float: right">
+                                <i class="bi bi-trash-fill selectedTaskIcons"></i>
+                                <i class="fas fa-share selectedTaskIcons"></i>
+                                <i class="fas fa-pencil-alt selectedTaskIcons"></i>
+                                <i class="bi bi-check-square-fill selectedTaskIcons"></i>
+                                <i style="color: gray" class="bi bi-pin-angle-fill selectedTaskIcons"></i>
+                            </span>
+                        </div>
+
+                        <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; font-size: 14px; color: #3d3d3f; margin-bottom: 10px">
+                            <span>Deadline:</span><span style="margin-left: 10px">2/8/2022</span><br>
+                            <span>Category:</span><input type="text" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #3d3d3f">
+                            <span style="float:right"><i class="fas fa-pencil-alt selectedTaskIcons"></i></span><br>
+                        </div>
+
+                        <div style="width: 100%; height: 150px; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
+                            <span>Details</span><br>
+                            <textarea placeholder="Enter task details....." style="width: 100%; font-size: 14px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #3d3d3f"></textarea>
+                        </div>
+
+                        <div style="color: #1a1e21; width: 100%; height: 200px; border-bottom: #454748 1px solid; margin-bottom: 10px">
+                            <span>Steps</span><span style="float: right"><i style="cursor: pointer" class="bi bi-plus-circle-fill"></i></span><br>
+                            <div style="width: 100%; height: 160px; overflow: auto; background-color: rgba(210,180,165,0.37)">
+                                <div style="width: 100%; font-size: 16px">
+                                    <span style="width: 10%">1.</span>
+                                    <input type="text" style="width: 80%; margin-left: 10px; background-color: transparent; border: none; outline: none" value="bla bla blaa">
+                                    <span style="float: right; width: 10%">
+                                    <i class="bi bi-trash-fill selectedTaskIcons"></i>
+                                    <input type="checkbox">
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 10px 0 10px 10px; width: 100%">
+                            <button class="saveTaskButton">Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
