@@ -37,6 +37,8 @@ window.addEventListener('click', event => {
 
     $('#fade').on("click", function () {
         document.getElementById('light').style.display='none';
+        document.getElementById('light_share_task').style.display='none';
+        document.getElementById('light_task_cat').style.display='none';
         document.getElementById('fade').style.display='none';
     })
 });
