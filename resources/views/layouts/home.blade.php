@@ -91,7 +91,7 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" style="cursor: pointer" onclick="show('allTasks')">All</a>
+                            <a id="getAllTasks" class="nav-link" style="cursor: pointer" onclick="show('allTasks')">All</a>
                             <a class="nav-link" style="cursor: pointer" onclick="show('assignedToMeTasks')">Assigned to me</a>
                         </nav>
                     </div>
@@ -138,7 +138,7 @@
                     <li onclick="createCategory()" class="breadcrumb-item taskBar">Create Category <i class="bi bi-plus-square taskIcons"></i></li>
                     <li onclick="getPerformance()" class="breadcrumb-item taskBar">Performance <i class="bi bi-bar-chart-line-fill taskIcons"></i></li>
                 </ol>
-                <div class="row">
+                <div id="cards" class="row">
 
                     <div onclick="show('taskView')" class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
@@ -150,6 +150,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
@@ -466,7 +467,21 @@
             });
         }
     })
-
+    $('#getAllTasks').on("click", function () {
+            // var _token = $("input[name='_token']").val();
+            $.ajax({
+                type: "GET",
+                url: "{{route('getAllTasks')}}",
+                data: {},
+                success: function(res) {
+                    $.each(res, function (key, value) {
+                        //to be implemented
+                        categoryView(value.category);
+                        console.log(value);
+                    });
+                }
+            });
+    })
 
     function deleteTask() {
         show('allTasks');
