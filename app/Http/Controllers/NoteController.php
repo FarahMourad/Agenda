@@ -226,7 +226,7 @@ class NoteController
         $is_category_found = Note_category::where([
             ['user_id', $user_id],
             ['category', $category]
-        ]);
+        ])->first();
         if ($is_category_found == null) {
             $new_category = new Note_category();
             $new_category->user_id = $user_id;

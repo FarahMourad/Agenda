@@ -71,15 +71,15 @@
                             <a class="nav-link" style="cursor: pointer" onclick="show('assignedToMeTasks')">Assigned to me</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="far fa-sticky-note"></i></div>
+                    <a id="getCat" class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div  class="sb-nav-link-icon"><i class="far fa-sticky-note"></i></div>
                         Notes
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
+                        <nav id="notesCategories" class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" style="cursor: pointer" id="allNotesButton">All</a>
-                            <a class="nav-link" style="cursor: pointer" onclick="show('sharedWithMeNotes')">Shared with me</a>
+{{--                            <a class="nav-link" style="cursor: pointer" onclick="show('sharedWithMeNotes')">Shared with me</a>--}}
                         </nav>
                     </div>
                     <a class="nav-link" style="cursor: pointer" onclick="show('diaryDiv')">
@@ -258,7 +258,7 @@
                 </div>
             </div>
             <div id="allNotes" style="display: none" class="container-fluid px-4">
-                <h1 class="mt-4" style="width: 400px;display: inline-block">Notes</h1>
+                <h1  class="mt-4" style="width: 400px;display: inline-block">Notes</h1>
                 {{--                <input type="button" value="Create Category" style="display: inline-block">--}}
                 <ol class="breadcrumb mb-4">
                     <li id="categoryNamePreview" class="breadcrumb-item active">All</li>
@@ -268,9 +268,9 @@
                     <form>
                         <label for="categoryCreation">Create Category:</label>
                         <input type="text" name="category" id="categoryCreation" placeholder="Category Title" required>
-                        <input class="btn btn-sm btn-flash-border-success"
+                        <input id="addCat" class="btn btn-sm btn-flash-border-success"
                                style=""
-                               onclick="categoryView('duck')" type="submit" value="CREATE">
+                               value="CREATE">
                     </form>
                 </div>
                 <br>
@@ -386,11 +386,11 @@
         aCategory.id=category;
         aCategory.innerText=category;
         aCategory.className="nav-link";
-        aCategory.onclick=function (){
-            document.getElementById("categoryNamePreview").innerText=category;
-            show('allNotes');
-            //
-        }
+        // aCategory.onclick=function (){
+        //     document.getElementById("categoryNamePreview").innerText=category;
+        //     //show('allNotes');
+        //
+        // }
         var categories =document.getElementById("notesCategories");
         categories.insertBefore(aCategory,null);
 

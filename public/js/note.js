@@ -69,4 +69,38 @@ window.addEventListener('click', event => {
         });
     }
 
+    document.getElementById('addCat').onclick = function (){
+        var _token = $("input[name='_token']").val();
+        // var note_id = document.getElementById('shared_note').value;
+        var category = document.getElementById('categoryCreation').value;
+        console.log(category);
+        $.ajax({
+            type: "POST",
+            url: "/createNoteCategory",
+            data: {
+                _token:_token,
+                category: category,
+            },
+            success: function (res) {
+                categoryView(category);
+                console.log("worked");
+            }
+        });
+    }
 })
+window.addEventListener('load', (event) => {
+    console.log("test");
+    $.ajax({
+        type: "GET",
+        url: "/getCategories",
+        data: {},
+        success: function (res) {
+            if (res) {
+                $.each(res, function (key, value) {
+                    categoryView(value.category);
+                    console.log(value);
+                });
+            }
+        }
+    });
+});
