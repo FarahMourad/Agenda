@@ -179,11 +179,11 @@
             <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
                 <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:0px;width: 500px;height: 500px;  overflow-y: scroll; " class="card card-margin">
-                <form id="sharingNotes" method="POST">
+                <form>
                     <label for="userShared">Collaborator</label>
                     <input type="text" style="display: none" id="shared_note">
-                    <input name="username" placeholder="Username" required>
-                    <button id="share" type="submit">Share</button>
+                    <input id="username" name="username" placeholder="Username" required>
+                    <div id="share_note">Share</div>
                     <br><br>
                     <div id="notesToBeShared">
                     </div>
@@ -274,9 +274,9 @@
                 </div>
                 <br>
 {{--                <div style="cursor: pointer ;width:120px;  margin-right: 100px" onclick="show('addNotes')" >--}}
-                    <div style="cursor: pointer ;width:120px;  margin-right: 100px" onclick="document.getElementById('addNotes').style.display='block';" >
+                    <div style="cursor: pointer ;width:140px;  margin-right: 100px" onclick="document.getElementById('addNotes').style.display='block';" >
                     <svg style="display: inline-block" class="svg-inline--fa fa-sticky-note fa-w-14" aria-hidden="true" focusable="false" data-prefix="far" data-icon="sticky-note" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 348.106V80c0-26.51-21.49-48-48-48H48C21.49 32 0 53.49 0 80v351.988c0 26.51 21.49 48 48 48h268.118a48 48 0 0 0 33.941-14.059l83.882-83.882A48 48 0 0 0 448 348.106zm-128 80v-76.118h76.118L320 428.106zM400 80v223.988H296c-13.255 0-24 10.745-24 24v104H48V80h352z"></path></svg>
-                    <p style="display: inline-block" class="breadcrumb-item active" > Add new note</p>
+                    <p style="display: inline-block" class="breadcrumb-item active" > ADD NEW NOTE</p>
                 </div>
                 <div id="sortIcon" style="cursor: pointer;width: 20px" onclick="" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
@@ -417,12 +417,12 @@
         var div = document.createElement("div");
         noteShared.required=true;
         article.onclick=function (){
-            document.getElementById("shared_note").id=note.note_id;
+            document.getElementById("shared_note").value=note.note_id;
         }
         div.innerText=note.title;
         noteShared.id=note.note_id;
         noteShared.type="radio";
-        noteShared.name="category";
+        noteShared.name="selected";
         // noteShared.required;c
         article.className="feature1";
         article.insertBefore(noteShared,null);
@@ -570,145 +570,6 @@
         col.insertBefore(div2,null);
 
         notesContainer.insertBefore(col,null);
-
-
-
-
-
-
-
-
-
-
-        ///////ollddd/////////////
-
-
-
-
-
-
-
-
-    // var notesContainer = document.getElementById("notesContainer");
-    //     var col = document.createElement("div");
-    //     col.className="col-md-4 col-sm-6 content-card";
-    //     col.id = note.note_id + "";
-    //     var card = document.createElement("div");
-    //     card.className="card-big-shadow";
-    //     var cardColor= document.createElement("div");
-    //     cardColor.className="card card-just-text";
-    //     cardColor.setAttribute("data-background","color");
-    //     cardColor.setAttribute("data-color","blue");
-    //     cardColor.setAttribute("data-radius","none");
-    //     var cardHeader = document.createElement("div");
-    //     cardHeader.className="card-header no-border";
-    //     var cardBody = document.createElement("div");
-    //     cardBody.className="card-body pt-0";
-    //     var body = document.createElement("div");
-    //     body.className="widget-49";
-    //     var view = document.createElement("div");
-    //     view.className="widget-49-meeting-action";
-    //     var cardTitleHeader = document.createElement("h5");
-    //     cardTitleHeader.className="card-title";
-    //     cardTitleHeader.innerHTML=note.title;
-    //     cardTitleHeader.style="float:left;width:95%;height:28px;text-overflow: ellipsis; overflow:hidden";
-        // cardHeader.style="width:100%;";
-
-        {{--var pinned = note.pinned;--}}
-
-        {{--var pinDiv= document.createElement("div");--}}
-        {{--var pin= document.createElement("svg");--}}
-        {{--pinDiv.style= "float:right;cursor:pointer";--}}
-        {{--pin.style= "float:top";--}}
-        {{--pin.xmlns="http://www.w3.org/2000/svg";--}}
-        {{--pin.width='16';--}}
-        {{--pin.height='16';--}}
-        {{--pin.fill="currentColor";--}}
-        {{--pin.viewBox="0 0 16 16";--}}
-        {{--if (pinned==true)--}}
-        {{--    pin.className="bi bi-pin-fill";--}}
-        {{--else--}}
-        {{--    pin.className="bi bi-pin";--}}
-
-        {{--var path = document.createElement("path");--}}
-        {{--path.d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354zm1.58 1.408-.002-.001.002.001zm-.002-.001.002.001A.5.5 0 0 1 6 2v5a.5.5 0 0 1-.276.447h-.002l-.012.007-.054.03a4.922 4.922 0 0 0-.827.58c-.318.278-.585.596-.725.936h7.792c-.14-.34-.407-.658-.725-.936a4.915 4.915 0 0 0-.881-.61l-.012-.006h-.002A.5.5 0 0 1 10 7V2a.5.5 0 0 1 .295-.458 1.775 1.775 0 0 0 .351-.271c.08-.08.155-.17.214-.271H5.14c.06.1.133.191.214.271a1.78 1.78 0 0 0 .37.282z";--}}
-        {{--pin.insertBefore(path,null);--}}
-        {{--pinDiv.onclick=function (e){--}}
-        {{--    if (pinned === 1){ //pin style--}}
-        {{--        pinned = false;--}}
-        {{--        pin.className="bi bi-pin";--}}
-        {{--    }--}}
-        {{--    else {--}}
-        {{--        pinned = true;--}}
-        {{--        pin.className="bi bi-pin-fill";--}}
-        {{--    }--}}
-        {{--    e.preventDefault();--}}
-        {{--    var _token = $("input[name='_token']").val();--}}
-        {{--    console.log(pinned);--}}
-        {{--    $.ajax({--}}
-        {{--        type: "POST",--}}
-        {{--        url: "{{route('pinNote')}}",--}}
-        {{--        data: {--}}
-        {{--            note_id: note.note_id,--}}
-        {{--            _token: _token,--}}
-        {{--        },--}}
-        {{--        success: function() {--}}
-        {{--            console.log("success");--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--}--}}
-
-        {{--var noteContent = document.createElement("p");--}}
-
-        {{--noteContent.className="widget-49-pro-title";--}}
-        {{--noteContent.style="text-overflow: ellipsis; overflow-y:hidden;height: 290px;width:100%;";--}}
-        {{--noteContent.innerHTML= note.content;--}}
-
-        {{--var viewNote = document.createElement("div");--}}
-        {{--viewNote.innerHTML="VIEW NOTE";--}}
-        {{--viewNote.className="btn btn-sm btn-flash-border-success";--}}
-        {{--viewNote.onclick=function (){--}}
-
-        {{--    document.getElementById("noteTitle").value= note.title;--}}
-        {{--    document.getElementById("noteContent").innerText= note.content;--}}
-        {{--    show('editNotes');--}}
-        {{--    document.getElementById("note_id").value = col.id;--}}
-        {{--}--}}
-        {{--const self= this;--}}
-        {{--var deleteButton =document.createElement("svg");--}}
-        {{--deleteButton.style= "float:left;cursor:pointer";--}}
-        {{--deleteButton.onclick=function (){--}}
-        {{--    var result = confirm("Are you sure you want to delete this note?");--}}
-        {{--    if (result) {--}}
-        {{--        document.getElementById("deletedNote").value = col.id;--}}
-        {{--        document.forms["deleteNote"].action= "{{route('deleteNote')}}"--}}
-        {{--        document.forms["deleteNote"].submit();--}}
-        {{--        notesContainer.removeChild(col);--}}
-        {{--    }--}}
-
-        {{--}--}}
-        {{--deleteButton.xmlns="http://www.w3.org/2000/svg";--}}
-        {{--deleteButton.width='16';--}}
-        {{--deleteButton.height='16';--}}
-        {{--deleteButton.className="bi bi-trash-fill";--}}
-        {{--deleteButton.fill="currentColor";--}}
-        {{--deleteButton.viewBox="0 0 16 16";--}}
-        {{--var deletePath = document.createElement("path");--}}
-        {{--deletePath.d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"--}}
-        {{--deleteButton.insertBefore(deletePath,null);--}}
-        {{--view.insertBefore(deleteButton,null);--}}
-        {{--view.insertBefore(viewNote,null);--}}
-        {{--body.insertBefore(noteContent,null);--}}
-        {{--body.insertBefore(view,null);--}}
-        {{--cardBody.insertBefore(body,null);--}}
-        {{--cardHeader.insertBefore(cardTitleHeader,null);--}}
-        {{--pinDiv.insertBefore(pin,null);--}}
-        {{--cardHeader.insertBefore(pinDiv,null);--}}
-        {{--card.insertBefore(cardHeader,null);--}}
-        {{--card.insertBefore(cardBody,null);--}}
-        {{--col.insertBefore(card,null);--}}
-        {{--notesContainer.insertBefore(col,null);--}}
-
     }
 
     $('#theme').click(function(e) {

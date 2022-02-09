@@ -163,30 +163,22 @@ class NoteController
         $coll_username = $request->coll_username;
         $collaborator = User::where([
             ['user_id', $coll_username]
-        ]);
+        ])->first();
         if ($collaborator != null) {
             $note = Note::where([
                 ['user_id', $user_id],
                 ['note_id', $note_id]
             ])->first();
             $new_note = new Note();
-            //may generate error
             $new_note->user_id = $coll_username;
             $new_note->title = $note->title;
             $new_note->content = $note->content;
             $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
             $new_note->note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
             $new_note->category = 'Shared with me';
-            //to be deleted
-            $new_note->creation_date = $note->creation_date;
-            $new_note->modified_date = $note->modified_date;
             $new_note->pinned = false;
-            echo $new_note;
             $new_note->save();
-            return response()->noContent();
         }
-//        $note->pinned = !(($pinned == null || $pinned == false));
-//        $note->save();
     }
 
     public function sortNotesByTitle(Request $request): JsonResponse // category

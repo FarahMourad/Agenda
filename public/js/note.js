@@ -49,7 +49,7 @@ window.addEventListener('click', event => {
             });
         },
 
-    document.getElementById('share').onsubmit = function (){
+    document.getElementById('share_note').onclick = function (){
         var _token = $("input[name='_token']").val();
         var note_id = document.getElementById('shared_note').value;
         var coll_username = document.getElementById('username').value;
@@ -61,7 +61,7 @@ window.addEventListener('click', event => {
             data: {
                 _token:_token,
                 note_id: note_id,
-                coll_username, coll_username
+                coll_username: coll_username
             },
             success: function (res) {
                 console.log("shared");
