@@ -17,7 +17,6 @@ Route::group(['middleware' => 'prevent'],function() {
             return view('test');
         });
 
-
         Route::get('/setting', 'EditUserController@showSetting');
         Route::post('/editData', 'EditUserController@edit')->name('edit');
         Route::post('/setTheme', 'EditUserController@editTheme')->name('edit-theme');
@@ -57,7 +56,6 @@ Route::group(['middleware' => 'prevent'],function() {
         Route::post('/addTask', 'TaskController@addTask')->name('addTask');
         Route::post('/editTask', 'TaskController@editTask')->name('editTask');
         Route::post('/shareAsCopy', 'TaskController@shareAsCopy')->name('shareAsCopy');
-//        Route::post('/shareAsCollaborator', 'TaskController@shareAsCollaborator')->name('shareAsCollaborator');
 
         Route::post('/pinTask', 'TaskController@setAsPinned')->name('pinTask');
         Route::post('/markAsCompleted', 'TaskController@markAsCompleted')->name('markAsCompleted');

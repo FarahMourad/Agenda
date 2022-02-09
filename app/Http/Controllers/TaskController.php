@@ -282,7 +282,7 @@ class TaskController
         $steps = Step::where([
             ['user_id', $user_id],
             ['task_id', $request->task_id]
-        ])->orderBy('pinned', 'DESC')->orderBy('created_at', 'ASC')->get();
+        ])->orderBy('created_at', 'ASC')->get();
         return response()->json($steps);
     }
 
