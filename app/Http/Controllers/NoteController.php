@@ -146,7 +146,9 @@ class NoteController
             $new_note->category = 'Shared with me';
             $new_note->pinned = false;
             $new_note->save();
+            return response()->json(1);
         }
+        return response()->json(0);
     }
 
     public function sortNotesByTitle(Request $request): JsonResponse // category

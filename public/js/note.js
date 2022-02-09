@@ -53,6 +53,7 @@ window.addEventListener('click', event => {
         var _token = $("input[name='_token']").val();
         var note_id = document.getElementById('shared_note').value;
         var coll_username = document.getElementById('username').value;
+
         console.log(note_id);
         console.log(coll_username);
         $.ajax({
@@ -64,7 +65,12 @@ window.addEventListener('click', event => {
                 coll_username: coll_username
             },
             success: function (res) {
-                console.log("shared");
+                if (res === 1) {
+                    document.getElementById('shareNotes').style.display='none';
+                    document.getElementById('sharedForm').reset();
+                } else {
+                    alert("Invalid username");
+                }
             }
         });
     }
