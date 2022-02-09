@@ -28,7 +28,7 @@ class TaskController
             ['user_id', $user_id],
             ['category', $category]
         ])->orderBy('pinned', 'DESC')->orderBy('updated_at', 'DESC')->get();
-        return response()->json('tasks', $tasks);
+        return response()->json($tasks);
     }
 
     public function getCategories(): JsonResponse
@@ -93,8 +93,9 @@ class TaskController
         }
     }
 
-    public function addTask(Request $request) // title, category, description, deadline, pinned, completed
+    public function addTask(Request $request) // title, category, description, deadline, completed
     {
+
         $user_id = auth()->user()->user_id;
         if($request->title != null){
             $task = new Task();
@@ -103,12 +104,15 @@ class TaskController
             $task->category = $request->category;
             $task->description = $request->description;
             $task->deadline = $request->deadline;
-            $task->pinned = $request->pinned;
-            $task->completed = $request->completed;
+            if($request->completed == "true")
+                $task->completed = true;
+            else
+                $task->completed = false;
             $last_task = Task::where('user_id', $user_id)->latest('task_id')->first();
             $task_id = ($last_task != null) ? ($last_task->task_id + 1) : 1;
             $task->task_id =$task_id;
             $task->save();
+            return response()->json($task->task_id);
         }
     }
 
@@ -210,11 +214,6 @@ class TaskController
             $new_task->completed = false;
             $new_task->save();
         }
-    }
-
-    public function shareAsCollaborator(Request $request)
-    {
-
     }
 
     public function setAsPinned(Request $request) // task_id, pinned

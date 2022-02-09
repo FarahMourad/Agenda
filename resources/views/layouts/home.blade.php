@@ -134,13 +134,13 @@
                 <ol class="breadcrumb mb-4" style="">
                     <li class="breadcrumb-item taskBar">Sort by Title <i class="bi bi-sort-down taskIcons"></i></li>
                     <li class="breadcrumb-item taskBar">Sort by Deadline <i class="bi bi-sort-down taskIcons"></i></li>
-                    <li onclick="createTask()" class="breadcrumb-item taskBar">Add Task <i class="bi bi-plus-square taskIcons"></i></li>
+                    <li onclick="show('task')" class="breadcrumb-item taskBar">Add Task <i class="bi bi-plus-square taskIcons"></i></li>
                     <li onclick="createCategory()" class="breadcrumb-item taskBar">Create Category <i class="bi bi-plus-square taskIcons"></i></li>
                     <li onclick="getPerformance()" class="breadcrumb-item taskBar">Performance <i class="bi bi-bar-chart-line-fill taskIcons"></i></li>
                 </ol>
                 <div class="row">
 
-                    <div onclick="showSelectedTask()" class="col-xl-3 col-md-6">
+                    <div onclick="show('taskView')" class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
                             <div class="card-body"><span>Task Title</span></div>
                             <div class="small" style="color: rgba(243,239,233,0.63); padding: 0 15px 15px"><span>Category</span><span style="float: right">Deadline</span></div>
@@ -150,7 +150,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
@@ -164,32 +163,66 @@
                 <div class="task_window">
                     <div class="task_window_after">
                         <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
-                            <span>Task Title</span><span style="float: right">
+                            <input id="taskTitle" value="New Title" placeholder="Task Title.." type="text" style="background-color: transparent; border: none; outline: none; color: #23282a"><span style="float: right">
                                 <i onclick="deleteTask()" class="bi bi-trash-fill selectedTaskIcons"></i>
                                 <i onclick="shareTaskB()" class="fas fa-share selectedTaskIcons"></i>
-                                <i id="completeTask" class="bi bi-check-square-fill selectedTaskIcons"></i>
+                                <input type="checkbox" id="completeTask" value="false">
                             </span>
                         </div>
 
                         <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; font-size: 14px; color: #23282a; margin-bottom: 10px">
-                            <span>Deadline:</span><input type="date" style="margin-left: 11.5px; width: 167px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
-                            <span>Category:</span><input type="text" value="Uncategorized" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                            <span>Deadline:</span><input id="deadline" type="date" style="margin-left: 11.5px; width: 167px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                            <span>Category:</span><input id="cate" type="text" value="Uncategorized" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
                         </div>
 
                         <div style="width: 100%; height: 150px; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
                             <span>Details</span><br>
-                            <textarea placeholder="Enter task details....." style="width: 100%; font-size: 14px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #272c2d"></textarea>
+                            <textarea id="des" placeholder="Enter task details....." style="width: 100%; font-size: 16px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #272c2d"></textarea>
                         </div>
 
                         <div style="color: #1a1e21; width: 100%; height: 200px; border-bottom: #454748 1px solid; margin-bottom: 10px">
                             <span>Steps</span><span style="float: right"><i onclick="addStep()" style="cursor: pointer" class="bi bi-plus-circle-fill"></i></span><br>
                             <div id="stepsContainer" style="width: 100%; height: 160px; overflow: auto; background-color: rgba(210,180,165,0.37)">
 
+                            </div>
+                        </div>
+                        <div style="padding: 10px 0 10px 10px; width: 100%">
+                            <button id="addTask" class="saveTaskButton">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="taskView" style="display: none" class="container-fluid px-4">
+                <h1 class="mt-4">Tasks</h1>
+                <div class="task_window">
+                    <div class="task_window_after">
+                        <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
+                            <input id="" placeholder="Task Title.." type="text" style="background-color: transparent; border: none; outline: none; color: #23282a"><span style="float: right">
+                                <i onclick="deleteTask()" class="bi bi-trash-fill selectedTaskIcons"></i>
+                                <i onclick="shareTaskB()" class="fas fa-share selectedTaskIcons"></i>
+                                <input type="checkbox" id="completeTask" value="false">
+                            </span>
+                        </div>
+
+                        <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; font-size: 14px; color: #23282a; margin-bottom: 10px">
+                            <span>Deadline:</span><input id="" type="date" style="margin-left: 11.5px; width: 167px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                            <span>Category:</span><input id="" type="text" value="Uncategorized" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                        </div>
+
+                        <div style="width: 100%; height: 150px; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
+                            <span>Details</span><br>
+                            <textarea id="" placeholder="Enter task details....." style="width: 100%; font-size: 16px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #272c2d"></textarea>
+                        </div>
+
+                        <div style="color: #1a1e21; width: 100%; height: 200px; border-bottom: #454748 1px solid; margin-bottom: 10px">
+                            <span>Steps</span><span style="float: right"><i onclick="addStep()" style="cursor: pointer" class="bi bi-plus-circle-fill"></i></span><br>
+                            <div id="stepsContainerView" style="width: 100%; height: 160px; overflow: auto; background-color: rgba(210,180,165,0.37)">
+
 
                             </div>
                         </div>
                         <div style="padding: 10px 0 10px 10px; width: 100%">
-                            <button class="saveTaskButton">Save</button>
+                            <button id="saveTask" class="saveTaskButton">Save</button>
                         </div>
                     </div>
                 </div>
@@ -401,6 +434,102 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script>
+    $('#addTask').on("click", function () {
+        let title = document.getElementById('taskTitle').value;
+        let category = document.getElementById('cate').value;
+        let description = document.getElementById('des').value;
+        let deadline = document.getElementById('deadline').value;
+        let completed = document.getElementById('completeTask').value;
+
+        console.log(title);
+        console.log(category);
+        console.log(description);
+        console.log(deadline);
+        console.log(completed);
+        if (document.getElementById('taskTitle').value.length !== 0 && deadline.length !== 0){
+            console.log('testtt');
+            var _token = $("input[name='_token']").val();
+            $.ajax({
+                type: "POST",
+                url: "{{route('addTask')}}",
+                data: {
+                    _token:_token,
+                    title: document.getElementById('taskTitle').value,
+                    category: document.getElementById('cate').value,
+                    description: document.getElementById('des').value,
+                    deadline: document.getElementById('deadline').value,
+                    completed: document.getElementById('completeTask').value
+                },
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        }
+    })
+
+
+    function deleteTask() {
+        show('allTasks');
+        document.getElementById('light').innerHTML = "This task has been deleted successfully";
+        document.getElementById('light').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
+    function shareTaskB() {
+        document.getElementById('light_share_task').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
+    var c = 0;
+    $("#completeTask").click(function () {
+        if(c == 0){
+            $("#completeTask").val(true);
+            $("input:checkbox").prop('checked', true);
+            c = 1;
+        }else{
+            $("#completeTask").val(false);
+            $("input:checkbox").prop('checked', false);
+            c = 0;
+        }
+
+    });
+
+    const elem = document.getElementById('stepBody');
+    function addStep() {
+        const divList = document.getElementById('stepsContainer').children;
+        console.log(divList);
+
+        elem.children[0].innerHTML = `${divList.length + 1}.`;
+        elem.style.display = 'block';
+        elem.id = `stepBody${divList.length + 1}`;
+        console.log(elem);
+
+        const parent = document.getElementById('stepsContainer');
+        parent.appendChild(elem);
+    }
+    function deleteStep() {
+
+    }
+    function saveTask() {
+        show('allTasks');
+        document.getElementById('light').innerHTML = "This task has been saved successfully";
+        document.getElementById('light').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
+    function getPerformance() {
+        document.getElementById('light').innerHTML = "Your Performance is: ";
+        document.getElementById('light').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
+    function createCategory() {
+        document.getElementById('light_task_cat').style.display = "block";
+        document.getElementById('fade').style.display = "block";
+    }
+
+
+
+
+
+
+
     var currentCategory="All";
 
     document.getElementById('sortIcon').onclick = function () {
@@ -427,65 +556,7 @@
                 }
             }
         });
-    },
-
-    function deleteTask() {
-        show('allTasks');
-        document.getElementById('light').innerHTML = "This task has been deleted successfully";
-        document.getElementById('light').style.display = "block";
-        document.getElementById('fade').style.display = "block";
     }
-    function shareTaskB() {
-        document.getElementById('light_share_task').style.display = "block";
-        document.getElementById('fade').style.display = "block";
-    }
-    var c = 0;
-    $("#completeTask").click(function () {
-        if(c == 0){
-            $("input:checkbox").prop('checked', true);
-            c = 1;
-        }else{
-            $("input:checkbox").prop('checked', false);
-            c = 0;
-        }
-
-    });
-
-    const elem = document.getElementById('stepBody');
-    function addStep() {
-        const divList = document.getElementById('stepsContainer').children;
-        elem.children[0].innerHTML = `${divList.length + 1}.`;
-        elem.style.display = 'block';
-        elem.id = `stepBody${divList.length + 1}`;
-        const parent = document.getElementById('stepsContainer');
-        parent.appendChild(elem);
-    }
-    function deleteStep() {
-
-    }
-    function saveTask() {
-        show('allTasks');
-        document.getElementById('light').innerHTML = "This task has been saved successfully";
-        document.getElementById('light').style.display = "block";
-        document.getElementById('fade').style.display = "block";
-    }
-    function getPerformance() {
-        document.getElementById('light').innerHTML = "Your Performance is: ";
-        document.getElementById('light').style.display = "block";
-        document.getElementById('fade').style.display = "block";
-    }
-    function createTask() {
-        show('task');
-    }
-    function showSelectedTask() {
-        show('task');
-    }
-    function createCategory() {
-        document.getElementById('light_task_cat').style.display = "block";
-        document.getElementById('fade').style.display = "block";
-    }
-
-
     var theme = 1;
     function swap() {
         let sheet = document.getElementById('stylesheet').getAttribute('href');
