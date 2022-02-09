@@ -39,7 +39,7 @@ class NoteController
             ['user_id', $user_id],
             ['category', $category]
         ])->get();
-        return response()->json('notes', $note);
+        return response()->json($note);
     }
 
     public function addNote(Request $request): \Illuminate\Http\RedirectResponse
@@ -232,8 +232,11 @@ class NoteController
             $new_category->user_id = $user_id;
             $new_category->category = $category;
             $new_category->save();
+            return response()->json(1);
         } else {
-            return redirect()->back()->withErrors('msg', 'ERROR: already exists');
+            return response()->json(0);
+
+//            return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
 

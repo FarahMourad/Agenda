@@ -386,11 +386,27 @@
         aCategory.id=category;
         aCategory.innerText=category;
         aCategory.className="nav-link";
-        // aCategory.onclick=function (){
-        //     document.getElementById("categoryNamePreview").innerText=category;
-        //     //show('allNotes');
-        //
-        // }
+        aCategory.onclick=function (){
+            document.getElementById("categoryNamePreview").innerHTML=category;
+            document.getElementById('notesContainer').innerHTML = "";
+            $.ajax({
+                type: "GET",
+                url: "/getCategoryNotes",
+                data: {
+                    category: category
+                },
+                success: function (res) {
+                    if (res) {
+                        $.each(res, function (key, value) {
+                            noteView(value);
+                            shareNotesView(value);
+                            console.log(value);
+                        });
+                        show('allNotes');
+                    }
+                }
+            });
+        }
         var categories =document.getElementById("notesCategories");
         categories.insertBefore(aCategory,null);
 
