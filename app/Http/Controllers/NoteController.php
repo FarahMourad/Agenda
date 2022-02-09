@@ -86,7 +86,7 @@ class NoteController
         $is_category_found = Note_category::where([
             ['user_id', $user_id],
             ['category', $category]
-        ])->first();
+        ]);
         if ($is_category_found == null || $table_empty == 0) {
             $new_category = new Note_category();
             $new_category->category = $category;
@@ -95,12 +95,7 @@ class NoteController
         }
         $note->title = $title;
         $note->content = $content;
-        if($category != "Shared with me"){
-            $note->category = $category;
-        } else{
-            $note->category = "Shared with me";
-        }
-
+        $note->category = $category;
         $note->pinned = !(($pinned == null) || ($pinned == false));
         $note->save();
         return redirect()->back();
