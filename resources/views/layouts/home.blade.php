@@ -200,11 +200,22 @@
             <div id="shareNotes" style="z-index: 1000;width:100%;height:100%;position: fixed;display: none;background: rgba(0,0,0,0.5);" class="container-fluid px-4">
                 <br>
                 <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:0px;width: 500px;height: 500px;  overflow-y: scroll; " class="card card-margin">
-                <form>
-                    <label for="userShared">Collaborator</label>
+                <form id="sharedForm" class="sharedForm" >
+                    <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
+                            onclick="var result = confirm('Are you sure you want to discard changes?');
+                        if (result) {
+                          document.getElementById('shareNotes').style.display='none';
+                          document.getElementById('sharedForm').reset();
+                        }
+                         ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                    <label style="font-weight: lighter;margin-right: 5px" for="userShared">COLLABORATOR</label>
                     <input type="text" style="display: none" id="shared_note">
-                    <input id="username" name="username" placeholder="Username" required>
-                    <div id="share_note">Share</div>
+                    <input class="categoryTitle" id="username" name="username" placeholder="Username" required>
+                    <div class="btn btn-sm btn-flash-border-success" id="share_note">SHARE</div>
                     <br><br>
                     <div id="notesToBeShared">
                     </div>
@@ -505,6 +516,9 @@
         var form = document.getElementById("notesToBeShared");
         var article = document.createElement("article");
         var noteShared= document.createElement("input");
+        article.style="border-radius: 50%;";
+        noteShared.style="border-radius: 50%;";
+        noteShared.className="sharedNote";
         var div = document.createElement("div");
         noteShared.required=true;
         article.onclick=function (){

@@ -76,12 +76,20 @@
     scroll-behavior: smooth;
   }
 }
+
+.sharedForm {
+    color:white;
+}
+.sharedNote, .sharedNote::before, .sharedNote::after {
+    border-radius: 50%;
+}
 .categoryTitle{
     background-color: #161e23;
     border-radius: 30px;
     height: 35px;
     border: none;
     padding: 20px;
+    color: white;
 }
 .shareNotesB {
     color: white;
@@ -116,9 +124,11 @@ article input {
     cursor: pointer;
 }
 
+
 input[type=radio]:checked ~ div {
     background-color: #b0b0b0;
     color: #333333;
+    border-radius: 50%;
 }
 
 

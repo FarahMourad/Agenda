@@ -130,6 +130,7 @@ article input {
 input[type=radio]:checked ~ div {
     background-color: #25353b;
     color: white;
+    border-radius: 50%;
 }
 
 
