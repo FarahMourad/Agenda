@@ -402,6 +402,33 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script>
     var currentCategory="All";
+
+    document.getElementById('sortIcon').onclick = function () {
+        while (document.getElementById("notesToBeShared").firstChild) {
+            document.getElementById("notesToBeShared").removeChild(document.getElementById("notesToBeShared").firstChild);
+        }
+        while (document.getElementById("notesContainer").firstChild) {
+            document.getElementById("notesContainer").removeChild(document.getElementById("notesContainer").firstChild);
+        }
+        $.ajax({
+            type: "GET",
+            url: "/sortNotesByTitle",
+            data: {
+                category: currentCategory
+            },
+            success: function (res) {
+                if (res) {
+                    $.each(res, function (key, value) {
+                        noteView(value);
+                        shareNotesView(value);
+                        console.log(value);
+                    });
+                    show('allNotes');
+                }
+            }
+        });
+    },
+
     function deleteTask() {
         show('allTasks');
         document.getElementById('light').innerHTML = "This task has been deleted successfully";

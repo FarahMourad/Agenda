@@ -156,7 +156,7 @@ class NoteController
         $user_id = auth()->user()->user_id;
         $category = $request->category;
 
-        if ($category == 'all') {
+        if ($category == 'All') {
             $retrieved_notes = Note::where([
                 ['user_id', $user_id]
             ])->orderBy('pinned', 'DESC')->orderBy('title', 'ASC')->get([

@@ -26,29 +26,7 @@ window.addEventListener('click', event => {
             }
         });
     },
-    document.getElementById('sortIcon').onclick = function () {
-            while (document.getElementById("notesToBeShared").firstChild) {
-                document.getElementById("notesToBeShared").removeChild(document.getElementById("notesToBeShared").firstChild);
-            }
-            while (document.getElementById("notesContainer").firstChild) {
-                document.getElementById("notesContainer").removeChild(document.getElementById("notesContainer").firstChild);
-            }
-            $.ajax({
-                type: "GET",
-                url: "/sortNotesByTitle",
-                data: {},
-                success: function (res) {
-                    if (res) {
-                        $.each(res, function (key, value) {
-                            noteView(value);
-                            shareNotesView(value);
-                            console.log(value);
-                        });
-                        show('allNotes');
-                    }
-                }
-            });
-        },
+
 
     document.getElementById('share_note').onclick = function (){
         var _token = $("input[name='_token']").val();
