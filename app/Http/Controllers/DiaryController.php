@@ -122,7 +122,7 @@ class DiaryController
         ]);
     }
 
-    public function searchForPage(Request $request)
+    public function searchForPage(Request $request): JsonResponse
     {
         $page_no = $request->page_no;
         $user_id = auth()->user()->user_id;

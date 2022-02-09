@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Note_category;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use \Illuminate\Http\JsonResponse;
@@ -42,7 +43,7 @@ class NoteController
         return response()->json($note);
     }
 
-    public function addNote(Request $request): \Illuminate\Http\RedirectResponse
+    public function addNote(Request $request): RedirectResponse
     { // title, category, content, creation_date, modified_date, pinned
         $user_id = auth()->user()->user_id;
         $title = $request->title; //not null
@@ -66,7 +67,7 @@ class NoteController
         return redirect()->back();
     }
 
-    public function editNote(Request $request)
+    public function editNote(Request $request): RedirectResponse
     { // note_id, title, content, category, modified_date, pinned
         $user_id = auth()->user()->user_id;
         $note_id = $request->note_id;
@@ -101,7 +102,7 @@ class NoteController
         return redirect()->back();
     }
 
-    public function deleteNote(Request $request)
+    public function deleteNote(Request $request): RedirectResponse
     { // note_id
         $user_id = auth()->user()->user_id;
         $note_id = $request->note_id;
@@ -117,7 +118,6 @@ class NoteController
     { // note_id, pinned
         $user_id = auth()->user()->user_id;
         $note_id = $request->note_id;
-//        $pinned = $request->pinned;
         $note = Note::where([
             ['user_id', $user_id],
             ['note_id', $note_id]
@@ -129,32 +129,6 @@ class NoteController
         }
         $note->save();
     }
-
-//    public function shareNote(Request $request)
-//    { //note_id, coll_username
-//        $user_id = auth()->user()->user_id;
-//        $note_id = $request->note_id;
-//        $coll_username = $request->coll_username;
-//        $collaborator = User::where([
-//            ['user_id', $coll_username]
-//        ])->first();
-//        if ($collaborator != null) {
-//            $note = Note::where([
-//                ['user_id', $user_id],
-//                ['note_id', $note_id]
-//            ]);
-//            $new_note = new Note();
-//            $new_note = $note;
-//            $new_note->user_id = $coll_username;
-//            $last_note = Note::where('user_id', $coll_username)->latest('note_id')->first();
-//            $new_note->note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
-//            $new_note->category = 'Shared with me';
-//            $new_note->save();
-//        }
-//
-////        $note->pinned = !(($pinned == null || $pinned == false));
-//        $note->save();
-//    }
 
     public function shareNote(Request $request)
     { //note_id, coll_username
@@ -211,7 +185,7 @@ class NoteController
         return response()->json($retrieved_notes);
     }
 
-    public function createNoteCategory(Request $request)
+    public function createNoteCategory(Request $request): JsonResponse
     { // category
         $user_id = auth()->user()->user_id;
         $category = $request->category;
