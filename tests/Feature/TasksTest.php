@@ -1169,11 +1169,11 @@ class TasksTest extends TestCase
 
         $this->assertSame(json_encode([
             [
-                "category" => "SWE",
+                "category" => "ML",
                 "user_id" => $user->user_id
             ],
             [
-                "category" => "ML",
+                "category" => "SWE",
                 "user_id" => $user->user_id
             ]
         ]), $response->getContent(), '');
@@ -1864,7 +1864,7 @@ class TasksTest extends TestCase
         $user_id = auth()->user()->user_id;
         $categories = Task_category::where([
             ['user_id', $user_id]
-        ])->get();
+        ])->orderBy('category', 'ASC')->get();
         return response()->json($categories);
     }
 
@@ -1889,7 +1889,7 @@ class TasksTest extends TestCase
         $steps = Step::where([
             ['user_id', $user_id],
             ['task_id', $request->task_id]
-        ])->get([
+        ])->orderBy('step_id', 'ASC')->get([
             'task_id',
             'step_id',
             'user_id',
