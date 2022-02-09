@@ -95,8 +95,12 @@ class NoteController
         }
         $note->title = $title;
         $note->content = $content;
-        if($category != "Shared with me")
+        if($category != "Shared with me"){
             $note->category = $category;
+        } else{
+            $note->category = "Shared with me";
+        }
+
         $note->pinned = !(($pinned == null) || ($pinned == false));
         $note->save();
         return redirect()->back();
