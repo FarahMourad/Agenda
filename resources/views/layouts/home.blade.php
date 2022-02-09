@@ -23,10 +23,11 @@
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-        </div>
+{{--        <div class="input-group">--}}
+{{--            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />--}}
+{{--            <button class="btn btn-primary" id="btnNavbarSearch" type="button">--}}
+{{--                <i class="fas fa-search"></i></button>--}}
+{{--        </div>--}}
     </form>
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -240,7 +241,7 @@
                         <textarea name="note_content" class="noteContent" id="addedNoteContent" style="height: 400px; border-bottom: none" placeholder="Content" required></textarea>
                         <div>
                             <label class="btn btn-sm btn-flash-border-success" style="cursor:none;margin-left: 20px" for="cat">Category</label>
-                            <select class="btn btn-default dropdown-toggle" name="category" style="width: 150px; background-color: #4a9a71" name="cat" id="cat">
+                            <select class="btn btn-default dropdown-toggle" style="width: 150px; background-color: #4a9a71" name="categ" id="categ">
                                 <option style="background-color: #c4d8da" selected value>Uncategorized</option>
                             </select>
                         </div>
@@ -270,7 +271,7 @@
                         <textarea name="note_content" class="noteContent" id="noteContent" style="height: 400px; border-bottom: none" placeholder="Note Content" required></textarea>
                         <div>
                             <label class="btn btn-sm btn-flash-border-success" style="cursor:none;margin-left: 20px" for="cat">Category</label>
-                            <select class="btn btn-default dropdown-toggle" name="category" style="width: 150px; background-color: #4a9a71" name="cat" id="editCat">
+                            <select class="btn btn-default dropdown-toggle" name="category" style="width: 150px; background-color: #4a9a71" name="editCat" id="editCat">
                                 <option style="background-color: #c4d8da" selected value>Uncategorized</option>
                             </select>
                         </div>
@@ -425,13 +426,9 @@
     const elem = document.getElementById('stepBody');
     function addStep() {
         const divList = document.getElementById('stepsContainer').children;
-        console.log(divList);
-
         elem.children[0].innerHTML = `${divList.length + 1}.`;
         elem.style.display = 'block';
         elem.id = `stepBody${divList.length + 1}`;
-        console.log(elem);
-
         const parent = document.getElementById('stepsContainer');
         parent.appendChild(elem);
     }
@@ -479,12 +476,12 @@
         }
     }
     function categoryView(category){
-        var categoryContainer = document.getElementById("cat");
-        var categoryContainer2 = document.getElementById("editCat");
+        var cat1 = document.getElementById("categ");
+        var cat2 = document.getElementById("editCat");
         var option = document.createElement("option");
         option.innerText=category;
-        categoryContainer.insertBefore(option,null);
-        categoryContainer2.insertBefore(option,null);
+        cat1.insertBefore(option,null);
+        cat2.insertBefore(option,null);
         var aCategory = document.createElement("a");
         aCategory.id=category;
         aCategory.innerText=category;
@@ -503,7 +500,6 @@
                         $.each(res, function (key, value) {
                             noteView(value);
                             shareNotesView(value);
-                            console.log(value);
                         });
                         show('allNotes');
                     }
@@ -604,7 +600,6 @@
             }
             e.preventDefault();
             var _token = $("input[name='_token']").val();
-            console.log(pinned);
             $.ajax({
                 type: "POST",
                 url: "{{route('pinNote')}}",
@@ -613,7 +608,6 @@
                     _token: _token,
                 },
                 success: function() {
-                    console.log("success");
                 }
             });
         }
@@ -687,15 +681,12 @@
             url: "{{route('edit-theme')}}",
             data: {theme: theme, _token: _token},
             success: function() {
-                console.log("success");
             }
         });
     });
     $(document).ready(function(){
         theme = '{{\Illuminate\Support\Facades\Auth::user()->theme}}';
-        console.log(theme);
         if (theme == 1){
-            console.log(theme);
             document.getElementById("stylesheet").setAttribute("href", "css/home.css");
         }else {
             document.getElementById("stylesheet").setAttribute("href", "css/homeDark.css");
@@ -730,7 +721,6 @@
                     document.getElementById('save2').style.cursor = 'pointer';
 
                     document.getElementById('page-back').value = res.left_content;
-                    // console.log(document.getElementById('page-back').innerText);
                     document.getElementById('page-front').value = res.right_content;
                     document.getElementById('leftNo').innerText = res.left_page;
                     document.getElementById('rightNo').innerText = res.right_page;
@@ -807,7 +797,6 @@
             data: {},
             success: function(res) {
                 if (res) {
-                    console.log(res);
                     if (res.left_content == null && res.right_content == null && res.left_page == null && res.right_page == null){
                         document.getElementById('light').innerHTML = "Didn't found any bookmarked page";
                         document.getElementById('light').style.display = "block";
@@ -817,8 +806,6 @@
                         document.getElementById('page-front').value = res.right_content;
                         document.getElementById('leftNo').innerText = res.left_page;
                         document.getElementById('rightNo').innerText = res.left_page + 1;
-                        console.log(res.left_bookmarked)
-                        console.log(res.right_bookmarked)
 
                         if (res.left_bookmarked){
                             document.getElementById('star1').style.color = '#efa315';
@@ -836,10 +823,8 @@
         });
     }
     function goLeft(){
-        console.log('left');
         var pageNo = document.getElementById('leftNo').innerText;
         pageNo = parseInt(pageNo) - 1;
-        console.log(pageNo);
         if (pageNo <= 0) {
             document.getElementById('light').innerHTML = "Page number is invalid";
             document.getElementById('light').style.display = "block";
@@ -881,7 +866,6 @@
     function goRight(){
         var pageNo = document.getElementById('rightNo').innerText;
         pageNo = parseInt(pageNo) + 1;
-        console.log(pageNo);
         $.ajax({
             type: "GET",
             url: "/searchPage",

@@ -80,8 +80,6 @@ window.addEventListener('click', event => {
         // var note_id = document.getElementById('shared_note').value;
         var category = document.getElementById('categoryCreation').value;
         if (category.length !== 0 ) {
-            console.log("check");
-            console.log(category);
             $.ajax({
                 type: "POST",
                 url: "/createNoteCategory",
