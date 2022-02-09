@@ -208,7 +208,6 @@ class TaskController
             $new_task->deadline = $task->deadline;
             $new_task->pinned = false;
             $new_task->completed = false;
-            echo $new_task;
             $new_task->save();
         }
     }

@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Pipeline;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -24,6 +25,7 @@ class TasksTest extends TestCase
         $this->get('/getCategoryTasks')->assertRedirect('/login');
     }
 
+    /** @test */
     /** @test */
     public function add_task()
     {
@@ -1964,7 +1966,6 @@ class TasksTest extends TestCase
                 ['step_id', $i->step_id]
             ])->first();
             $i->completed = $request->completed;
-            echo $i;
             $i->save();
         }
         return response()->noContent();
@@ -1984,7 +1985,7 @@ class TasksTest extends TestCase
             (new Pipeline($this->app))
                 ->send($request)
                 ->through([
-                    \Illuminate\Session\Middleware\StartSession::class,
+                    StartSession::class,
                 ])
                 ->then($callback)
         );

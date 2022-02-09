@@ -6,12 +6,8 @@ use App\Models\Note;
 use App\Models\Note_category;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use \Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Redirect;
-use Mockery\Matcher\Not;
-use function Symfony\Component\Translation\t;
+use Illuminate\Http\JsonResponse;
 
 class NoteController
 {
@@ -49,8 +45,6 @@ class NoteController
         $title = $request->title; //not null
         $category = $request->category;
         $content = $request->note_content;
-        $creation_date = $request->creation_date; //not null
-        $modified_date = $request->modified_date; //not null
         $pinned = $request->pinned;
         $last_note = Note::where('user_id', $user_id)->latest('note_id')->first();
         $note_id = ($last_note != null) ? ($last_note->note_id + 1) : 1;
@@ -201,8 +195,6 @@ class NoteController
             return response()->json(1);
         } else {
             return response()->json(0);
-
-//            return redirect()->back()->withErrors('msg', 'ERROR: already exists');
         }
     }
 

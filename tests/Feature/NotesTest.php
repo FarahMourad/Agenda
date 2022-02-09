@@ -1087,8 +1087,6 @@ class NotesTest extends TestCase
             $new_note->save();
             return response()->noContent();
         }
-//        $note->pinned = !(($pinned == null || $pinned == false));
-//        $note->save();
     }
 
     /**

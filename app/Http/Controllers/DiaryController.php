@@ -35,17 +35,6 @@ class DiaryController
                     "left_bookmarked" => null,
                     "right_bookmarked" => null
                 ]);
-//                $left_content = Diary_pages::where([
-//                    ['user_id', $current_user->user_id],
-//                    ['page_id', $page_no - 1]
-//                ])->first();
-//                echo $last_page;
-//                $left_page = $page_no - 1;
-//                $right_page = $page_no;
-//                $left_bookmark = $left_content->bookmarked;
-//                $right_bookmark = $last_page->bookmarked;
-//                $left_content = $left_content->content;
-//                $right_content = $last_page->content;
             } else {
                 $left_page = $page_no;
                 $right_page = $page_no + 1;
@@ -184,8 +173,6 @@ class DiaryController
 
         $left_page_content = $request->left_page_content;
         $right_page_content = $request->right_page_content;
-
-
         if ($left_page_content != null || $right_page_content != null){
             if ($left_page_content != null){
                 $current_user = auth()->user();
@@ -217,7 +204,6 @@ class DiaryController
             }
         }
         return response()->noContent();
-
     }
 
     public function bookmarkPage(Request $request)
