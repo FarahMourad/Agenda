@@ -27,7 +27,6 @@ window.addEventListener('click', event => {
         });
     },
 
-
     document.getElementById('share_note').onclick = function (){
         var _token = $("input[name='_token']").val();
         var note_id = document.getElementById('shared_note').value;
@@ -93,4 +92,21 @@ window.addEventListener('load', (event) => {
             }
         }
     });
+
+    $.ajax({
+        type: "GET",
+        url: "/getTaskCategories",
+        data: {},
+        success: function (res) {
+            if (res) {
+                $.each(res, function (key, value) {
+                    //for tasks
+                    taskCategoryView(value.category);
+                    console.log(value);
+                });
+            }
+        }
+    });
+
 });
+

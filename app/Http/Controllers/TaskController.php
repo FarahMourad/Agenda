@@ -20,6 +20,7 @@ class TaskController
         return response()->json($tasks);
     }
 
+    //to be written
     public function getCategoryTasks(Request $request): JsonResponse // category
     {
         $user_id = auth()->user()->user_id;
@@ -27,10 +28,9 @@ class TaskController
         $tasks = Task::where([
             ['user_id', $user_id],
             ['category', $category]
-        ])->orderBy('pinned', 'DESC')->orderBy('updated_at', 'DESC')->get();
+        ])->orderBy('updated_at', 'DESC')->get();
         return response()->json($tasks);
     }
-
     public function getCategories(): JsonResponse
     {
         $user_id = auth()->user()->user_id;
@@ -45,15 +45,15 @@ class TaskController
         $user_id = auth()->user()->user_id;
         $category = $request->category;
 
-        if ($category == 'all') {
+        if ($category == 'All') {
             $retrieved_tasks = Task::where([
                 ['user_id', $user_id]
-            ])->orderBy('pinned', 'DESC')->orderBy('title', 'ASC')->get();
+            ])->orderBy('title', 'ASC')->get();
         } else {
             $retrieved_tasks = Task::where([
                 ['user_id', $user_id],
                 ['category', $category]
-            ])->orderBy('pinned', 'DESC')->orderBy('title', 'ASC')->get();
+            ])->orderBy('title', 'ASC')->get();
         }
         return response()->json($retrieved_tasks);
     }
@@ -63,15 +63,15 @@ class TaskController
         $user_id = auth()->user()->user_id;
         $category = $request->category;
 
-        if ($category == 'all') {
+        if ($category == 'All') {
             $retrieved_tasks = Task::where([
                 ['user_id', $user_id]
-            ])->orderBy('pinned', 'DESC')->orderBy('deadline', 'ASC')->get();
+            ])->orderBy('deadline', 'ASC')->get();
         } else {
             $retrieved_tasks = Task::where([
                 ['user_id', $user_id],
                 ['category', $category]
-            ])->orderBy('pinned', 'DESC')->orderBy('deadline', 'ASC')->get();
+            ])->orderBy('deadline', 'ASC')->get();
         }
         return response()->json($retrieved_tasks);
     }
@@ -90,7 +90,9 @@ class TaskController
             $new_category->user_id = $user_id;
             $new_category->category = $category;
             $new_category->save();
+            return response()->json(1);
         }
+        return response()->json(0);
     }
 
     public function addTask(Request $request) // title, category, description, deadline, completed
@@ -114,78 +116,6 @@ class TaskController
             $task->save();
             return response()->json($task->task_id);
         }
-    }
-
-    public function editTask(Request $request) // task_id, title, category, description, deadline, pinned, completed
-    {
-        $user_id = auth()->user()->user_id;
-        $task_id = $request->task_id;
-        $title = $request->title;
-        $category = $request->category;
-        $description = $request->description;
-        $deadline = $request->deadline;
-        $pinned = $request->pinned;
-        $completed = $request->completed;
-
-        if ($title == null || $task_id == null) {
-            return redirect()->back()->withErrors('msg', 'ERROR: null content');
-        }
-        $task = Task::where([
-            ['user_id', $user_id],
-            ['task_id', $task_id]
-        ])->first();
-        $table_empty = Task_category::count();
-        $is_category_found = Task_category::where([
-            ['user_id', $user_id],
-            ['category', $category]
-        ])->first();
-        if ($is_category_found == null || $table_empty == 0) {
-            $new_category = new Task_category();
-            $new_category->category = $category;
-            $new_category->user_id = $user_id;
-            $new_category->save();
-        }
-
-        $task->title = $title;
-        $task->category = $category;
-        $task->description = $description;
-        $task->deadline = $deadline;
-        $task->pinned = !(($pinned == null) || ($pinned == false));
-        $task->completed = !(($completed == null) || ($completed == false));
-        $task->save();
-    }
-
-    public function editTitle(Request $request) // task_id, title
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->title = $request->title;
-        $task->save();
-    }
-
-    public function editDeadline(Request $request) // task_id, deadline
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->deadline = $request->deadline;
-        $task->save();
-    }
-
-    public function editDescription(Request $request) // task_id, description
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->description = $request->description;
-        $task->save();
     }
 
     public function shareAsCopy(Request $request) //task_id, collaborator_username
@@ -216,17 +146,6 @@ class TaskController
         }
     }
 
-    public function setAsPinned(Request $request) // task_id, pinned
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id],
-        ])->first();
-        $task->pinned = $request->pinned;
-        $task->save();
-    }
-
     public function markAsCompleted(Request $request) // task_id, is_completed
     {
         $user_id = auth()->user()->user_id;
@@ -247,17 +166,6 @@ class TaskController
             ['task_id', $request->task_id]
         ]);
         $task->delete();
-    }
-
-    public function editCategory(Request $request) // task_id, category
-    {
-        $user_id = auth()->user()->user_id;
-        $task = Task::where([
-            ['task_id', $request->task_id],
-            ['user_id', $user_id]
-        ])->first();
-        $task->category = $request->category;
-        $task->save();
     }
 
     public function calculatePerformance(): JsonResponse
@@ -297,29 +205,6 @@ class TaskController
         $step->save();
     }
 
-    public function editStepTitle(Request $request)  // task_id, step_id, title
-    {
-        $user_id = auth()->user()->user_id;
-        $step = Step::where([
-            ['user_id', $user_id],
-            ['task_id', $request->task_id],
-            ['step_id', $request->step_id]
-        ])->first();
-        $step->title = $request->title;
-        $step->save();
-    }
-
-    public function editStepDeadline(Request $request)  // task_id, step_id, deadline
-    {
-        $user_id = auth()->user()->user_id;
-        $step = Step::where([
-            ['user_id', $user_id],
-            ['task_id', $request->task_id],
-            ['step_id', $request->step_id]
-        ])->first();
-        $step->deadline = $request->deadline;
-        $step->save();
-    }
 
     public function editStepContent(Request $request)  // task_id, step_id, step_content
     {
@@ -355,33 +240,6 @@ class TaskController
         foreach ($steps as $i) {
             $i->completed = $request->completed;
             $i->save();
-        }
-    }
-
-    public function editStep(Request $request)
-    {
-        $user_id = auth()->user()->user_id;
-        $task_id = $request->task_id;
-        $step_id = $request->step_id;
-        $title = $request->title;
-        $step_content = $request->step_content;
-        $deadline = $request->deadline;
-        $completed = $request->completed;
-
-        if ($title == null || $task_id == null) {
-            return redirect()->back()->withErrors('msg', 'ERROR: null content');
-        }
-        $step = Step::where([
-            ['user_id', $user_id],
-            ['task_id', $task_id],
-            ['step_id', $step_id]
-        ])->first();
-        if ($step != null) {
-            $step->title = $title;
-            $step->content = $step_content;
-            $step->deadline = $deadline;
-            $step->completed = !(($completed == null) || ($completed == false));
-            $step->save();
         }
     }
 

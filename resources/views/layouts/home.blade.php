@@ -64,8 +64,8 @@
 </div>
 <div id="light_task_cat" class="white_content">
     <span>Category: </span>
-    <span><input type="text" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"></span>
-    <span><button class="saveTaskButton">Create</button></span>
+    <span><input id="taskCategory" type="text" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"></span>
+    <span><button id="addTaskCat" class="saveTaskButton">Create</button></span>
 </div>
 <div id="fade" class="black_overlay"></div>
 <div id="stepBody" style="width: 100%; font-size: 16px; display: none">
@@ -85,14 +85,13 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <a class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <div  class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Tasks
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
+                        <nav id="tasksCategories" class="sb-sidenav-menu-nested nav">
                             <a id="getAllTasks" class="nav-link" style="cursor: pointer" onclick="show('allTasks')">All</a>
-                            <a class="nav-link" style="cursor: pointer" onclick="show('assignedToMeTasks')">Assigned to me</a>
                         </nav>
                     </div>
                     <a id="getCat" class="nav-link collapsed" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -129,35 +128,29 @@
             <div id="allTasks" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Tasks</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">All</li>
+                    <li id="taskCatPre" class="breadcrumb-item active">All</li>
                 </ol>
                 <ol class="breadcrumb mb-4" style="">
-                    <li class="breadcrumb-item taskBar">Sort by Title <i class="bi bi-sort-down taskIcons"></i></li>
-                    <li class="breadcrumb-item taskBar">Sort by Deadline <i class="bi bi-sort-down taskIcons"></i></li>
+                    <li id="sortTitle" class="breadcrumb-item taskBar">Sort by Title <i class="bi bi-sort-down taskIcons"></i></li>
+                    <li id="sortDead" class="breadcrumb-item taskBar">Sort by Deadline <i class="bi bi-sort-down taskIcons"></i></li>
                     <li onclick="show('task')" class="breadcrumb-item taskBar">Add Task <i class="bi bi-plus-square taskIcons"></i></li>
                     <li onclick="createCategory()" class="breadcrumb-item taskBar">Create Category <i class="bi bi-plus-square taskIcons"></i></li>
                     <li onclick="getPerformance()" class="breadcrumb-item taskBar">Performance <i class="bi bi-bar-chart-line-fill taskIcons"></i></li>
                 </ol>
                 <div id="cards" class="row">
 
-                    <div onclick="show('taskView')" class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
-                            <div class="card-body"><span>Task Title</span></div>
-                            <div class="small" style="color: rgba(243,239,233,0.63); padding: 0 15px 15px"><span>Category</span><span style="float: right">Deadline</span></div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" style="text-decoration: none; cursor: pointer">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div  onclick="show('taskView')" class="col-xl-3 col-md-6">--}}
+{{--                        <div class="card bg-primary text-white mb-4">--}}
+{{--                            <div class="card-body"><span>Task Title</span></div>--}}
+{{--                            <div class="small" style="color: rgba(243,239,233,0.63); padding: 0 15px 15px"><span>Category</span><span style="float: right">Deadline</span></div>--}}
+{{--                            <div class="card-footer d-flex align-items-center justify-content-between">--}}
+{{--                                <a class="small text-white stretched-link" style="text-decoration: none; cursor: pointer">View Details</a>--}}
+{{--                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                 </div>
-            </div>
-            <div id="assignedToMeTasks" style="display: none" class="container-fluid px-4">
-                <h1 class="mt-4">Tasks</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Assigned to me</li>
-                </ol>
             </div>
             <div id="task" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Tasks</h1>
@@ -198,21 +191,21 @@
                 <div class="task_window">
                     <div class="task_window_after">
                         <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
-                            <input id="" placeholder="Task Title.." type="text" style="background-color: transparent; border: none; outline: none; color: #23282a"><span style="float: right">
+                            <input id="tTitle" placeholder="Task Title.." type="text" style="background-color: transparent; border: none; outline: none; color: #23282a"><span style="float: right">
                                 <i onclick="deleteTask()" class="bi bi-trash-fill selectedTaskIcons"></i>
                                 <i onclick="shareTaskB()" class="fas fa-share selectedTaskIcons"></i>
-                                <input type="checkbox" id="completeTask" value="false">
+                                <input type="checkbox" id="completeTask2" value="false">
                             </span>
                         </div>
 
                         <div style="width: 100%; border-bottom: #454748 1px solid; padding-bottom: 10px; font-size: 14px; color: #23282a; margin-bottom: 10px">
-                            <span>Deadline:</span><input id="" type="date" style="margin-left: 11.5px; width: 167px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
-                            <span>Category:</span><input id="" type="text" value="Uncategorized" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                            <span>Deadline:</span><input id="tDead" type="date" style="margin-left: 11.5px; width: 167px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
+                            <span>Category:</span><input id="tCat" type="text" value="Uncategorized" placeholder="task category" style="margin-left: 10px; background-color: rgba(210,180,165,0.37); border: none; outline: none; color: #23282a"><br>
                         </div>
 
                         <div style="width: 100%; height: 150px; border-bottom: #454748 1px solid; padding-bottom: 10px; margin-bottom: 10px">
                             <span>Details</span><br>
-                            <textarea id="" placeholder="Enter task details....." style="width: 100%; font-size: 16px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #272c2d"></textarea>
+                            <textarea id="tDes" placeholder="Enter task details....." style="width: 100%; font-size: 16px; height: 100px; outline: none; resize: none; border: none; background-color: rgba(210,180,165,0.37); color: #272c2d"></textarea>
                         </div>
 
                         <div style="color: #1a1e21; width: 100%; height: 200px; border-bottom: #454748 1px solid; margin-bottom: 10px">
@@ -223,7 +216,7 @@
                             </div>
                         </div>
                         <div style="padding: 10px 0 10px 10px; width: 100%">
-                            <button id="saveTask" class="saveTaskButton">Save</button>
+                            <button id="editTask" class="saveTaskButton">Save</button>
                         </div>
                     </div>
                 </div>
@@ -468,6 +461,9 @@
         }
     })
     $('#getAllTasks').on("click", function () {
+        while (document.getElementById("cards").firstChild) {
+            document.getElementById("cards").removeChild(document.getElementById("cards").firstChild);
+        }
             // var _token = $("input[name='_token']").val();
             $.ajax({
                 type: "GET",
@@ -476,7 +472,7 @@
                 success: function(res) {
                     $.each(res, function (key, value) {
                         //to be implemented
-                        categoryView(value.category);
+                        taskInterface(value);
                         console.log(value);
                     });
                 }
@@ -530,19 +526,175 @@
         document.getElementById('fade').style.display = "block";
     }
     function getPerformance() {
-        document.getElementById('light').innerHTML = "Your Performance is: ";
-        document.getElementById('light').style.display = "block";
-        document.getElementById('fade').style.display = "block";
+        $.ajax({
+            type: "GET",
+            url: "/calculatePerformance",
+            data: {},
+            success: function (res) {
+                if (res) {
+                    document.getElementById('light').innerHTML = "Your Performance is: " + res + " %";
+                    document.getElementById('light').style.display = "block";
+                    document.getElementById('fade').style.display = "block";
+                }
+            }
+        });
+
     }
     function createCategory() {
         document.getElementById('light_task_cat').style.display = "block";
         document.getElementById('fade').style.display = "block";
     }
 
+    var currentTaskCategory = "All";
+    document.getElementById('sortTitle').onclick = function () {
+        while (document.getElementById("cards").firstChild) {
+            document.getElementById("cards").removeChild(document.getElementById("cards").firstChild);
+        }
+        // while (document.getElementById("notesContainer").firstChild) {
+        //     document.getElementById("notesContainer").removeChild(document.getElementById("notesContainer").firstChild);
+        // }
+        $.ajax({
+            type: "GET",
+            url: "/sortTasksByTitle",
+            data: {
+                category: currentTaskCategory
+            },
+            success: function (res) {
+                if (res) {
+                    $.each(res, function (key, value) {
 
+                        taskInterface(value);
+                        // shareNotesView(value);
+                        console.log(value);
+                    });
+                    // show('allTasks');
+                }
+            }
+        });
+    }
 
+    document.getElementById('sortDead').onclick = function () {
+        while (document.getElementById("cards").firstChild) {
+            document.getElementById("cards").removeChild(document.getElementById("cards").firstChild);
+        }
+        $.ajax({
+            type: "GET",
+            url: "/sortByDeadline",
+            data: {
+                category: currentTaskCategory
+            },
+            success: function (res) {
+                if (res) {
+                    $.each(res, function (key, value) {
+                        taskInterface(value);
+                        console.log(value);
+                    });
+                }
+            }
+        });
+    }
 
+    document.getElementById('addTaskCat').onclick = function () {
+        var _token = $("input[name='_token']").val();
+        // var note_id = document.getElementById('shared_note').value;
+        var category = document.getElementById('taskCategory').value;
+        if (category.length !== 0 ) {
+            $.ajax({
+                type: "POST",
+                url: "/createTaskCategory",
+                data: {
+                    _token: _token,
+                    category: category,
+                },
+                success: function (res) {
+                    if (res === 1) {
+                        //for tasks
+                        taskCategoryView(category);
+                    } else {
+                        alert("Category already exits")
+                    }
+                    console.log("worked");
+                }
+            });
+        }
+    }
 
+    function taskInterface(task){
+        var cardsContainer = document.getElementById('cards');
+        var div1 = document.createElement("div");
+        div1.className= "col-xl-3 col-md-6";
+        div1.id = task.task_id + "";
+        div1.onclick= function (){
+            document.getElementById('tTitle').value = task.title;
+            if(task.completed == 0 || task.completed == false) {
+                console.log("not Comp");
+                $('#completeTask2').val(false);
+                $("#completeTask2").prop('checked', false);
+            }else {
+                console.log("Comp");
+                $('#completeTask2').val(true);
+                $("#completeTask2").prop('checked', true);
+            }
+            document.getElementById('tDead').value = task.deadline;
+            document.getElementById('tCat').value = task.category;
+            document.getElementById('tDes').value = task.description;
+            show('taskView');
+        }
+        var div2 = document.createElement("div");
+        div2.className="card bg-primary text-white mb-4";
+        var div3 = document.createElement("div");
+        div3.className="card-body";
+        var spn= document.createElement("span");
+        spn.innerHTML=task.title;
+        div3.insertBefore(spn,null);
+        var div4 = document.createElement("div");
+        div4.className="card-footer d-flex align-items-center justify-content-between";
+        var aTask= document.createElement("a");
+        aTask.className="small text-white stretched-link";
+        aTask.style="text-decoration: none; cursor: pointer";
+        aTask.innerHTML="View Details";
+        var div5 = document.createElement("div");
+        div5.className="small text-white";
+        var iTask= document.createElement("i");
+        iTask.className="fas fa-angle-right";
+        div5.insertBefore(iTask,null);
+        div4.insertBefore(aTask,null);
+        div4.insertBefore(div5,null);
+        div2.insertBefore(div3,null);
+        div2.insertBefore(div4,null);
+        div1.insertBefore(div2,null);
+        cardsContainer.insertBefore(div1,null);
+
+    }
+    function taskCategoryView(category){
+        var aCategory = document.createElement("a");
+        aCategory.id=category;
+        aCategory.innerText=category;
+        aCategory.className="nav-link";
+        aCategory.onclick=function (){
+            currentTaskCategory=category;
+            document.getElementById("taskCatPre").innerHTML=category;
+            document.getElementById('cards').innerHTML = "";
+            $.ajax({
+                type: "GET",
+                url: "/getCategoryTasks",
+                data: {
+                    category: category
+                },
+                success: function (res) {
+                    if (res) {
+                        $.each(res, function (key, value) {
+                            taskInterface(value);
+                            // shareNotesView(value);
+                        });
+                        // show('allNotes');
+                    }
+                }
+            });
+        }
+        var categories =document.getElementById("tasksCategories");
+        categories.insertBefore(aCategory,null);
+    }
 
 
     var currentCategory="All";

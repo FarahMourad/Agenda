@@ -81,7 +81,7 @@ class RegisterController extends Controller
         $shared->save();
         $shared = new Task_category();
         $shared->user_id = $user->user_id;
-        $shared->category = 'Shared with me';
+        $shared->category = 'Assigned to me';
         $shared->save();
         return $user;
     }
