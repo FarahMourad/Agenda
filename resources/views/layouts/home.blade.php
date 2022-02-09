@@ -266,11 +266,10 @@
 
                 <div  style="float: right;margin-right: 100px">
                     <form>
-                        <label for="categoryCreation">Create Category:</label>
-                        <input type="text" name="category" id="categoryCreation" placeholder="Category Title" required>
+                        <input class="categoryTitle" type="text" name="category" id="categoryCreation" placeholder="Category Title" required>
                         <input id="addCat" class="btn btn-sm btn-flash-border-success"
-                               style=""
-                               value="CREATE">
+                               style="width: 140px"
+                               value="CREATE CATEGORY">
                     </form>
                 </div>
                 <br>

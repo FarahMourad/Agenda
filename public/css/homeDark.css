@@ -76,6 +76,13 @@
     scroll-behavior: smooth;
   }
 }
+.categoryTitle{
+    background-color: #161e23;
+    border-radius: 30px;
+    height: 35px;
+    border: none;
+    padding: 20px;
+}
 .shareNotesB {
     color: white;
 }

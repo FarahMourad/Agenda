@@ -90,6 +90,13 @@
 }
 
 
+.categoryTitle{
+    background-color: #eeeeee;
+    border-radius: 30px;
+    height: 35px;
+    border: none;
+    padding: 20px;
+}
 article {
     position: relative;
     width: 200px;
