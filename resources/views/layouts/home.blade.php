@@ -378,9 +378,11 @@
     }
     function categoryView(category){
         var categoryContainer = document.getElementById("cat");
+        var categoryContainer2 = document.getElementById("editCat");
         var option = document.createElement("option");
         option.innerText=category;
         categoryContainer.insertBefore(option,null);
+        categoryContainer2.insertBefore(option,null);
         var aCategory = document.createElement("a");
         aCategory.id=category;
         aCategory.innerText=category;
