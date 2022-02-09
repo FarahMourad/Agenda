@@ -21,6 +21,7 @@ window.addEventListener('click', event => {
                         console.log(value);
                     });
                     show('allNotes');
+                    categoryChange('All');
                 }
             }
         });

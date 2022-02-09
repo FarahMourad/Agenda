@@ -401,6 +401,7 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script>
+    var currentCategory="All";
     function deleteTask() {
         show('allTasks');
         document.getElementById('light').innerHTML = "This task has been deleted successfully";
@@ -475,6 +476,9 @@
             show('allNotes');
         }
     }
+    function categoryChange(category){
+        currentCategory=category;
+    }
     function categoryView(category){
         var option = document.createElement("option");
         option.innerText=category;
@@ -494,6 +498,7 @@
         aCategory.innerText=category;
         aCategory.className="nav-link";
         aCategory.onclick=function (){
+            currentCategory=category;
             document.getElementById("categoryNamePreview").innerHTML=category;
             document.getElementById('notesContainer').innerHTML = "";
             $.ajax({
