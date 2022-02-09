@@ -201,17 +201,14 @@
                 <br>
                 <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:0px;width: 500px;height: 500px;  overflow-y: scroll; " class="card card-margin">
                 <form id="sharedForm" class="sharedForm" >
-                    <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
-                            onclick="var result = confirm('Are you sure you want to discard changes?');
+                    <svg style="float: right;cursor: pointer" onclick="var result = confirm('Are you sure you want to discard changes?');
                         if (result) {
                           document.getElementById('shareNotes').style.display='none';
                           document.getElementById('sharedForm').reset();
                         }
-                         ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </button>
+                         " xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
                     <label style="font-weight: lighter;margin-right: 5px" for="userShared">COLLABORATOR</label>
                     <input type="text" style="display: none" id="shared_note">
                     <input class="categoryTitle" id="username" name="username" placeholder="Username" required>
@@ -229,19 +226,16 @@
                 {{--                    <p><u>< Cancel</u></p>--}}
                 {{--                </div>--}}
                 <div id="newNotte" style="padding:15px;z-index: 1001;margin-left:350px;margin-top:50px;width: 500px;" class="card card-margin">
-                    <form id="noteForm" action="{{route('addNote')}}" method="POST">
+                    <form class="sharedForm" id="noteForm" action="{{route('addNote')}}" method="POST">
                         @csrf
-                        <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
-                                onclick="var result = confirm('Are you sure you want to discard changes?');
+                        <svg style="float: right;cursor: pointer" onclick="var result = confirm('Are you sure you want to discard changes?');
                         if (result) {
-                          document.getElementById('noteForm').reset();
                           document.getElementById('addNotes').style.display='none';
+                          document.getElementById('noteForm').reset();
                         }
-                         ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                         " xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                         </svg>
-                        </button>
                         <input name="title" class="noteContent" id="addedNoteTitle" style="height: 50px;" placeholder="Title" maxlength="100" required>
                         <textarea name="note_content" class="noteContent" id="addedNoteContent" style="height: 400px; border-bottom: none" placeholder="Content" required></textarea>
                         <div>
@@ -261,18 +255,16 @@
                 <br>
 
                 <div style="padding:15px;z-index: 1001;margin-left:350px;margin-top:50px;width: 500px;" class="card card-margin">
-                    <form action="{{route('editNote')}}" method="POST">
+                    <form class="sharedForm" action="{{route('editNote')}}" method="POST">
                         @csrf
-                        <button style="background-color: #4a9a71;width: 30px;height: 30px;border-radius: 50% ;border:none;float: right;cursor: pointer"
-                                onclick="var result = confirm('Are you sure you want to discard changes?');
+                        <svg style="float: right;cursor: pointer" onclick="var result = confirm('Are you sure you want to discard changes?');
                         if (result) {
                           document.getElementById('editNotes').style.display='none';
+
                         }
-                         ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                        </button>
+                         " xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                        </svg>
                         <input name="title" class="noteContent" id="noteTitle" style="height: 50px;" placeholder="Note Title" maxlength="100" required>
                         <input id="note_id" type="text" name="note_id" style="display: none">
                         <textarea name="note_content" class="noteContent" id="noteContent" style="height: 400px; border-bottom: none" placeholder="Note Content" required></textarea>
@@ -299,9 +291,14 @@
                 <div  style="float: right;margin-right: 100px">
                     <form>
                         <input class="categoryTitle" type="text" name="category" id="categoryCreation" placeholder="Category Title" required>
-                        <input id="addCat" class="btn btn-sm btn-flash-border-success"
-                               style="width: 140px"
-                               value="CREATE CATEGORY">
+                        <div style="display: inline-block ;cursor: pointer" id="addCat">
+                            <button  style="font-size: 16px;background-color: inherit;border: none;color: inherit;font-weight: lighter"
+                                     value="CREATE CATEGORY">CREATE CATEGORY</button>
+                            <svg name="folder" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-fill" viewBox="0 0 16 16">
+                                <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z"/>
+                            </svg>
+                        </div>
+
                     </form>
                 </div>
                 <br>
@@ -325,10 +322,15 @@
                         <input type="number" name="note_id" id="deletedNote">
                     </form>
                 </div>
-                <div>
-                    <input type="button" class="shareNotesB" value="Share Notes" style="background: inherit;border: none; float: right;" onclick="document.getElementById('shareNotes').style.display='block';" >
+                <div onclick="document.getElementById('shareNotes').style.display='block';" style="background: inherit;border: none; float: right;" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                    </svg>
+                    <input type="button" class="shareNotesB" value="Share Notes" style="background: inherit;border: none;"   >
                 </div>
+                <div><br><br></div>
             </div>
+
             <div id="sharedWithMeNotes" style="display: none" class="container-fluid px-4">
                 <h1 class="mt-4">Notes</h1>
                 <ol class="breadcrumb mb-4">
