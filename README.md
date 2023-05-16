@@ -2,6 +2,20 @@
 
 Agenda is a web-based application built using the Laravel framework and MySQL scheme. The application is designed using the Software Engineering Agile concept and developed in multiple phases. The project's first milestone is described in this document: [Milestone 1](https://docs.google.com/document/d/1vSQoD6_-r65wgjhFiZe2GmxnIJ4UtVdnLElvT9Ldgm8/edit?usp=sharing), the second in [Milestone 2](https://docs.google.com/document/d/1K5hD3mflWh634G8IcuHsaX-zv9V6C_FXI0dvXH-6uyI/edit?usp=sharing), and the third and final in [Milestone 3](https://docs.google.com/document/d/1MZXZV5_oBU9DroGZhBPrgjgiI7U5zvW0Vts_8dMYjcs/edit?usp=sharing).
 
+## Getting Started
+To run the Agenda web application, follow these steps:
+
+1. Install PHP and MySQL on your machine.
+2. Clone the repository to your local machine using the following command: git clone https://github.com/username/agenda.git
+3. Navigate to the project directory using the command-line interface.
+3. Install the required dependencies using the command: composer install
+4. Copy the .env.example file to .env using the command: cp .env.example .env
+5. Generate an application key using the command: php artisan key:generate
+6. Update the .env file with your MySQL database credentials.
+7. Run the database migrations using the command: php artisan migrate
+8. Start the development server using the command: php artisan serve
+9. Open your web browser and navigate to http://localhost:8000 to access the Agenda web application.
+10. 
 ## System Components
 
 ### Views
@@ -147,3 +161,15 @@ Here are some screenshots of the Agenda application:
 ## Conclusion
 
 By applying the Agile concept and using the Laravel framework and MySQL scheme, the Agenda web application is efficient, user-friendly, and meets the needs of users who want to manage their tasks, notes, or keep diaries.
+
+## Contributing
+To contribute to the project, follow these steps:
+
+1. Fork the repository.
+2. Clone the forked repository to your local machine.
+3. Create a new branch for your changes using git checkout -b your-branch-name.
+4. Make your changes to the code.
+5. Test your changes thoroughly.
+6. Commit your changes using git commit -m "Your commit message".
+7. Push your changes to your forked repository using git push origin your-branch-name.
+8. Create a pull request in the original repository.
