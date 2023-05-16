@@ -22,35 +22,35 @@ To run the Agenda web application, follow these steps:
 
 The application has the following views:
 
-#### Guest Component
+#### - Guest Component
 
 Includes a page for guests that has information about the website feedback form.
 
-#### Authentication Component
+#### - Authentication Component
 
 Includes the registration form for new accounts and the login form for existing accounts.
 
-#### Layout Component
+#### - Layout Component
 
 One view includes the layout of the authentication, and the other one includes the layout of notes, diaries, and tasks.
 
-#### Agenda Component
+#### - Agenda Component
 
 Includes Task Component, Notes Component, and Diaries Component.
 
-#### Tasks Component
+#### - Tasks Component
 
 Includes created categories and default categories on the side of the screen. Once a task is created, the user chooses whether it’s categorized or uncategorized. Each task may include multiple steps, both of which can be modified and can have a deadline. The user may add collaborators to any task either as a copy of the task or for the collaborator to view the task details and progress.
 
-#### Notes Component
+#### - Notes Component
 
 All notes are shown with each one’s title and a part of the description. If a category is chosen, all notes of this category are shown. Same as Tasks, with the exception that it doesn’t include any steps or a deadline.
 
-#### Diary Component
+#### - Diary Component
 
 Shown as two opposite pages. Doesn’t include any categories. Once a page is finished, it becomes read-only. The user can bookmark any written page.
 
-#### Setting Component
+#### - Setting Component
 
 Includes setting user information. Setting application themes. Clear history or clear account data.
 
