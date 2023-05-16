@@ -15,7 +15,7 @@ To run the Agenda web application, follow these steps:
 7. Run the database migrations using the command: php artisan migrate
 8. Start the development server using the command: php artisan serve
 9. Open your web browser and navigate to http://localhost:8000 to access the Agenda web application.
-10. 
+
 ## System Components
 
 ### Views
