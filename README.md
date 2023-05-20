@@ -148,15 +148,25 @@ Anyone who:
 
 Here are some screenshots of the Agenda application:
 
-![Login Page](screenshots/login-page.png)
+![Home Page](https://github.com/FarahMourad/Agenda/assets/58910478/76bc1796-02c7-4900-9663-ab0907c07923)
 
-![Tasks Page](screenshots/tasks-page.png)
+![Sign Up Page](https://github.com/FarahMourad/Agenda/assets/58910478/deca5d39-0766-49b7-9fbb-8d620122a88d)
 
-![Notes Page](screenshots/notes-page.png)
+![Sign In Page](https://github.com/FarahMourad/Agenda/assets/58910478/da8e0b1c-0e37-497e-9aae-020abf126d43)
 
-![Diaries Page](screenshots/diaries-page.png)
+![Add Task Page](https://github.com/FarahMourad/Agenda/assets/58910478/a5387bf1-d56d-4f30-b69c-bf1f5bc8e025)
 
-![Settings Page](screenshots/settings-page.png)
+![Tasks Page](https://github.com/FarahMourad/Agenda/assets/58910478/e18875c4-e1cf-45c3-a444-54f0f2549a55)
+
+![Add Note Page](https://github.com/FarahMourad/Agenda/assets/58910478/a4f3cd7a-d2da-4416-8546-d61dff805ed8)
+
+![Notes Page](https://github.com/FarahMourad/Agenda/assets/58910478/9531914a-1df7-444e-bac9-75d62a4f95bc)
+
+![Diary Cover Page](https://github.com/FarahMourad/Agenda/assets/58910478/dd1ee0b4-daae-46db-a832-044cecc335c9)
+
+![Diary Opened Page](https://github.com/FarahMourad/Agenda/assets/58910478/28aeb38e-2c10-4513-8517-26fbbdadfef9)
+
+![Settings Page](https://github.com/FarahMourad/Agenda/assets/58910478/b99825a7-1f10-4d3b-9680-a37b08f4c5ad)
 
 ## Conclusion
 
